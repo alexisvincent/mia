@@ -7,7 +7,10 @@
       "mcp__beeper__list_messages",
       "mcp__beeper__get_chat",
       "mcp__beeper__search_chats",
-      "mcp__linear__get_issue"
+      "mcp__linear__get_issue",
+      "mcp__beeper__search_messages",
+      "mcp__linear__create_comment",
+      "mcp__linear__create_issue"
     ],
     "deny": [],
     "ask": []

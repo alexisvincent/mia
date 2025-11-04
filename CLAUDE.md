@@ -52,6 +52,14 @@ Projects are grouped in their own directories under `projects/` for better organ
 
 - **personal-optimization/** - Strategies and systems for optimizing personal performance and productivity (ADHD management, energy optimization, etc.)
 
+### Playbooks Organization
+
+Company playbooks and operational frameworks are stored in `playbooks/`:
+
+- **gtm-planning-cadence.md** - Go-to-market planning framework adapted from engineering cadence (monthly initiatives, weekly sprints)
+- Standardized approaches to recurring business operations
+- Living documents that evolve based on what works
+
 ## Usage Guidelines
 
 - Use Claude Code to interact with and manage all aspects of this control panel
@@ -153,3 +161,7 @@ The primary user (Alexis Vincent) has ADHD. When developing tools or interfaces:
 ---
 
 *This repository is designed to be your personal command center - use Claude Code to navigate, manage, and execute all operations from here.*
+
+## Personal Preferences
+
+- i much prefer audio books on Audible then any other method
