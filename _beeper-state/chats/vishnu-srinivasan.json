@@ -1,0 +1,62 @@
+{
+  "chatId": "!3N7rrcnFIMxZscEcim0hKCrJ2TY:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Vishnu Srinivasan",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Vishnu Srinivasan",
+      "id": "@VD5NLRZxm7qnE2JToWB8o9qq-11vMEpOmON8OOEUnL-q4VJEiOEV:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-10-30T21:46:39.000Z",
+  "lastMessageId": "2932",
+  "lastSortKey": "451036364544",
+  "context": {
+    "summary": "Alexis requesting connection to person at Kalder (getkalder.com), asking Vishnu to connect. Also catching up about NY trip and meeting Vishnu's dad. Met via Grant at Soma. K42 builds retail network with itemized basket data enabling brand-level offers.",
+    "topics": ["introductions", "networking", "Kalder", "K42", "retail", "card-linked offers"],
+    "pendingActions": [
+      {
+        "action": "Connect Alexis with contact at Kalder",
+        "status": "pending",
+        "createdAt": "2025-10-30T21:46:39.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Vishnu Srinivasan", "Vishnu's dad"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2932",
+      "timestamp": "2025-10-30T21:46:39.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Hows NY treating you"
+    },
+    {
+      "id": "2931",
+      "timestamp": "2025-10-30T21:46:17.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Would also love to meet your dad as well if you're down to make the connect"
+    },
+    {
+      "id": "2930",
+      "timestamp": "2025-10-30T21:45:48.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "K42 is building a retail network with deep integrations that provide itemized basket data, enabling brand-level and product-level offers across multiple retailers."
+    }
+  ],
+  "metadata": {
+    "messageCount": 12,
+    "firstMessageDate": "2025-10-25T02:57:42.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

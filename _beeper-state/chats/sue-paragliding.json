@@ -1,0 +1,62 @@
+{
+  "chatId": "!9gMPrzX5eM5cem8HSjU-7io_IhQ:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Sue (Paragliding)",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Sue (Paragliding)",
+      "id": "@mkqwpY0rQ9d9xdZ3ajqJbD5hm5qYJbEiFPJO_5saEk7ncwoGfNuW:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-10-31T12:56:41.000Z",
+  "lastMessageId": "2824",
+  "lastSortKey": "451050342656",
+  "context": {
+    "summary": "Sue from Wallend-Air following up about paragliding course in January 2026 for 3 people. She shared course info document and training videos from the Garden Route in South Africa. Alexis expressed interest and requested details to forward to the group.",
+    "topics": ["paragliding", "training", "South Africa", "Garden Route", "licensing"],
+    "pendingActions": [
+      {
+        "action": "Review paragliding course details and decide on January 2026 booking",
+        "status": "pending",
+        "createdAt": "2025-10-31T12:56:41.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Sue", "Barry Pedersen"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2824",
+      "timestamp": "2025-10-31T12:56:41.000Z",
+      "senderName": "Sue (Paragliding)",
+      "isSender": false,
+      "text": "Hi Alexis, following up with you re: joining our paragliding course in January 2026."
+    },
+    {
+      "id": "2820",
+      "timestamp": "2025-10-13T18:54:08.000Z",
+      "senderName": "Sue (Paragliding)",
+      "isSender": false,
+      "text": "Hi Alexis, here is our course info doc.  Have a read and let me know if you have any queries."
+    },
+    {
+      "id": "2818",
+      "timestamp": "2025-10-13T13:42:43.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Hi Sue! Thanks for getting in touch! Yes, we have 3 people keen to get licence. Could you send me some details that I could forward in our group?"
+    }
+  ],
+  "metadata": {
+    "messageCount": 10,
+    "firstMessageDate": "2025-10-11T18:13:59.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

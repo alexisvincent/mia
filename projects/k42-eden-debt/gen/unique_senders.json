@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "total_unique_senders": 3,
+    "total_external_inflow": 163221.91999999998,
+    "analysis_date": "2025-07-07"
+  },
+  "senders": {
+    "from eden analytics ltd": {
+      "name": "From EDEN ANALYTICS LTD",
+      "total_amount": 109000.0,
+      "transaction_count": 7,
+      "transactions": [
+        {
+          "date": "2025-06-17",
+          "amount": 60000.0,
+          "currency": "CHF",
+          "type": "TRANSFER",
+          "description": "From EDEN ANALYTICS LTD",
+          "reference": "Venture Debt"
+        },
+        {
+          "date": "2025-05-12",
+          "amount": 42000.0,
+          "currency": "USD",
+          "type": "TRANSFER",
+          "description": "From EDEN ANALYTICS LTD",
+          "reference": "Venture Debt"
+        },
+        {
+          "date": "2025-05-06",
+          "amount": 2000.0,
+          "currency": "USD",
+          "type": "TRANSFER",
+          "description": "From EDEN ANALYTICS LTD",
+          "reference": "Venture Debt"
+        },
+        {
+          "date": "2025-05-05",
+          "amount": 1000.0,
+          "currency": "USD",
+          "type": "TRANSFER",
+          "description": "From EDEN ANALYTICS LTD",
+          "reference": "Venture Debt"
+        },
+        {
+          "date": "2025-04-30",
+          "amount": 1000.0,
+          "currency": "USD",
+          "type": "TRANSFER",
+          "description": "From EDEN ANALYTICS LTD",
+          "reference": "Venture Debt"
+        },
+        {
+          "date": "2025-04-30",
+          "amount": 2000.0,
+          "currency": "USD",
+          "type": "TRANSFER",
+          "description": "From EDEN ANALYTICS LTD",
+          "reference": "Venture Debt"
+        },
+        {
+          "date": "2025-01-21",
+          "amount": 1000.0,
+          "currency": "USD",
+          "type": "TRANSFER",
+          "description": "From EDEN ANALYTICS LTD",
+          "reference": "Venture Debt"
+        }
+      ]
+    },
+    "money added from k42, inc.": {
+      "name": "Money added from K42, Inc.",
+      "total_amount": 52571.92,
+      "transaction_count": 2,
+      "transactions": [
+        {
+          "date": "2025-04-08",
+          "amount": 27571.92,
+          "currency": "USD",
+          "type": "TOPUP",
+          "description": "Money added from K42, Inc.",
+          "reference": "/ROC/N4KUzpbZsDNqJASk///URI/TEL +44 .7575494823. FROM K42 INC SUBSIDIAR Y TRANSFER:TRANSFERRING MONEY TO A  SUBSIDIARY IN THE UK"
+        },
+        {
+          "date": "2025-02-05",
+          "amount": 25000.0,
+          "currency": "USD",
+          "type": "TOPUP",
+          "description": "Money added from K42, Inc.",
+          "reference": "/ROC/rcMvG7JY3BFJIFM9///URI/TEL +44 .7575494823. FROM K42 INC SUBSIDIAR Y TRANSFER:TRANSFERRING MONEY TO A  SUBSIDIARY IN THE UK"
+        }
+      ]
+    },
+    "from alexis john vincent": {
+      "name": "From Alexis John Vincent",
+      "total_amount": 1650.0,
+      "transaction_count": 4,
+      "transactions": [
+        {
+          "date": "2025-01-14",
+          "amount": 600.0,
+          "currency": "USD",
+          "type": "TRANSFER",
+          "description": "From Alexis John Vincent",
+          "reference": "Director Loan"
+        },
+        {
+          "date": "2025-01-10",
+          "amount": 50.0,
+          "currency": "USD",
+          "type": "TRANSFER",
+          "description": "From Alexis John Vincent",
+          "reference": "Director Loan"
+        },
+        {
+          "date": "2025-01-08",
+          "amount": 500.0,
+          "currency": "USD",
+          "type": "TRANSFER",
+          "description": "From Alexis John Vincent",
+          "reference": "Director Loan"
+        },
+        {
+          "date": "2025-01-08",
+          "amount": 500.0,
+          "currency": "GBP",
+          "type": "TRANSFER",
+          "description": "From Alexis John Vincent",
+          "reference": "Director Loan"
+        }
+      ]
+    }
+  }
+}

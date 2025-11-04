@@ -1,0 +1,36 @@
+# K42 Eden Debt Analysis Commands
+
+# Run financial analysis on Revolut CSV
+analyze:
+    python3 src/analyze.py
+
+# Generate analysis.md from analysis.json
+generate-report:
+    python3 src/generate_report.py
+
+# Run full analysis pipeline
+full-analysis: analyze generate-report
+    @echo "Full analysis complete!"
+    @echo "Files generated:"
+    @echo "  - gen/analysis.json (raw data)"
+    @echo "  - gen/analysis.md (formatted report)"
+
+# Clean generated files
+clean:
+    rm -f gen/analysis.json gen/analysis.md
+
+# Show analysis summary
+summary:
+    python3 src/summary.py
+
+# Find unique entities sending money to company
+unique-senders:
+    python3 src/unique_senders.py
+
+# Filter CSV to remove internal transfer pairs
+filter-csv:
+    python3 src/filter_csv.py
+
+# Add income/expense classification column to filtered CSV
+classify-transactions:
+    python3 src/add_classification.py

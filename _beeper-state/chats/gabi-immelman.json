@@ -1,0 +1,76 @@
+{
+  "chatId": "!4nnWc370QApRE9WkeqW6l8eL3x4:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Gabi Immelman",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Gabi Immelman",
+      "id": "@6p0AR08-Vx6R-NIDgquGrVly363X8s4LC5ZQ84zzxSjupVWty4O6:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-03T14:50:52.000Z",
+  "lastMessageId": "1857",
+  "lastSortKey": "451118451712",
+  "context": {
+    "summary": "Close friend checking in on Alexis in SF. Gabi is interested in SF and has a doc with recommendations. They've scheduled a call and shared a Sabine Hossenfelder video. Previous conversation included Alexis requesting intros to cool founders and investors in SF. Warm, supportive friendship.",
+    "topics": ["friendship", "sf-life", "networking", "youtube-videos", "check-ins"],
+    "pendingActions": [
+      {
+        "action": "Have catch-up call with Gabi",
+        "status": "pending",
+        "createdAt": "2025-11-03T14:50:52.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Gabi Immelman"],
+    "lastUpdated": "2025-11-03T14:50:52.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "1857",
+      "timestamp": "2025-11-03T14:50:52.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "In a bit?"
+    },
+    {
+      "id": "1856",
+      "timestamp": "2025-11-03T14:50:33.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Call?"
+    },
+    {
+      "id": "1855",
+      "timestamp": "2025-11-03T14:50:31.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Good :) SF atm"
+    },
+    {
+      "id": "1854",
+      "timestamp": "2025-11-03T04:36:00.000Z",
+      "senderName": "Gabi Immelman",
+      "isSender": false,
+      "text": "How are you? Where are you?"
+    },
+    {
+      "id": "1841",
+      "timestamp": "2025-09-13T19:13:36.000Z",
+      "senderName": "Gabi Immelman",
+      "isSender": false,
+      "text": "https://youtu.be/7krR4YQ_yNE?si=wdHulEILx_Z1TFkP"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-07-02T17:52:13.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

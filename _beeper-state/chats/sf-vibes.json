@@ -1,0 +1,53 @@
+{
+  "chatId": "!_iQ1eVnY_u5vDZmqf7TZjSe7T0U:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "SF Vibes",
+  "type": "group",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [],
+  "lastActivity": "2025-10-31T17:47:27.000Z",
+  "lastMessageId": "2807",
+  "lastSortKey": "451054808832",
+  "context": {
+    "summary": "SF group chat coordinating meetups and events. Elio sharing Halloween block party info, Viktoria promoting her speaking event, coordinating TechCrunch Disrupt attendance with lunch and ticket sharing. Group members checking in on good events and planning evening activities.",
+    "topics": ["events", "meetups", "TechCrunch", "halloween", "speaking", "coordination"],
+    "pendingActions": [],
+    "keyPeople": ["Elio Assaf", "Viktoria Izdebska", "Alain"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2807",
+      "timestamp": "2025-10-31T17:47:27.000Z",
+      "senderName": "Elio Assaf",
+      "isSender": false,
+      "text": "I won't be there as I'm leaving today evening"
+    },
+    {
+      "id": "2806",
+      "timestamp": "2025-10-31T17:47:07.000Z",
+      "senderName": "Elio Assaf",
+      "isSender": false,
+      "text": "https://luma.com/frontstreet?tk=Z7VVkJ"
+    },
+    {
+      "id": "2805",
+      "timestamp": "2025-10-31T17:46:25.000Z",
+      "senderName": "Elio Assaf",
+      "isSender": false,
+      "text": "There is a cool halloween block party you guys should check"
+    },
+    {
+      "id": "2804",
+      "timestamp": "2025-10-28T21:07:12.000Z",
+      "senderName": "Viktoria Izdebska",
+      "isSender": false,
+      "text": "https://luma.com/jl553vwc - ill be speaker there today, feel free to stop by"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-10-22T23:21:25.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

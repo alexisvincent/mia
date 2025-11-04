@@ -1,0 +1,32 @@
+{
+  "chatId": "!ar0AZRBgLa0K1Edm3XtcTfBl1j0:ba_BdxJfgTbM_kfnV0wpXpiPilSZMc.local-linkedin.localhost",
+  "name": "Viktoria Izdebska (LinkedIn)",
+  "type": "single",
+  "accountID": "local-linkedin_ba_BdxJfgTbM_kfnV0wpXpiPilSZMc",
+  "participants": [],
+  "lastActivity": "2025-11-01T01:58:36.063Z",
+  "lastMessageId": "31922",
+  "lastSortKey": "451062352912128",
+  "context": {
+    "summary": "Alexis shared a LinkedIn post link with Viktoria via LinkedIn chat.",
+    "topics": ["linkedin", "sharing"],
+    "pendingActions": [],
+    "keyPeople": ["Viktoria Izdebska"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "31922",
+      "timestamp": "2025-11-01T01:58:36.063Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "https://www.linkedin.com/feed/update/urn:li:activity:7390091322076012544"
+    }
+  ],
+  "metadata": {
+    "messageCount": 1,
+    "firstMessageDate": "2025-11-01T01:58:36.063Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

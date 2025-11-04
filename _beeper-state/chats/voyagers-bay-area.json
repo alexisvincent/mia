@@ -1,0 +1,46 @@
+{
+  "chatId": "!xV25JQFVRhgosP8cubFuYNt6DBM:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Voyagers Bay Area",
+  "type": "group",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [],
+  "lastActivity": "2025-10-31T20:40:14.000Z",
+  "lastMessageId": "2730",
+  "lastSortKey": "451057462784",
+  "context": {
+    "summary": "Active Voyagers Bay Area community group discussing events, networking, and support. Recent topics include femtech fundraising roundtable, deep tech panels, battery startup connections, healthcare journalists list, full-stack engineer hiring, and eye doctor recommendations. Ida from battery startup alteva introduced herself looking for US investors and ecosystem insights.",
+    "topics": ["events", "networking", "fundraising", "femtech", "cleantech", "deep tech", "battery", "healthcare", "hiring", "recommendations"],
+    "pendingActions": [],
+    "keyPeople": ["Ida", "Karen Baert"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2730",
+      "timestamp": "2025-10-31T20:40:14.000Z",
+      "senderName": "+4917621388602",
+      "isSender": false,
+      "text": "Hi Bay Area femtech friends! 👋 I'm hosting an intimate roundtable with Denis and Alena on early-stage fundraising in *women's health* on November 3rd."
+    },
+    {
+      "id": "2728",
+      "timestamp": "2025-10-30T16:25:54.000Z",
+      "senderName": "+14154204478",
+      "isSender": false,
+      "text": "Hello Bay Area Voyagers please check out this amazing panel of Female founders in deep tech."
+    },
+    {
+      "id": "2720",
+      "timestamp": "2025-10-28T19:13:18.000Z",
+      "senderName": "+491731952387",
+      "isSender": false,
+      "text": "Hey everyone, I am Ida, founder and CTO of battery startup alteva based in Germany, and will be coming to San Francisco in two weeks."
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-09-12T18:22:37.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

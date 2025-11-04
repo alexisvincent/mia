@@ -1,0 +1,55 @@
+{
+  "chatId": "!ZGJn1HQc6kxMJaMg7w0OSzXkVVA:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Brandon Smith",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Brandon Smith",
+      "id": "@wBCOQnzCliGEoQS7rF-aZBwiPkHXz25nHGmLocla1LCZ2iztZxg33Q:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-10-31T04:26:28.000Z",
+  "lastMessageId": "2912",
+  "lastSortKey": "451042505728",
+  "context": {
+    "summary": "Brief initial contact exchange between Alexis and Brandon with casual greeting.",
+    "topics": ["introduction", "greeting"],
+    "pendingActions": [],
+    "keyPeople": ["Brandon Smith"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2912",
+      "timestamp": "2025-10-31T04:26:28.000Z",
+      "senderName": "Brandon Smith",
+      "isSender": false,
+      "text": "My guy"
+    },
+    {
+      "id": "2911",
+      "timestamp": "2025-10-31T04:26:22.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Alexis Vincent"
+    },
+    {
+      "id": "2910",
+      "timestamp": "2025-10-31T04:26:18.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Yo yo"
+    }
+  ],
+  "metadata": {
+    "messageCount": 3,
+    "firstMessageDate": "2025-10-31T04:26:18.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "chatId": "!aaj01Z6Hc5YbbJ_goFa3jKCqfgQ:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Aryan Raigangar",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Aryan Raigangar",
+      "id": "@12pfVm3fDteVhLvtWh4LHw5J-22GewvXFO6JnqKZvkRrzdKE1XNr:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-03T20:57:42.000Z",
+  "lastMessageId": "1025",
+  "lastSortKey": "451124086272",
+  "context": {
+    "summary": "Discussion about playing tennis together. Aryan is interested but busy this week, suggested next week instead. Clarified it was a tennis racket, not padel. Aryan used to be a member at Park Padel before joining Bay Club.",
+    "topics": ["tennis", "padel", "scheduling", "sports", "social"],
+    "pendingActions": [
+      {
+        "action": "Schedule tennis game with Aryan for next week",
+        "status": "pending",
+        "createdAt": "2025-11-03T20:57:42.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Aryan Raigangar"],
+    "lastUpdated": "2025-11-03T20:57:42.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "1025",
+      "timestamp": "2025-11-03T20:57:42.000Z",
+      "senderName": "Aryan Raigangar",
+      "isSender": false,
+      "text": "actually tennis racket haha"
+    },
+    {
+      "id": "1024",
+      "timestamp": "2025-11-03T20:57:36.000Z",
+      "senderName": "Aryan Raigangar",
+      "isSender": false,
+      "text": "lets aim for next week? this week is crazy busy with dinners etc"
+    },
+    {
+      "id": "1023",
+      "timestamp": "2025-11-03T20:57:21.000Z",
+      "senderName": "Aryan Raigangar",
+      "isSender": false,
+      "text": "so down!"
+    },
+    {
+      "id": "1022",
+      "timestamp": "2025-11-03T20:51:17.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "noticed the padel racket in your bag"
+    },
+    {
+      "id": "1021",
+      "timestamp": "2025-11-03T20:51:07.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "im keen to play a bunch over next 3 weeks. keen to play if you're down"
+    },
+    {
+      "id": "1020",
+      "timestamp": "2025-11-03T20:50:47.000Z",
+      "senderName": "Aryan Raigangar",
+      "isSender": false,
+      "text": "used to be a member at park padel before I joined bay club"
+    },
+    {
+      "id": "1019",
+      "timestamp": "2025-11-03T20:50:26.000Z",
+      "senderName": "Aryan Raigangar",
+      "isSender": false,
+      "text": "Yesir I do!"
+    },
+    {
+      "id": "1018",
+      "timestamp": "2025-11-03T20:44:40.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Do you play padel?"
+    },
+    {
+      "id": "1017",
+      "timestamp": "2025-10-30T01:39:19.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Yo"
+    }
+  ],
+  "metadata": {
+    "messageCount": 9,
+    "firstMessageDate": "2025-10-30T01:39:19.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

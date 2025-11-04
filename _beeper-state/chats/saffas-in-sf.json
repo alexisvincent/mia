@@ -1,0 +1,86 @@
+{
+  "chatId": "!uD-fPSK8UdqCXyqHgaCl9Jxzr4s:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Saffas in SF 🇿🇦🇺🇸",
+  "type": "group",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "+14156012767",
+      "id": "@OsJj9kAqKZCFaTjv6J2ikBhmFDsG2j-j0GD930lNpRfAEoBrqlQLN-kUe9le9D4:local-whatsapp.localhost"
+    },
+    {
+      "name": "+27766802602",
+      "id": "@Nt5_XRdJzaju9KxSNhBz1vr8mBQ8LXIAuSGoN1Qn3VL7LKGKMT-IKChv4InP:local-whatsapp.localhost"
+    },
+    {
+      "name": "+27748974003",
+      "id": "@puyJRbhAXrFZy7LgUZhREGRScaHOrIrF58I8MuqtBsLApjI5YHixTVNrLis31sQ:local-whatsapp.localhost"
+    },
+    {
+      "name": "+14696005414",
+      "id": "@wI-GLhJpb1A5yTGs0SCGoD9RZH1GyEz5XRMijkqCHm3YA9ISR-SMMPViakGQNP4:local-whatsapp.localhost"
+    },
+    {
+      "name": "+27793858982",
+      "id": "@gl1r6i4H-vTjk0CkP-O_x_P6Ry1Y3Hb98bUnoW0MyZ5W6or3D01ep3UWamwBrw:local-whatsapp.localhost"
+    },
+    {
+      "name": "+16507628334",
+      "id": "@ftS_5KFFtJUfrk6LxbFAd-EgYq_qc7VxMwXB7r3it1OFN0BpO_q5MdZ_5kJ7dc4:local-whatsapp.localhost"
+    },
+    {
+      "name": "+17373281964",
+      "id": "@JDc0p4h4oSgNforO8odbsMS1fK1bYC8hONaO3Jzhg6A32df3qtKNURVZciZNTUI:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-02T09:02:18.000Z",
+  "lastMessageId": "2140",
+  "lastSortKey": "451090979328",
+  "context": {
+    "summary": "South African community in SF. Recent focus on feedback for The Parlay Company sports betting app launch. Members provided detailed UX/UI feedback including concerns about red/green color scheme conflicting with Yes/No semantics, suggestions for smoother parlay selection flow (single tap vs two-tap), reducing overwhelming number of visible options (16 down to 4-8), and onboarding improvements. Also discussion about CFTC compliance - navigating DCM/FCM licensing and looking for FCM partners. Social question about where to find biltong in SF.",
+    "topics": ["parlay-betting-app", "product-feedback", "ui-ux", "cftc-compliance", "startup-launch", "south-african-community", "biltong"],
+    "pendingActions": [],
+    "keyPeople": ["Ethan"],
+    "lastUpdated": "2025-11-02T09:02:18.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2140",
+      "timestamp": "2025-11-02T09:02:18.000Z",
+      "senderName": "+14696005414",
+      "isSender": false,
+      "text": "So if you guys know of any FCMs lmk 😂"
+    },
+    {
+      "id": "2139",
+      "timestamp": "2025-11-02T09:00:27.000Z",
+      "senderName": "+14696005414",
+      "isSender": false,
+      "text": "Sure. If you create an event contract you need to become a Designated Contract Maker (DCM) under the CFTC which is tough to get took Kalshi 3 years + millions of $ and polymarket had to make an acquisition to get it. If you route these event contacts to new users but still hedge/clear on the underlying DCM you're seen as a Futures Commission Merchant (FCM) which isn't as bad to get the license for. The quickest way to get regulated seems to be to partner with a FCM to clear on the DCM and to get an Introducing Broker (IB) license"
+    },
+    {
+      "id": "2138",
+      "timestamp": "2025-11-02T05:36:10.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Anyone know of any spots in SF that sell biltong?"
+    },
+    {
+      "id": "2122",
+      "timestamp": "2025-11-01T18:41:17.000Z",
+      "senderName": "+14156012767",
+      "isSender": false,
+      "text": "Also — color scheme is confusing because red and green is used for Yes or No — and then psychologically I need to want the product but it's in the same color as "No" so it confuses the brain"
+    }
+  ],
+  "metadata": {
+    "messageCount": 30,
+    "firstMessageDate": "2025-10-31T22:18:41.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

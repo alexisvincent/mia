@@ -1,0 +1,76 @@
+{
+  "chatId": "!RBN213jd7644xLu37NaSwq0tO5s:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Alexis Vincent (with Viktoria Izdebska)",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Viktoria Izdebska",
+      "id": "@VpT-zt6AFDIkPYF0raGBCIJVPmwhXEOE-JWB29dOVeZ_KP6M5KW76-0:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-03T19:58:10.000Z",
+  "lastMessageId": "1084",
+  "lastSortKey": "451123171840",
+  "context": {
+    "summary": "Viktoria is dealing with a major company pivot for Octrace. Timo quit, and she's considering selling to a competitor or doing a clean restart in SF. She's drafting a message to investor Aneel about the situation and wants his book recommendations for positioning the company for urgent sale. Alexis is providing emotional support and suggesting they discuss strategy later.",
+    "topics": ["octrace", "business-pivot", "startup-challenges", "investor-relations", "company-sale", "emotional-support"],
+    "pendingActions": [
+      {
+        "action": "Have strategic discussion about Octrace's future and sale options",
+        "status": "pending",
+        "createdAt": "2025-11-03T19:58:10.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Viktoria Izdebska", "Timo", "Aneel", "Daniel"],
+    "lastUpdated": "2025-11-03T19:58:10.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "1084",
+      "timestamp": "2025-11-03T19:58:10.000Z",
+      "senderName": "Viktoria Izdebska",
+      "isSender": false,
+      "text": "Yes"
+    },
+    {
+      "id": "1083",
+      "timestamp": "2025-11-03T19:58:06.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Talk about it later?"
+    },
+    {
+      "id": "1082",
+      "timestamp": "2025-11-03T19:58:02.000Z",
+      "senderName": "Viktoria Izdebska",
+      "isSender": false,
+      "text": "Thank you ❤️"
+    },
+    {
+      "id": "1076",
+      "timestamp": "2025-11-03T19:56:36.000Z",
+      "senderName": "Viktoria Izdebska",
+      "isSender": false,
+      "text": "We're considering selling to a competitor. Do you have any book recommendations for the next few weeks, especially on how to position a company for an urgent sale and get the most out of the situation?"
+    },
+    {
+      "id": "1068",
+      "timestamp": "2025-11-03T14:54:46.000Z",
+      "senderName": "Viktoria Izdebska",
+      "isSender": false,
+      "text": "Timo quit"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-10-30T08:40:24.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "chatId": "!oiFpexfecKVgoTbXKF6LPJygmpc:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "SF Bay Area Startup Community",
+  "type": "group",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [],
+  "lastActivity": "2025-11-03T23:41:40.000Z",
+  "lastMessageId": "32129",
+  "lastSortKey": "451126604800",
+  "context": {
+    "summary": "Large SF startup community group discussing events, opportunities, and networking. Recent activity includes someone seeking OpenAI referrals, event promotions, sublet listings, partnership opportunities for 2026 events, and recommendations for web design agencies.",
+    "topics": ["networking", "events", "job-referrals", "startups", "partnerships", "web-design", "sublets", "community"],
+    "pendingActions": [],
+    "keyPeople": ["Tennessee", "Christopher Carew"],
+    "lastUpdated": "2025-11-03T23:41:40.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "32129",
+      "timestamp": "2025-11-03T23:41:40.000Z",
+      "senderName": "Tennessee",
+      "isSender": false,
+      "text": "Hey all - quick one. I'm applying for a strategy/product role at OpenAI tonight. Does anyone have a contact or referral there? I'd love to connect asap before the posting closes."
+    },
+    {
+      "id": "1720",
+      "timestamp": "2025-11-03T15:48:30.000Z",
+      "senderName": "+12128048576",
+      "isSender": false,
+      "text": "Happening TODAY\n9am PST\n12pm EST\n\nhttps://luma.com/4yniz9fl"
+    },
+    {
+      "id": "1718",
+      "timestamp": "2025-11-02T18:17:17.000Z",
+      "senderName": "+16505758561",
+      "isSender": false,
+      "text": "Looking forward to seeing you and anyone else from the crew who's here https://www.linkedin.com/in/carlhinrichsen/"
+    },
+    {
+      "id": "1716",
+      "timestamp": "2025-11-02T18:16:24.000Z",
+      "senderName": "+12128048576",
+      "isSender": false,
+      "text": "Mainly seeking financial partners who would benefit from long-term exposure to thousands of Founders, Investors, & Operators around the United States.\n\nThis is a great opportunity to grow your network, grow your email list, and gain exposure at large conferences like Art Basel, Consumer Electronics Show, SXSW, NY Tech Week, SF Tech Week, LA Tech Week, and many in-person & virtual events."
+    },
+    {
+      "id": "1709",
+      "timestamp": "2025-11-02T17:25:33.000Z",
+      "senderName": "+12128048576",
+      "isSender": false,
+      "text": "I'm committing to a bunch of things for 2026, and looking out for Partners who want to be a part of some of the these:\n\nIn-person events\n- Los Angeles\n- San Francisco\n- New York City\n- Las Vegas\n- Austin\n- Miami\nVirtual events\nFounders community\nSocial media\n\nIf you want to reach thousands of Founders, Investors, and others in tech\n\nDM me here, or on LinkedIn\nhttps://linkedin.com/in/christophercarew"
+    },
+    {
+      "id": "1706",
+      "timestamp": "2025-11-02T15:31:47.000Z",
+      "senderName": "+15512637883",
+      "isSender": false,
+      "text": "Hey founders! 👋\n\nI've got a fully furnished master bedroom available immediately in my 2B2B apartment in San Francisco, a place you'll truly enjoy staying in!\nLocated in an amazing, safe neighborhood near Salesforce Tower, Moscone, SPC, SoMa, and FiDi, all walkable and super convenient."
+    },
+    {
+      "id": "1701",
+      "timestamp": "2025-11-01T17:17:19.000Z",
+      "senderName": "+41762168254",
+      "isSender": false,
+      "text": "Anyone going to this event in Berkeley tomorrow? \n\nhttps://luma.com/summit_berkeley"
+    },
+    {
+      "id": "1690",
+      "timestamp": "2025-10-31T23:54:51.000Z",
+      "senderName": "+16393177531",
+      "isSender": false,
+      "text": "Here are a couple of web design & branding agencies/studios that I've come across:\nhttps://www.blueoceaninteractive.com/\nhttps://guidebranding.com/#\nhttps://pixelwave.ca/\nhttps://y5webstudio.com/\nhttps://www.studiothink.com/"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-10-31T23:38:38.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

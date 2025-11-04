@@ -1,0 +1,41 @@
+{
+  "chatId": "!CwldlhKjo1zrpvl_1mVcZi_TV2c:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Mateo Ploquin",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Mateo Ploquin",
+      "id": "@TsPEST7X-7ZUfwR3tVLElg8DG_A9j7pAyKgLyAh9pVlF48g88rAV:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-01T21:29:20.379Z",
+  "lastMessageId": "2492",
+  "lastSortKey": "-1",
+  "context": {
+    "summary": "Initial contact exchange where Alexis shared his name with Mateo, who acknowledged with a thumbs up.",
+    "topics": ["introduction", "contact"],
+    "pendingActions": [],
+    "keyPeople": ["Mateo Ploquin"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2491",
+      "timestamp": "2025-11-01T05:43:55.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Alexis Vincent"
+    }
+  ],
+  "metadata": {
+    "messageCount": 2,
+    "firstMessageDate": "2025-11-01T05:43:55.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

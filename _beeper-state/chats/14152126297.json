@@ -1,0 +1,55 @@
+{
+  "chatId": "!KOiYweuwSkbAcIVSHqo0O-t62Dc:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "+14152126297",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "+14152126297",
+      "id": "@saIKl7qjDGFiK5aGUrjW76H0U6iQdKPjVeYKpKtQp2gdEe116ctu:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-03T17:39:08.000Z",
+  "lastMessageId": "1128",
+  "lastSortKey": "451121036288",
+  "context": {
+    "summary": "Automated Luma event notification bot sending updates about SF tech/startup events. Recent events include Cal Hacks Afterparty at Wordware Beach House (Nov 15), Halloween $5M Yacht Cruise, Bluejay x Twilio Voice AI Meetup, Value Paths GTM event, Halloween Party, and Sober Halloween Singles Event. All messages are event reminders and updates.",
+    "topics": ["luma-events", "sf-tech-events", "hackathons", "yacht-cruise", "ai-meetups", "networking"],
+    "pendingActions": [],
+    "keyPeople": ["Simon Lorenzo", "Zed From Venn", "Pear Chotbunwong", "Faraz Siddiqi", "Patrick Coleman", "Kevin Yar"],
+    "lastUpdated": "2025-11-03T17:39:08.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "1128",
+      "timestamp": "2025-11-03T17:39:08.000Z",
+      "senderName": "+14152126297",
+      "isSender": false,
+      "text": "New Post in Cal Hacks Afterparty @ Wordware Beach House\n\n*Simon Lorenzo*\n🚨 *Hackathon Alert — November 15th @ Civic Center!*"
+    },
+    {
+      "id": "1127",
+      "timestamp": "2025-11-03T00:29:51.000Z",
+      "senderName": "+14152126297",
+      "isSender": false,
+      "text": "New Post in Halloween $5M Yacht Cruise 🎃"
+    },
+    {
+      "id": "1124",
+      "timestamp": "2025-11-01T01:00:10.000Z",
+      "senderName": "+14152126297",
+      "isSender": false,
+      "text": "You have *Halloween $5M Yacht Cruise 🎃* coming up *in 1 hour*."
+    }
+  ],
+  "metadata": {
+    "messageCount": 36,
+    "firstMessageDate": "2025-10-28T22:03:21.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

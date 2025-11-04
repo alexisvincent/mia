@@ -1,37 +1,24 @@
-# Mia
+# Personal Workspace
 
-An AI personal assistant and automation system designed to maximize productivity for people with ADHD.
+This is a personal workspace for AI-assisted project management and development work. The workspace is configured with multiple MCP servers and tools to enable seamless AI collaboration on various projects and tasks.
 
-## Vision
+## Purpose
 
-Mia is an intelligent task management system that automatically captures, prioritizes, and helps complete tasks from across all your communication channels. The core philosophy is to minimize the time tasks spend waiting in queue and maximize your ability to respond quickly to what matters.
+This repository serves as a central hub for:
+- Personal project management and task tracking
+- AI-assisted development work across multiple projects
+- Integration with various tools and services (Linear, GitHub, etc.)
+- Experimentation and automation scripts
 
-## Core Concepts
+## Structure
 
-### Automatic Task Capture
-Mia monitors your communication streams (WhatsApp, email, text messages) and automatically detects when someone asks you to do something or when there's an action item. These are automatically converted into tracked tasks.
+- **mia-agent/**: An AI personal assistant agent for automatic task capture and management (see [mia-agent/README.md](mia-agent/README.md))
+- Additional projects and tools as needed
 
-### AI-Assisted Execution
-Beyond just capturing tasks, Mia helps you complete them:
-- Draft replies automatically
-- Suggest responses
-- Understand context and dependencies
-- Prioritize based on importance and urgency
+## Workspace Configuration
 
-### Queue Time Optimization
-The key innovation: track how long each task has been waiting and actively work to minimize response times. Tasks are graded by importance, and the system tracks:
-- When tasks arrived
-- How long they've been in queue
-- What's blocking quick resolution
-
-### Unified Task Management
-All tasks flow into Linear, providing a single source of truth for what needs to be done. Calendar integration helps with scheduling and time management.
-
-### Daily Workflows
-- **Morning routines**: Review incoming tasks before they're added to Linear
-- **Daily summaries**: Get an overview of what's going well and what needs attention
-- **Proactive notifications**: Be reminded of aging tasks before they become problems
-
-## Target User
-
-Designed specifically for Alexis Vincent and optimized for ADHD workflows, with potential to help others with similar productivity challenges.
+This workspace is configured to work with:
+- Multiple MCP servers for extended AI capabilities
+- Linear for task management
+- GitHub for version control and collaboration
+- Various development tools and integrations

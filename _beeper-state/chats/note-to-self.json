@@ -1,0 +1,32 @@
+{
+  "chatId": "!xfQbkKtRnrmWONHzgt:beeper.com",
+  "name": "Note to self",
+  "type": "group",
+  "accountID": "beeper",
+  "participants": [],
+  "lastActivity": "2025-11-03T21:37:16.816Z",
+  "lastMessageId": "7",
+  "lastSortKey": "830600571",
+  "context": {
+    "summary": "Encrypted personal notes chat synced across all Beeper devices. Used for storing personal notes, images, videos, and files privately.",
+    "topics": ["notes", "personal-storage", "encrypted"],
+    "pendingActions": [],
+    "keyPeople": [],
+    "lastUpdated": "2025-11-03T21:37:16.816Z"
+  },
+  "recentMessages": [
+    {
+      "id": "7",
+      "timestamp": "2025-11-03T21:37:16.816Z",
+      "senderName": "lexvin",
+      "isSender": true,
+      "text": "This is an encrypted chat that only you have access to. You can use it to store notes, images, video and any other files. Everything in this chat is instantly synced to anywhere you are signed in to Beeper."
+    }
+  ],
+  "metadata": {
+    "messageCount": 1,
+    "firstMessageDate": "2025-11-03T21:37:16.816Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

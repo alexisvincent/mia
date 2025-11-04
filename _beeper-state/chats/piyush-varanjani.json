@@ -1,0 +1,76 @@
+{
+  "chatId": "!BYeVnJ6p_052g1G6K2eHCx5auXY:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Piyush Varanjani",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Piyush Varanjani",
+      "id": "@6MH8AsM1IBzL9uwFvMUWsA-UKCVgf4Mb1y7OXEdYkQeWRDikvvc:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-01T11:50:35.000Z",
+  "lastMessageId": "2314",
+  "lastSortKey": "451071445760",
+  "context": {
+    "summary": "EWOR SF residency housemate. Piyush invited Alexis to a Sunday gathering/party (Partiful link) and encouraged bringing others. Previous interactions include Piyush generously offering extra spicy Indian dinner, helping with the hat for Nick's Burning Man trip, and reconnecting after a mad week. Alexis reached out in mid-October to hang out after returning to SF.",
+    "topics": ["ewor-residency", "social-events", "housemate", "food-sharing", "partiful", "indian-food"],
+    "pendingActions": [
+      {
+        "action": "Consider attending Piyush's Sunday gathering",
+        "status": "pending",
+        "createdAt": "2025-11-01T11:50:35.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Piyush Varanjani", "Nick"],
+    "lastUpdated": "2025-11-01T11:50:35.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2314",
+      "timestamp": "2025-11-01T11:50:35.000Z",
+      "senderName": "Piyush Varanjani",
+      "isSender": false,
+      "text": "Would be good to see you!"
+    },
+    {
+      "id": "2313",
+      "timestamp": "2025-11-01T11:50:35.000Z",
+      "senderName": "Piyush Varanjani",
+      "isSender": false,
+      "text": "feel free to invite others!"
+    },
+    {
+      "id": "2312",
+      "timestamp": "2025-11-01T11:50:34.000Z",
+      "senderName": "Piyush Varanjani",
+      "isSender": false,
+      "text": "Hosting on Sunday, feel free to join!\n\nhttps://partiful.com/e/zlfk0A3VlrtrsQ5XoeSa"
+    },
+    {
+      "id": "2302",
+      "timestamp": "2025-08-27T10:35:26.000Z",
+      "senderName": "Piyush Varanjani",
+      "isSender": false,
+      "text": "I got extra dinner tonight, if you want feel free to have in the day"
+    },
+    {
+      "id": "2300",
+      "timestamp": "2025-08-27T10:35:11.000Z",
+      "senderName": "Piyush Varanjani",
+      "isSender": false,
+      "text": "Since you appreciate spicy indian food"
+    }
+  ],
+  "metadata": {
+    "messageCount": 16,
+    "firstMessageDate": "2025-07-27T09:35:39.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

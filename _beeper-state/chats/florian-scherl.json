@@ -1,0 +1,62 @@
+{
+  "chatId": "!RGUZV6_yBwc6Jf6TyI82iHPwtc8:ba_BdxJfgTbM_kfnV0wpXpiPilSZMc.local-linkedin.localhost",
+  "name": "Florian Scherl",
+  "type": "single",
+  "accountID": "local-linkedin_ba_BdxJfgTbM_kfnV0wpXpiPilSZMc",
+  "participants": [
+    {
+      "name": "Florian Scherl",
+      "id": "@tjlOMqdmwLEghPCF7IeD7IXuJDWjXcNDX6XmBAxvQRtdhNrdf_aMFiWSLIh6wX2aY5NHDuG93ZGXVN3CuDQf0HIjeA:local-linkedin.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-01T12:49:42.519Z",
+  "lastMessageId": "31913",
+  "lastSortKey": "451072353924864",
+  "context": {
+    "summary": "LinkedIn conversation with Florian who is struggling with technical hiring - finding it more difficult than expected to find the right people for his company. Alexis asked him to forward something (appears to be a document/image) and checked in about how things are going with the company.",
+    "topics": ["hiring", "technical-recruitment", "company-building", "startup-challenges"],
+    "pendingActions": [
+      {
+        "action": "Florian to forward document when received",
+        "status": "pending",
+        "createdAt": "2025-11-01T12:49:42.519Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Florian Scherl"],
+    "lastUpdated": "2025-11-01T12:49:42.519Z"
+  },
+  "recentMessages": [
+    {
+      "id": "31913",
+      "timestamp": "2025-11-01T12:49:42.519Z",
+      "senderName": "Florian Scherl",
+      "isSender": false,
+      "text": "Unfortunately didn't get it so far - will forward once I receive it.\n\nRegarding company: Currently I spend most time to hire new technical talents - more difficult than expected to find the right people \n\nWhat about you?"
+    },
+    {
+      "id": "31912",
+      "timestamp": "2025-11-01T09:25:39.490Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "How's things going? In the company?"
+    },
+    {
+      "id": "31911",
+      "timestamp": "2025-11-01T09:25:25.500Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Did you get this? Can you forward?"
+    }
+  ],
+  "metadata": {
+    "messageCount": 4,
+    "firstMessageDate": "2025-11-01T09:25:11.705Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

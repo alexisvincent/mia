@@ -1,0 +1,55 @@
+{
+  "chatId": "!lBJ3LiGXtWLiSyelGwGyHKdkX5k:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Anelya Grant",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Anelya Grant",
+      "id": "@DW8N7xMfYPMiz7nOym4IL4Mtm19ETMgG6272GVZX5X4Nz1bqRU8X:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-10-31T06:04:22.000Z",
+  "lastMessageId": "2838",
+  "lastSortKey": "451044009472",
+  "context": {
+    "summary": "Met at DVC dinner. Anelya building revenue automation (YC, justpaid.ai), requested connection to Quentin and Amsterdam network. Alexis completed the introduction.",
+    "topics": ["YC", "revenue automation", "networking", "Amsterdam", "introductions"],
+    "pendingActions": [],
+    "keyPeople": ["Anelya Grant", "Quentin"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2838",
+      "timestamp": "2025-10-31T06:04:22.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Just did the intro 🙌"
+    },
+    {
+      "id": "2836",
+      "timestamp": "2025-10-31T04:51:23.000Z",
+      "senderName": "Anelya Grant",
+      "isSender": false,
+      "text": "Good seeing you!!!"
+    },
+    {
+      "id": "2834",
+      "timestamp": "2025-10-26T06:34:11.000Z",
+      "senderName": "Anelya Grant",
+      "isSender": false,
+      "text": "👋 nice meeting you today! \n\nWould love to connect with Quentin and the Ams network."
+    }
+  ],
+  "metadata": {
+    "messageCount": 7,
+    "firstMessageDate": "2025-10-26T04:24:45.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "chatId": "!y3nSiwiZyzJZnfhLQP9nMMDz9Pw:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Zara Gabryel",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Zara Gabryel",
+      "id": "@NcZKPRG38vO8K6X7JpRiiAwSwnRspDrBokI5MrG2gM3TDpZUqEtbhw:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-03T10:13:45.000Z",
+  "lastMessageId": "1958",
+  "lastSortKey": "451114195200",
+  "context": {
+    "summary": "Zara is experiencing significant stress - currently sick in bed, waiting to hear about a job at Avant, dealing with financial issues related to someone with initials 'SH'. She's worried and needs to freeze her bank account. Alexis sent her £500 to help and is being supportive, asking about her job situation and suggesting ways to dispute/reverse charges.",
+    "topics": ["job-search", "financial-stress", "health", "emotional-support", "avant-job", "bank-issues"],
+    "pendingActions": [
+      {
+        "action": "Check in with Zara about Avant job outcome",
+        "status": "pending",
+        "createdAt": "2025-11-03T10:13:45.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Zara Gabryel"],
+    "lastUpdated": "2025-11-03T10:13:45.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "1958",
+      "timestamp": "2025-11-03T10:13:45.000Z",
+      "senderName": "Zara Gabryel",
+      "isSender": false,
+      "text": "I'm currently sick in bed probably just from the stress"
+    },
+    {
+      "id": "1957",
+      "timestamp": "2025-11-03T10:13:35.000Z",
+      "senderName": "Zara Gabryel",
+      "isSender": false,
+      "text": "Bc I'm like insanely stressed"
+    },
+    {
+      "id": "1956",
+      "timestamp": "2025-11-03T10:13:31.000Z",
+      "senderName": "Zara Gabryel",
+      "isSender": false,
+      "text": "I just really want this job but if I don't get it then i need to really have a sit down and work this out"
+    },
+    {
+      "id": "1955",
+      "timestamp": "2025-11-03T10:13:10.000Z",
+      "senderName": "Zara Gabryel",
+      "isSender": false,
+      "text": "As for SH I'm speaking to my bank about it and I'm gonna freeze my account"
+    },
+    {
+      "id": "1949",
+      "timestamp": "2025-11-01T09:40:52.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "I sent 500"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-10-31T20:13:10.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

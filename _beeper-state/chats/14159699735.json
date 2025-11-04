@@ -1,0 +1,95 @@
+{
+  "chatId": "!M8QztbzqIv2k1Pd9LuhG6bB6Hr4:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "+14159699735",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [],
+  "lastActivity": "2025-11-03T21:19:15.000Z",
+  "lastMessageId": "1008",
+  "lastSortKey": "451124417280",
+  "context": {
+    "summary": "Conversation with someone offering networking introductions and connections. Alexis asked if they know anyone at Ramp, they requested a call first before making intros. Previous context shows they're a connector helping with fundraising and design partner introductions, have suggested VCs like Yoran Beisher, Christoph Janz, and David Peterson in the past.",
+    "topics": ["networking", "introductions", "ramp", "fundraising", "design-partners"],
+    "pendingActions": [
+      {
+        "action": "Follow up with +14159699735 about Ramp connection",
+        "status": "pending",
+        "createdAt": "2025-11-03T21:19:15.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Yoran Beisher", "Christoph Janz", "David Peterson"],
+    "lastUpdated": "2025-11-03T21:19:15.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "1008",
+      "timestamp": "2025-11-03T21:19:15.000Z",
+      "senderName": "+14159699735",
+      "isSender": false,
+      "text": "No problem. I'll circle back another time. If you change your mind and want to do a quick 5 minute call, just say the word."
+    },
+    {
+      "id": "1007",
+      "timestamp": "2025-11-03T21:19:07.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Ask me later"
+    },
+    {
+      "id": "1006",
+      "timestamp": "2025-11-03T21:17:57.000Z",
+      "senderName": "+14159699735",
+      "isSender": false,
+      "text": "Totally fair. I can only check my network after a quick call. If you don't want intros yet, that's fine, the call is just to confirm context and get permission to peek. Want to do a 5 minute call now, or pick a time?"
+    },
+    {
+      "id": "1005",
+      "timestamp": "2025-11-03T21:17:48.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "I don't want you to introduce me yet. Just tell me if you have someone from Ramp in your network"
+    },
+    {
+      "id": "1004",
+      "timestamp": "2025-11-03T21:16:54.000Z",
+      "senderName": "+14159699735",
+      "isSender": false,
+      "text": "We'll need a quick call before I can make intros. Want to do that now, or pick a time?"
+    },
+    {
+      "id": "1003",
+      "timestamp": "2025-11-03T21:16:47.000Z",
+      "senderName": "+14159699735",
+      "isSender": false,
+      "text": "I can take a look. Quick note: I only make intros after a brief call, but I can check who I know at Ramp and line things up. One sec while I scan my network."
+    },
+    {
+      "id": "1002",
+      "timestamp": "2025-11-03T21:16:36.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Do you have anyone in your network that works at Ramp"
+    },
+    {
+      "id": "1001",
+      "timestamp": "2025-11-03T21:15:24.000Z",
+      "senderName": "+14159699735",
+      "isSender": false,
+      "text": "From what I have so far: your name is Alexis (Lex) Vincent, email is alexis@kepler16.com, and your LinkedIn is https://www.linkedin.com/in/ACoAACa7dWgB-g7gCyHUt5WT2rTCJ-VwIuxRd-A. You're raising funds and looking for design partners to validate an idea, with interest across SaaS and AI. We haven't had a full call yet, so that's the high level. Anything you'd add or correct?"
+    },
+    {
+      "id": "1000",
+      "timestamp": "2025-11-03T21:15:05.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "What do you know about me"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-07-16T19:01:52.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

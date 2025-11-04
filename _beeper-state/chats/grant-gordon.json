@@ -1,0 +1,76 @@
+{
+  "chatId": "!zJsSJ3crkFlZ41vj-G4gYGMVsII:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Grant Gordon",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Grant Gordon",
+      "id": "@ZCptWZjBsX0Gz_pyjVtHdhUOkeLbjx83iNux05PqrWo5VrIJDqGy:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-03T14:50:07.000Z",
+  "lastMessageId": "1899",
+  "lastSortKey": "451118440192",
+  "context": {
+    "summary": "Coordinating meetups in SF. Previous meetup was postponed due to Alexis having a cold. They scheduled breakfast at Coffee Bodega for 8:30am on Monday (Aug 25). Grant was traveling extensively. Alexis reached out again in November asking to meet up when Grant returns.",
+    "topics": ["meetups", "breakfast", "coffee", "scheduling", "health"],
+    "pendingActions": [
+      {
+        "action": "Schedule meetup with Grant Gordon when he's back in SF",
+        "status": "pending",
+        "createdAt": "2025-11-03T14:50:07.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Grant Gordon"],
+    "lastUpdated": "2025-11-03T14:50:07.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "1899",
+      "timestamp": "2025-11-03T14:50:07.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Would love to meet up"
+    },
+    {
+      "id": "1898",
+      "timestamp": "2025-11-03T14:49:55.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Hey man, ping me when you're back :)"
+    },
+    {
+      "id": "1897",
+      "timestamp": "2025-08-25T15:31:24.000Z",
+      "senderName": "Grant Gordon",
+      "isSender": false,
+      "text": "Great no rush"
+    },
+    {
+      "id": "1891",
+      "timestamp": "2025-08-19T21:18:26.000Z",
+      "senderName": "Grant Gordon",
+      "isSender": false,
+      "text": "Yes"
+    },
+    {
+      "id": "1888",
+      "timestamp": "2025-08-19T21:16:29.000Z",
+      "senderName": "Grant Gordon",
+      "isSender": false,
+      "text": "8:30 am? Coffee Bodega?"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-08-19T19:12:51.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "chatId": "!SJCQn95MDjcSZaJiOgvtWv7IA3I:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Alexis Vincent with Quinten",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Quinten Selhorst",
+      "id": "@LmUldRGPauIFFLcZr62xI9anHaQbDx9BgPXRgJhg0A4JjCfS-sNC:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-10-31T05:44:23.000Z",
+  "lastMessageId": "2901",
+  "lastSortKey": "451043702528",
+  "context": {
+    "summary": "Alexis connecting Quinten with Amsterdam-based YC founder (Anelya) who runs YC community there. Also thanked Quinten for organizing the Mallorca trip which was highly successful. Previously discussed hiking plans and mutual connection queries.",
+    "topics": ["introductions", "networking", "Amsterdam", "YC", "Mallorca trip", "travel"],
+    "pendingActions": [],
+    "keyPeople": ["Quinten Selhorst", "Anelya"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2901",
+      "timestamp": "2025-10-31T05:44:23.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Later stage company. So not EWOR. But I think worth making the network expansion"
+    },
+    {
+      "id": "2900",
+      "timestamp": "2025-10-31T05:43:55.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "https://www.linkedin.com/in/anelya?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    },
+    {
+      "id": "2897",
+      "timestamp": "2025-10-31T05:42:50.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Yo. Want to connect you with a founder based out of Amsterdam. She runs a YC community in Amsterdam."
+    },
+    {
+      "id": "2887",
+      "timestamp": "2025-09-30T11:31:46.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Hey man, just to thank you again for organising that trip. It was sick. Such good people. A sick apartment. The boat was awesome. Amazing meals. All in, such a sick trip. Thank you 🙏"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-09-23T20:08:02.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

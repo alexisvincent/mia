@@ -1,0 +1,29 @@
+# Eden Analysis - Financial Analysis Tools
+
+# Filter CSV to remove internal transfer pairs
+filter-csv:
+    python3 src/filter_csv.py
+
+# Add income/expense classification column to filtered CSV
+classify-transactions:
+    python3 src/add_classification.py
+
+# Run the complete data processing pipeline
+process-data: filter-csv classify-transactions
+
+# Clean generated files
+clean:
+    rm -f gen/*.csv gen/*.json gen/*.md
+
+# Show help
+help:
+    @echo "Eden Analysis Commands:"
+    @echo "  filter-csv           - Remove internal transfer pairs from bank statement"
+    @echo "  classify-transactions - Add income/expense classification"
+    @echo "  process-data         - Run complete data processing pipeline"
+    @echo "  clean               - Remove all generated files"
+    @echo ""
+    @echo "Data Pipeline:"
+    @echo "  1. Place bank statement CSV in data/bank_statement.csv"
+    @echo "  2. Run 'just process-data' to filter and classify transactions"
+    @echo "  3. Analyze results in gen/ directory"

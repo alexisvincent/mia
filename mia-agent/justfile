@@ -1,0 +1,7 @@
+# Expose local server via ngrok with static URL (default port: 4111)
+ngrok PORT="4111":
+    ngrok http --url=unborrowed-fasciately-lillianna.ngrok-free.dev {{PORT}}
+
+# Run dev server
+dev:
+    pnpm dev

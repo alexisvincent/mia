@@ -1,0 +1,60 @@
+{
+  "chatId": "!JUL-nCLEUqHNpEPLG3eLZJcO62M:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "EWOR SF Residency",
+  "type": "group",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [],
+  "lastActivity": "2025-11-01T10:29:53.000Z",
+  "lastMessageId": "2482",
+  "lastSortKey": "451070206208",
+  "context": {
+    "summary": "EWOR SF Residency group chat discussing modern marketing tactics, with Daniel sharing insights about Ryan Reynolds style marketing. Group also coordinating mentoring submissions for Top 100 Founder Mentors nomination and discussing Artifact founders visiting SF.",
+    "topics": ["marketing", "mentoring", "networking", "events", "EWOR"],
+    "pendingActions": [],
+    "keyPeople": ["Daniel Dippold", "Petter Made", "Viktoria Izdebska", "Ariel Harmoko"],
+    "lastUpdated": "2025-11-03T22:00:00.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2482",
+      "timestamp": "2025-11-01T10:29:53.000Z",
+      "senderName": "Petter Made",
+      "isSender": false,
+      "text": "Ryan Reynolds style!!"
+    },
+    {
+      "id": "2477",
+      "timestamp": "2025-11-01T10:21:04.000Z",
+      "senderName": "Daniel Dippold",
+      "isSender": false,
+      "text": "HIghly recommend you follow and do stuff like that yourself - especially for those B2C 😉"
+    },
+    {
+      "id": "2475",
+      "timestamp": "2025-11-01T10:20:49.000Z",
+      "senderName": "Daniel Dippold",
+      "isSender": false,
+      "text": "This guy is the king of modern marketing."
+    },
+    {
+      "id": "2473",
+      "timestamp": "2025-10-31T08:13:28.000Z",
+      "senderName": "Daniel Dippold",
+      "isSender": false,
+      "text": "If you have 5 minutes to submit the people *who made a real difference*, please help out :) \n\nhttps://www.linkedin.com/posts/danieldippold_top100foundermentors-activity-7389937271967256576-YGcO"
+    },
+    {
+      "id": "2472",
+      "timestamp": "2025-10-24T22:34:01.000Z",
+      "senderName": "Viktoria Izdebska",
+      "isSender": false,
+      "text": "Let do it"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-10-22T19:11:35.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

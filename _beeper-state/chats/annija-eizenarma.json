@@ -1,0 +1,69 @@
+{
+  "chatId": "!65ky20ZvHphHDgGXakQmFhPpMR8:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Annija Eizenarma",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Annija Eizenarma",
+      "id": "@XU71OCGeNx4y-NsYK1SkYOsiZfu8h-6HxvP9s-Tcr41V4OHG0H0q:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-01T16:17:19.000Z",
+  "lastMessageId": "2281",
+  "lastSortKey": "451075542784",
+  "context": {
+    "summary": "Coordinating logistics for picking up bags (Alexis's and Viktoria's) via Uber courier. Annija confirmed she and others were home, coordinated the pickup timing (arrived in 4 minutes), tracked the driver, and confirmed successful pickup. Also coordinated Instacart delivery. Casual check-in about weekend plans. Previous early morning call was because Alexis thought Annija was leaving by 9:30am.",
+    "topics": ["package-pickup", "uber-courier", "logistics", "coordination", "groceries"],
+    "pendingActions": [],
+    "keyPeople": ["Annija Eizenarma", "Viktoria Izdebska"],
+    "lastUpdated": "2025-11-01T16:17:19.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2281",
+      "timestamp": "2025-11-01T16:17:19.000Z",
+      "senderName": "Annija Eizenarma",
+      "isSender": false,
+      "text": "What's your plan for the weekend"
+    },
+    {
+      "id": "2280",
+      "timestamp": "2025-11-01T16:16:54.000Z",
+      "senderName": "Annija Eizenarma",
+      "isSender": false,
+      "text": "That's right. 😃"
+    },
+    {
+      "id": "2279",
+      "timestamp": "2025-11-01T16:16:28.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Sorry, thought you were leaving by 9.30, that's why called early"
+    },
+    {
+      "id": "2276",
+      "timestamp": "2025-11-01T16:06:51.000Z",
+      "senderName": "Annija Eizenarma",
+      "isSender": false,
+      "text": "Done"
+    },
+    {
+      "id": "2274",
+      "timestamp": "2025-11-01T16:03:13.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "I requested a package from you through Uber. Tap to track progress: \nhttps://trip.uber.com/.scob8eVCAb60"
+    }
+  ],
+  "metadata": {
+    "messageCount": 20,
+    "firstMessageDate": "2025-11-01T09:17:07.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

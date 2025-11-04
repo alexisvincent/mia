@@ -1,0 +1,89 @@
+{
+  "chatId": "!2vj-uU2n0kt83h6Mvwn4tbRAVhk:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Skydiving",
+  "type": "group",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [
+    {
+      "name": "Viktoria Izdebska",
+      "id": "@VpT-zt6AFDIkPYF0raGBCIJVPmwhXEOE-JWB29dOVeZ_KP6M5KW76-0:local-whatsapp.localhost"
+    },
+    {
+      "name": "+447542096081",
+      "id": "@xSNQ2MB7Pxs3uX8IF0Kqdp8MSlDuYcDhzz6GCtrLqz6NhmraVVynYcDo9my1hAE:local-whatsapp.localhost"
+    },
+    {
+      "name": "+447775342311",
+      "id": "@TEfES4EB0EwYf0JbJGLTN1vn5i4a6bDODRS2OEAKuGvjhmoq-iQE5KWg-3Qbu44:local-whatsapp.localhost"
+    },
+    {
+      "name": "Kacper",
+      "id": "@Yi6pcnPBQam_oZTdktBg9tAjZs_ePGQfnQKptWeZdOqpoFlNO7Rwwq4ncaNprA:local-whatsapp.localhost"
+    },
+    {
+      "name": "+48605606461",
+      "id": "@_0JACOnt5zg5sYWKoN2_qenTZIr3uQwO8XLvIx21Nu-fXkyBUgt1gqnoyCZq7vM:local-whatsapp.localhost"
+    },
+    {
+      "name": "+13142789694",
+      "id": "@NgZEBr5NaX1AO7QPMabCo8146V-WE1wHS7amHfVCYhC3pP2eefx-6tLG7A0LFQU:local-whatsapp.localhost"
+    },
+    {
+      "name": "Alexis Vincent",
+      "id": "@lexvin:beeper.com"
+    }
+  ],
+  "lastActivity": "2025-11-02T17:50:01.000Z",
+  "lastMessageId": "2058",
+  "lastSortKey": "451099085056",
+  "context": {
+    "summary": "Group coordinating skydiving activities in the Napa Valley area. Recent coordination involved meeting at 30 Otis at 9:45am, dealing with bathroom line delays causing pickup delays, and discussing availability for upcoming jumps. Alexis was booked out and couldn't make one session. Some members also discussing optional 5km run in Napa Valley. Requesting photos from previous jump.",
+    "topics": ["skydiving", "napa-valley", "coordination", "scheduling", "photos", "running"],
+    "pendingActions": [
+      {
+        "action": "Share photos from recent skydiving session",
+        "status": "pending",
+        "createdAt": "2025-11-02T17:50:01.000Z",
+        "linearIssueId": null
+      }
+    ],
+    "keyPeople": ["Viktoria Izdebska", "Kacper", "Kamil"],
+    "lastUpdated": "2025-11-02T17:50:01.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "2058",
+      "timestamp": "2025-11-02T17:50:01.000Z",
+      "senderName": "+13142789694",
+      "isSender": false,
+      "text": "Does anyone have photos from yesterday?"
+    },
+    {
+      "id": "2057",
+      "timestamp": "2025-11-02T05:38:09.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Was booked out. I really need to book earlier."
+    },
+    {
+      "id": "2056",
+      "timestamp": "2025-11-02T00:01:58.000Z",
+      "senderName": "Kacper",
+      "isSender": false,
+      "text": "Alexis Vincent you're still going tomorrow?"
+    },
+    {
+      "id": "2047",
+      "timestamp": "2025-11-01T05:57:06.000Z",
+      "senderName": "+48605606461",
+      "isSender": false,
+      "text": "+48501408252  & +447542096081 if you're up for running and not in a hurry, with Kamil we wanted to do light 5km on our way back somewhere close (like in the Napa Valley)"
+    }
+  ],
+  "metadata": {
+    "messageCount": 48,
+    "firstMessageDate": "2025-11-01T02:02:25.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}

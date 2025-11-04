@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__linear__list_issue_labels",
+      "WebSearch",
+      "WebFetch(domain:screenapp.io)",
+      "mcp__beeper__list_messages",
+      "mcp__beeper__get_chat",
+      "mcp__beeper__search_chats",
+      "mcp__linear__get_issue"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "chatId": "!YUA3tRuPBuSIhVONCd0pDEHTF3A:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+  "name": "Alexis Vincent",
+  "type": "single",
+  "accountID": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+  "participants": [],
+  "lastActivity": "2025-11-03T21:49:18.000Z",
+  "lastMessageId": "24995",
+  "lastSortKey": "451124878848",
+  "context": {
+    "summary": "Brief conversation with self-sent messages saying 'Hello Viktoria' and 'Yo'. Appears to be testing or notes to self.",
+    "topics": ["testing", "notes"],
+    "pendingActions": [],
+    "keyPeople": [],
+    "lastUpdated": "2025-11-03T21:49:18.000Z"
+  },
+  "recentMessages": [
+    {
+      "id": "24995",
+      "timestamp": "2025-11-03T21:49:18.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Hello Viktoria"
+    },
+    {
+      "id": "4234",
+      "timestamp": "2025-11-03T21:46:18.000Z",
+      "senderName": "Alexis Vincent",
+      "isSender": true,
+      "text": "Yo"
+    }
+  ],
+  "metadata": {
+    "messageCount": 2,
+    "firstMessageDate": "2025-11-03T21:46:18.000Z",
+    "isArchived": false,
+    "isMuted": false
+  }
+}
