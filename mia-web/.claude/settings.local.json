@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:clerk.com)",
+      "mcp__next-devtools__nextjs_runtime",
+      "Bash(pnpm list:*)",
+      "mcp__next-devtools__init",
+      "Bash(curl:*)",
+      "mcp__mia-local__get-clerk-user-data"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "mia-local"
+  ]
+}

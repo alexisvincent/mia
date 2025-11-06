@@ -1,12 +1,40 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+// import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+//
+// // Define public routes that don't require authentication
+// const isPublicRoute = createRouteMatcher([
+//   '/.well-known/oauth-authorization-server(.*)',
+//   '/.well-known/oauth-protected-resource(.*)',
+// ]);
+//
+// export default clerkMiddleware(async (auth, req) => {
+//   // Allow public access to .well-known routes
+//   if (isPublicRoute(req)) return;
+//
+//   // Protect all other routes
+//   await auth.protect();
+// });
+//
+// export const config = {
+//   matcher: [
+//     // Skip Next.js internals and all static files, unless found in search params
+//     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+//     // Always run for API routes
+//     "/(api)(.*)",
+//   ],
+// };
 
-export default clerkMiddleware();
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
-    "/(api|trpc)(.*)",
-  ],
-};
+const isPublicRoute = createRouteMatcher([
+  '/.well-known/oauth-authorization-server(.*)',
+  '/.well-known/oauth-protected-resource(.*)',
+  '/mcp(.*)',
+])
+
+export default clerkMiddleware(async (auth, req) => {
+  if (isPublicRoute(req)) return // Allow public access to .well-known endpoints
+  console.log("here", req.headers)
+  await auth.protect() // Protect all other routes
+  auth.protect
+  console.log("passed")
+})
