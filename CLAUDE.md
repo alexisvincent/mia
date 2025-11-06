@@ -60,6 +60,22 @@ Company playbooks and operational frameworks are stored in `playbooks/`:
 - Standardized approaches to recurring business operations
 - Living documents that evolve based on what works
 
+## Company Context
+
+For information about K42 (company context, research, vision, products, etc.), refer to the sibling repository:
+
+**`../company-os/`** - K42 Company OS (Authoritative Knowledge Base)
+
+This repository contains:
+- **Company strategy & vision** - Overview, PRE (Programmable Retail Economy) thesis, business model
+- **Product documentation** - Rewards Marketplace, Business Issuers, Infrastructure (ROS)
+- **Market positioning** - Positioning documents and messaging blurbs by audience
+- **Fundraising materials** - Pitch decks, investor outreach, VC feedback
+- **Market research** - Competitive analysis, stakeholder research, retail media trends
+- **_inbox/** - Work in progress (drafts, research, critiques, raw materials)
+
+Quick start: Read `company-os/CLAUDE.md` for full index and navigation guide
+
 ## Usage Guidelines
 
 - Use Claude Code to interact with and manage all aspects of this control panel

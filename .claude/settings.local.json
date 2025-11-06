@@ -10,7 +10,9 @@
       "mcp__linear__get_issue",
       "mcp__beeper__search_messages",
       "mcp__linear__create_comment",
-      "mcp__linear__create_issue"
+      "mcp__linear__create_issue",
+      "WebFetch(domain:seedlegals.com)",
+      "mcp__linear__list_issues"
     ],
     "deny": [],
     "ask": []
