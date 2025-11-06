@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__mastra__mastraDocs",
+      "mcp__mastra__mastraExamples"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
