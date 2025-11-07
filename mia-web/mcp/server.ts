@@ -2,13 +2,19 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 // import { type createMcpHandler } from '@vercel/mcp-adapter'
 import { clerkClient } from '@/lib/clerk'
+import { z } from "zod"
 
 export function setupServer(server: McpServer) {
-  server.tool(
+
+  server.registerTool(
     'get-clerk-user-data',
-    'Retrieves authenticated user information',
-    {},
-    async (_, { authInfo }) => {
+    {
+      title: "Get Clerk User Data",
+      inputSchema: {},
+      description: 'Retrieves authenticated user information',
+    },
+    async ({ }, { authInfo }) => {
+      console.log(authInfo)
       const userId = authInfo!.extra!.userId! as string
       const userData = await clerkClient.users.getUser(userId)
       return {

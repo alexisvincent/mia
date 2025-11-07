@@ -3,8 +3,7 @@ import { clerkClient } from '@/lib/clerk'
 import { createMcpHandler, withMcpAuth } from '@vercel/mcp-adapter'
 import { auth } from '@clerk/nextjs/server'
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
-import { setupServer } from './server'
-
+import { setupServer } from '@/mcp/server'
 
 // Define MCP tools
 const handler = createMcpHandler((server: McpServer) => {
