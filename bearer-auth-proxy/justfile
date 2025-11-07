@@ -1,0 +1,7 @@
+# Sync local directory to remote server
+sync:
+    rsync -avz --delete \
+        ./data/ root@mia-droplet:/root/proxy/
+
+tailscale:
+  tailscale funnel --https=10000 23373 -bg

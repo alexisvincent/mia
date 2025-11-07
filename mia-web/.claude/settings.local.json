@@ -6,7 +6,10 @@
       "Bash(pnpm list:*)",
       "mcp__next-devtools__init",
       "Bash(curl:*)",
-      "mcp__mia-local__get-clerk-user-data"
+      "mcp__mia-local__get-clerk-user-data",
+      "mcp__mia__get-clerk-user-data",
+      "WebSearch",
+      "mcp__mia-local__latest_chats_special"
     ],
     "deny": [],
     "ask": []
