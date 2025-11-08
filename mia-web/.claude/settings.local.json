@@ -10,7 +10,11 @@
       "mcp__mia__get-clerk-user-data",
       "WebSearch",
       "mcp__mia-local__latest_chats_special",
-      "mcp__beeper__search_chats"
+      "mcp__beeper__search_chats",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "mcp__mia-local__current_dev_tool",
+      "mcp__mia-local__link_connected_accounts",
+      "mcp__mia-local__sdf"
     ],
     "deny": [],
     "ask": []

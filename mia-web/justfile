@@ -1,0 +1,2 @@
+composio-types:
+  composio ts generate --type-tools --output-dir ./src/composio/types

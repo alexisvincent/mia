@@ -6,27 +6,16 @@ import { z } from "zod"
 import { mastra } from "@/src/mastra"
 import { weatherTool } from '@/src/mastra/tools/weather-tool'
 // import { weatherAgent } from '@/src/mastra/agents/weather-agent'
-import {latest} from "./beeper"
+import { register_beeper_tools } from "./beeper"
+
+import { registerXTools } from "./x"
 
 
 export function setupServer(server: McpServer) {
-  server.registerTool(
-    "latest_chats_special",
-    {
-      title: "Load latest special chats",
-      description: "Load latest special chats",
-      inputSchema: {},
-      // outputSchema: {}
-    },
-    async ({}, { authInfo }) => {
-      const l = await latest()
-      console.log("dddd", l)
-      return {
-        content: [{type: 'text', text: JSON.stringify(l, null, 2)}]
-      }
-    }
 
-  )
+  register_beeper_tools(server)
+
+  registerXTools(server)
 
   server.registerTool(
     'get-clerk-user-data',

@@ -11,6 +11,9 @@ importers:
       '@beeper/desktop-api':
         specifier: ^4.2.2
         version: 4.2.2
+      '@beeper/desktop-mcp':
+        specifier: ^4.2.2
+        version: 4.2.2
       '@clerk/mcp-tools':
         specifier: ^0.3.1
         version: 0.3.1(pg@8.16.3)(redis@4.7.1)
@@ -330,6 +333,10 @@ packages:
   '@beeper/desktop-api@4.2.2':
     resolution: {integrity: sha512-20iYyMeW7ProjInEj/K2DYWtUhQlPU7cKT1Z39Cypbkn8xzlkDSCY5KdmuYIZiFMmKM6Dhi0ydBtPRgAvj70Uw==}
 
+  '@beeper/desktop-mcp@4.2.2':
+    resolution: {integrity: sha512-w6gR+ctIhya9YL/JmcBMMt3mnruqzs9dIdypnzAJ2iIso0/LNLjvpUGuit2w8kPw2wAgzb2vZ3o+hkNJlg1B3A==}
+    hasBin: true
+
   '@clack/core@0.5.0':
     resolution: {integrity: sha512-p3y0FIOwaYRUPRcMO7+dlmLh8PSRcrjuTndsiA0WAFbWES0mLZlrjVoBRZ9DzkPFJZG6KGkJmoEAY0ZcVWTkow==}
 
@@ -384,6 +391,9 @@ packages:
   '@clerk/types@4.97.2':
     resolution: {integrity: sha512-xnJq3xzpmuuDnNnWuUMKJLPPkaEaLDM0kiv2Hm0gKIcL1+1P3VaGf2vL9roIhmhLswB2PUwtVvZKBmGjT5yOVw==}
     engines: {node: '>=18.17.0'}
+
+  '@cloudflare/cabidela@0.2.4':
+    resolution: {integrity: sha512-u/1OwwqfcMvjmUFOcb6QtFzVVGpncHJxwl254wjzp0JC5CUlBkV6r5BbRrHI5ZYJEAgu8NeeorirxngmMFPZjQ==}
 
   '@composio/client@0.1.0-alpha.38':
     resolution: {integrity: sha512-+Gm5EQdFCu408YqPb9rKdVK7QD9eLS5wJTeYw1QH9eA6hfLmTBKVHFLc32tbLlY9nFwmClyF7KIB6y4NUfYcQw==}
@@ -2129,6 +2139,10 @@ packages:
   '@upstash/redis@1.35.6':
     resolution: {integrity: sha512-aSEIGJgJ7XUfTYvhQcQbq835re7e/BXjs8Janq6Pvr6LlmTZnyqwT97RziZLO/8AVUL037RLXqqiQC6kCt+5pA==}
 
+  '@valtown/deno-http-worker@0.0.21':
+    resolution: {integrity: sha512-16kFuUykann75lNytnXXIQlmpzreZjzdyT27ebT3yNGCS3kKaS1iZYWHc3Si9An54Cphwr4qEcviChQkEeJBlA==}
+    engines: {node: 20 || 22 || 24}
+
   '@vercel/mcp-adapter@1.0.0':
     resolution: {integrity: sha512-o/QA4LhYCJvuL7/i8CfKPpOm29u25/L4m1LWH44EQZ8cfYJlc4B7Bu+YzDHl23m8A3hDxCJQmlgZEGmsPAQ0vQ==}
     hasBin: true
@@ -2500,6 +2514,9 @@ packages:
 
   date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
+
+  date-fns@4.1.0:
+    resolution: {integrity: sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg==}
 
   dateformat@4.6.3:
     resolution: {integrity: sha512-2P0p0pFGzHS5EMnhdxQi7aJN+iMheud0UhG4dlE1DLAlvL8JHjJJTX/CSm4JXwV0Ka5nGk3zC5mcb5bUQUxxMA==}
@@ -3394,6 +3411,10 @@ packages:
   joycon@3.1.1:
     resolution: {integrity: sha512-34wB/Y7MW7bzjKRjUKTa46I2Z7eV62Rkhva+KkopW7Qvv/OSWBqvkSY7vusOPrNuZcUG3tApvdVgNB8POj3SPw==}
     engines: {node: '>=10'}
+
+  jq-web@https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz:
+    resolution: {tarball: https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz}
+    version: 0.8.6
 
   js-base64@3.7.8:
     resolution: {integrity: sha512-hNngCeKxIUQiEUN3GPJOkz4wF/YvdUdbNL9hsBcMQTkKzboD7T/q3OYOuuPZLUE6dBxSGpwhk5mwuDud7JVAow==}
@@ -4993,6 +5014,25 @@ snapshots:
 
   '@beeper/desktop-api@4.2.2': {}
 
+  '@beeper/desktop-mcp@4.2.2':
+    dependencies:
+      '@beeper/desktop-api': 4.2.2
+      '@cloudflare/cabidela': 0.2.4
+      '@modelcontextprotocol/sdk': 1.21.0
+      '@valtown/deno-http-worker': 0.0.21
+      cors: 2.8.5
+      date-fns: 4.1.0
+      express: 5.1.0
+      jq-web: https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz
+      qs: 6.14.0
+      yargs: 17.7.2
+      zod: 3.25.76
+      zod-to-json-schema: 3.24.6(zod@3.25.76)
+      zod-validation-error: 4.0.2(zod@3.25.76)
+    transitivePeerDependencies:
+      - '@cfworker/json-schema'
+      - supports-color
+
   '@clack/core@0.5.0':
     dependencies:
       picocolors: 1.1.1
@@ -5062,6 +5102,8 @@ snapshots:
     transitivePeerDependencies:
       - react
       - react-dom
+
+  '@cloudflare/cabidela@0.2.4': {}
 
   '@composio/client@0.1.0-alpha.38': {}
 
@@ -6961,6 +7003,8 @@ snapshots:
     dependencies:
       uncrypto: 0.1.3
 
+  '@valtown/deno-http-worker@0.0.21': {}
+
   '@vercel/mcp-adapter@1.0.0(@modelcontextprotocol/sdk@1.21.0)(next@16.0.1(@babel/core@7.28.5)(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
     dependencies:
       '@modelcontextprotocol/sdk': 1.21.0
@@ -7361,6 +7405,8 @@ snapshots:
       is-data-view: 1.0.2
 
   date-fns@3.6.0: {}
+
+  date-fns@4.1.0: {}
 
   dateformat@4.6.3: {}
 
@@ -8419,6 +8465,8 @@ snapshots:
   jiti@2.6.1: {}
 
   joycon@3.1.1: {}
+
+  jq-web@https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz: {}
 
   js-base64@3.7.8: {}
 
@@ -9834,6 +9882,10 @@ snapshots:
       zod: 4.1.12
 
   zod-to-json-schema@3.24.6(zod@3.25.76):
+    dependencies:
+      zod: 3.25.76
+
+  zod-validation-error@4.0.2(zod@3.25.76):
     dependencies:
       zod: 3.25.76
 
