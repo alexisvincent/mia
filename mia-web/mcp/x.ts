@@ -1,7 +1,6 @@
 import { composio } from "@/src/composio"
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { generateText, Experimental_Agent as Agent, stepCountIs, tool } from 'ai';
-import { Toolkits } from "@/src/composio/types"
 import { ToolkitsListParamsSchema } from "@composio/core"
 import z from "zod";
 
