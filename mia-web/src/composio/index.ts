@@ -7,5 +7,3 @@ export const composio = new Composio({
   provider: new VercelProvider(),
   apiKey: process.env.COMPOSIO_API_KEY
 });
-
-

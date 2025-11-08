@@ -9,6 +9,7 @@ import { weatherTool } from '@/src/mastra/tools/weather-tool'
 import { register_beeper_tools } from "./beeper"
 
 import { registerXTools } from "./x"
+import { registerTaskPlanningTools } from './task_planning'
 
 
 export function setupServer(server: McpServer) {
@@ -16,6 +17,7 @@ export function setupServer(server: McpServer) {
   register_beeper_tools(server)
 
   registerXTools(server)
+  registerTaskPlanningTools(server)
 
   server.registerTool(
     'get-clerk-user-data',

@@ -14,7 +14,11 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "mcp__mia-local__current_dev_tool",
       "mcp__mia-local__link_connected_accounts",
-      "mcp__mia-local__sdf"
+      "mcp__mia-local__sdf",
+      "mcp__mia-local__get_task_planning_context",
+      "mcp__linear__list_issues",
+      "mcp__mia-local__update_task_planning_context",
+      "mcp__linear__get_issue"
     ],
     "deny": [],
     "ask": []
