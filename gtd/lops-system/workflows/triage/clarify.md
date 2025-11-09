@@ -18,48 +18,98 @@ For each item in the Triage queue, ask these questions:
 
 Does this require me to do something?
 
-**NO** → Choose one:
-- **Trash** - No longer needed, delete it (reject)
-- **Reference** - Might need later, save somewhere appropriate
-- **Incubate** - Remind me about this on a specific date (set due date or reminder)
-
 **YES** → Continue to question 2
 
-### 2. What is the next physical, visible action?
+**NO** → Continue to section "For Non-Actionable Items" below
 
-Ask: "What is the next physical, visible action needed to do this?"
+---
 
-Try to rewrite the item as a concrete next action. Make it specific enough that you won't need to think when executing.
+### 2. What is the definition of done?
 
-- ❌ Not "deal with taxes"
-- ✅ But "Call accountant at 555-1234 to ask about quarterly filing deadline"
+**What does "done" look like?** Define what needs to be true for this to be complete.
 
-See [Writing a Great Next Action](../../guides/writing-next-actions.md) for detailed guidance.
+This could be:
+- A single outcome: "Accountant has answered my tax filing question"
+- Multiple requirements:
+  - "Website redesign mockups approved"
+  - "New design implemented in production"
+  - "Old design archived"
+
+**Important:** Both Actions and Objectives need clear definitions of done.
 
 ### 3. Is this a single action or an objective?
 
-If you complete that next action, is the item done?
+**Can the definition of done be achieved in a single next action?**
 
-**Single Action** → This is an **Action**. The next action you defined IS the task. Ready for Organize step.
+**Single Action** → Continue to section "For Actions" below
 
-**Multiple Steps or Unclear** → This is an **Objective**. Either:
-- Multiple steps are clearly required, OR
-- The next action is unclear/undefined
+**Multiple Steps or Unclear How to Achieve** → Continue to section "For Objectives" below
 
-Continue to question 4 to define the objective.
+---
 
-### 4. Define the Objective
+### 4. Is this related to existing work?
 
-**What does "done" look like?** Write a clear objective title describing the completed state.
+Before creating something new, check if this connects to work already in the system.
+
+**Search for related issues:** Look for existing objectives or actions that might be:
+- The same thing (duplicate)
+- A parent objective this action belongs to
+- A similar objective that should be merged or updated
+
+**If you find something:**
+- **Duplicate** → Update or merge with the existing item instead of creating new
+- **Parent objective exists** → Note the parent ID, this will be linked as a child issue
+- **Should be merged** → Combine with existing objective and update its definition/actions
+
+**If nothing related exists** → Continue below to create new work
+
+---
+
+## For Objectives
+
+### 5a. Write the Objective Title
+
+Write a clear objective title describing the completed state in a single sentence.
 
 - ✅ Good: "Website redesign completed and launched to production"
 - ❌ Bad: "Work on website"
 
-**Can you now define a next action?** If yes, go back to question 2 and define it (this will become a child action of the objective).
+### 6a. Define Next Actions (or Sub-Objectives)
 
-If you can't define "done" clearly, it may need to go to Someday/Maybe.
+**Can you define the next action(s) clearly?**
 
-### 5. Estimate the effort
+List out the actions (or sub-objectives) needed to achieve the definition of done.
+
+**IMPORTANT: Each next action or sub-objective must go through the full clarification process:**
+- Define its definition of done (step 2)
+- Determine if it's a single action or objective (step 3)
+- Check if related to existing work (step 4)
+- Follow the appropriate path (For Actions or For Objectives)
+- Add the appropriate label (action or objective)
+
+**Breaking into Sub-Objectives:**
+Objectives can be broken into sub-objectives, BUT ask yourself: **Is this task too large?** If you're creating many layers, you may have defined too broad an objective.
+
+If you can't define clear next actions, the objective may need to go to Someday/Maybe or requires more thinking.
+
+### 7a. Add the Label
+
+Add the **objective** label to this issue.
+
+---
+
+## For Actions
+
+### 5b. Write the Next Action
+
+The definition of done should follow the guidance in [Writing a Great Next Action](../../guides/writing-next-actions.md).
+
+Write as a physical, visible action:
+
+- ❌ Not "deal with taxes"
+- ✅ But "Call accountant at 555-1234 to ask about quarterly filing deadline"
+
+### 6b. Estimate the Effort
 
 **How much effort will this take?** Assign a T-shirt size estimate:
 
@@ -75,15 +125,46 @@ If you can't define "done" clearly, it may need to go to Someday/Maybe.
 
 **Tip:** If estimating feels difficult, the task may not be well-clarified yet. Return to question 2.
 
+### 7b. Add the Label
+
+Add the **action** label to this issue.
+
+---
+
+## For Non-Actionable Items
+
+### What type of non-actionable item is this?
+
+Determine which category this falls into:
+
+**Trash** - No longer needed or relevant
+- Delete immediately
+
+**Reference** - Information I might need later
+- Identify where it should be stored
+- Add any context needed to find/use it later
+
+**Incubate** - Not ready to act on now, but might be relevant in the future
+- Determine when to revisit (specific date or timeframe)
+- Add context about why it might become relevant
+
+Once clarified, proceed to [Organize](./organize.md) to handle the item appropriately.
+
+---
+
 ## Output
 
 After clarifying each item, you should know:
-- ✅ Whether it's actionable
-- ✅ The specific next action (if actionable)
+
+**If Actionable:**
+- ✅ Definition of done
 - ✅ Whether it's an Action or Objective
-- ✅ If Objective: what "done" looks like
-- ✅ Any relevant context (where/how it can be done)
-- ✅ Effort estimate (T-shirt size)
+- ✅ If Action: clear next action and effort estimate
+- ✅ If Objective: objective title and list of next actions (or sub-objectives)
+
+**If Not Actionable:**
+- ✅ Which category: Trash, Reference, or Incubate
+- ✅ Any context needed (storage location, revisit date, etc.)
 
 ## Next Step
 
