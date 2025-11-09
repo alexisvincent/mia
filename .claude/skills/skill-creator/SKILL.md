@@ -33,48 +33,42 @@ Follow this checklist for creating a new skill:
 - [ ] Identify reusable assets (templates, boilerplate, etc.)
 - [ ] Plan any utility scripts for deterministic operations
 
-### 3. Create Directory Structure
+### 3. Initialize Skill Structure
+
+Use the init_skill.py script to scaffold your new skill:
+
 ```bash
-.claude/skills/your-skill-name/
-├── SKILL.md              # Main skill file (<500 lines)
-├── references/           # Detailed docs loaded on-demand
-│   └── *.md
-├── assets/              # Templates, examples, boilerplate
-│   └── *
-└── scripts/             # Executable utilities (optional)
-    └── *
+cd .claude/skills/skill-creator/scripts
+./init_skill.py your-skill-name --path /path/to/skills
 ```
 
-### 4. Write SKILL.md
-Use this template structure:
-
-```markdown
----
-name: your-skill-name
-description: What it does and when to use it (concise, <1024 chars)
----
-
-# Skill Name
-
-Brief overview (1-2 sentences).
-
-## When to Use This Skill
-
-Bullet list of trigger conditions.
-
-## Workflows
-
-Clear step-by-step procedures with checklists.
-
-## Key Patterns
-
-Important concepts, but keep detailed explanations in references/.
-
-## References
-
-- [[references/detailed-guide.md]] - When to load this
-- [[assets/template.txt]] - What this provides
+This creates:
 ```
+your-skill-name/
+├── SKILL.md              # Template with TODOs and structural guidance
+├── references/           # Example reference documentation
+│   └── api_reference.md
+├── assets/              # Example asset placeholder
+│   └── example_asset.txt
+└── scripts/             # Example script
+    └── example.py
+```
+
+The script provides a comprehensive template with:
+- Structural pattern guidance (workflow-based, task-based, reference-based, capabilities-based)
+- Example files showing best practices
+- TODOs marking sections to customize
+- Resource organization examples
+
+### 4. Customize SKILL.md
+
+The generated SKILL.md includes inline guidance:
+
+- [ ] Complete the description in YAML frontmatter (what + when to use)
+- [ ] Choose appropriate structural pattern for your skill (delete guidance section when done)
+- [ ] Replace placeholder sections with actual content
+- [ ] Add workflows, examples, and references as needed
+- [ ] Delete example files in scripts/, references/, and assets/ if not needed
 
 ### 5. Apply Best Practices
 - [ ] Keep SKILL.md under 500 lines (move details to references)
@@ -83,26 +77,48 @@ Important concepts, but keep detailed explanations in references/.
 - [ ] Provide both flexible guidance and strict templates where appropriate
 - [ ] Add clear success criteria for each workflow step
 
-### 6. Test and Iterate
+### 6. Validate and Test
+
+Run the validation script to check your skill structure:
+
+```bash
+cd .claude/skills/skill-creator/scripts
+./quick_validate.py /path/to/your-skill-name
+```
+
+The validator checks:
+- SKILL.md exists and has valid YAML frontmatter
+- Required fields (name, description) are present
+- Name follows hyphen-case convention (lowercase, hyphens, digits only)
+- Description doesn't contain invalid characters
+
+Then test with real usage:
 - [ ] Create test scenarios before extensive documentation
 - [ ] Test with different model sizes if relevant (Opus vs. Haiku)
 - [ ] Verify progressive disclosure works (references load only when needed)
 - [ ] Gather real-world usage feedback
 
+### 7. Package for Distribution (Optional)
+
+To create a distributable zip file:
+
+```bash
+cd .claude/skills/skill-creator/scripts
+./package_skill.py /path/to/your-skill-name [output-directory]
+```
+
+This will:
+- Validate the skill structure
+- Create a compressed zip file
+- Include all skill files (SKILL.md, references, assets, scripts)
+
+The packaged skill can be shared with others or backed up.
+
 ## Best Practices Quick Reference
 
-**Conciseness**: Challenge every word. Does Claude really need this explanation?
+Key principles: **conciseness**, **progressive disclosure**, and **matching specificity to task fragility**.
 
-**Progressive Disclosure**: Metadata loads always (~100 words), SKILL.md loads when invoked (<5k words), references load on-demand (unlimited).
-
-**Match Specificity to Fragility**:
-- High freedom (text instructions) → Flexible, creative tasks
-- Medium freedom (pseudocode/patterns) → Preferred approaches with room for adaptation
-- Low freedom (exact scripts) → Error-prone, format-critical operations
-
-**Workflow Design**: Break complex operations into sequential steps with validation gates (plan → validate → execute).
-
-**Templates**: Strict templates for format-critical outputs, flexible guidance for creative work.
+For comprehensive guidance, see [[references/best-practices.md]].
 
 ## Common Patterns
 
@@ -143,7 +159,6 @@ Load these on-demand for detailed guidance:
 - [[references/best-practices.md]] - Comprehensive best practices guide
 - [[references/structure-guide.md]] - Detailed structure and architecture patterns
 - [[references/examples.md]] - Real-world skill examples and templates
-- [[assets/skill-template.md]] - Copy-paste template for new skills
 
 ## Anti-Patterns to Avoid
 
@@ -180,9 +195,10 @@ Before finalizing a skill, verify:
 ## Getting Help
 
 For questions about skill architecture or best practices:
-1. Review [[references/best-practices.md]] for comprehensive guidance
-2. Check [[references/examples.md]] for real-world patterns
-3. Use [[assets/skill-template.md]] as a starting point
+1. Use `./scripts/init_skill.py` to scaffold a new skill with templates
+2. Review [[references/best-practices.md]] for comprehensive guidance
+3. Check [[references/examples.md]] for real-world patterns
+4. Run `./scripts/quick_validate.py` to validate your skill structure
 
 ---
 

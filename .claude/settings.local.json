@@ -13,7 +13,12 @@
       "mcp__linear__create_issue",
       "WebFetch(domain:seedlegals.com)",
       "mcp__linear__list_issues",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Skill(skill-creator)",
+      "mcp__linear__search_documentation",
+      "WebFetch(domain:linear.app)",
+      "Bash(python3 init_skill.py:*)",
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []
