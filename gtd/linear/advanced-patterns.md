@@ -35,7 +35,7 @@ All sub-issues start in **Backlog**:
 
 - "Buy desk organizer on Amazon"
   - State: Backlog
-  - Labels: @computer, @low-energy, Executable
+  - Labels: @computer, @low-energy, Atomic
   - Parent: Home office topic
 
 - "File old papers into filing cabinet"
@@ -59,8 +59,7 @@ All sub-issues start in **Backlog**:
 
 **5. Completing the topic:**
 - When making final push to complete ALL remaining sub-issues in one day
-- Move topic to In Progress (signals active completion mode)
-- Complete remaining sub-issues
+- Actively work through remaining sub-issues in Next
 - Mark topic as Done when all sub-issues complete
 
 ## Pattern 2: Complex Topic (with Linear Project)
@@ -119,10 +118,6 @@ All sub-issues start in **Backlog**:
 - Work on sub-issues
 - Update Linear Project status periodically
 
-**6. Topic can move to In Progress:**
-- When making final push to complete
-- Actively working to wrap up all remaining sub-issues
-- Signals "completing this project now"
 
 ## Topic Issue States Explained
 
@@ -144,12 +139,6 @@ All sub-issues start in **Backlog**:
 - Or reviewing/planning the project today
 - Sub-issues likely in various states
 
-**Topic in In Progress:**
-- Making active push to complete
-- Planning to finish all remaining work soon (same day or very soon)
-- Actively working through remaining sub-issues
-- Signals "finishing this project now"
-- Move to Done once all sub-issues complete
 
 **Topic in Waiting For:**
 - Generally not used (sub-issues would be in Waiting For instead)

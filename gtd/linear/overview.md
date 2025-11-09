@@ -51,8 +51,6 @@ This Week (Committed for this week)
     ↓
 Next (Doing today)
     ↓
-In Progress (Actively working now)
-    ↓
 Done / Canceled
 
 Side branches:
@@ -63,8 +61,7 @@ Side branches:
 **The Flow:**
 - **Backlog** = Approved actions, not yet scheduled
 - **This Week** = Committed to complete/progress this week (weekly planning)
-- **Next** = Doing today (daily planning)
-- **In Progress** = Actively working on right now
+- **Next** = Doing today (daily planning) - work on it and move to Done or Waiting For
 - **Waiting For** = Delegated or blocked by others
 - **Someday/Maybe** = Ideas to review later
 
@@ -92,24 +89,19 @@ Side branches:
 - Selected during daily planning
 - Short list (3-5 items)
 - Top priority work for the day
+- Move to Done when complete or to Waiting For if blocked
 
-**5. In Progress**
-- Actively working on right now
-- Limit to 1-3 items simultaneously
-- Move here when you start work
-- Both atomic actions AND topic issues near completion
-
-**6. Waiting For**
+**5. Waiting For**
 - Delegated to someone else
 - Blocked by external dependency
 - Always include date delegated and who
 
-**7. Someday/Maybe**
+**6. Someday/Maybe**
 - Ideas to consider later
 - Reviewed during weekly review
 - No pressure to complete
 
-**8. Done / Canceled**
+**7. Done / Canceled**
 - Completed successfully (Done)
 - No longer relevant (Canceled)
 

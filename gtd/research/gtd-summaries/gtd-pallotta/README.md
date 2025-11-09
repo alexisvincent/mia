@@ -4,7 +4,7 @@
 
 **Author:** Luca Pallotta
 
-![Header](pallotta-gtd-images/header.jpg)
+![Header](header.jpg)
 
 ---
 
@@ -61,7 +61,7 @@ The key insight: Your mind is terrible at remembering tasks at the right time, b
 
 #### 2. Clarify
 
-![Clarify Workflow](pallotta-gtd-images/clarify-workflow.png)
+![Clarify Workflow](clarify-workflow.png)
 
 Process each item by asking:
 
@@ -87,7 +87,7 @@ Process each item by asking:
 
 #### 3. Organize
 
-![Organize Workflow](pallotta-gtd-images/organize-workflow.png)
+![Organize Workflow](organize-workflow.png)
 
 Store processed items in eight categories:
 
@@ -218,7 +218,7 @@ Use "what if" thinking:
 
 #### 4. Brainstorming
 
-![Brainstorming Example](pallotta-gtd-images/brainstorming-example.png)
+![Brainstorming Example](brainstorming-example.png)
 
 **Generate ideas externally** to access "distributed cognition"
 

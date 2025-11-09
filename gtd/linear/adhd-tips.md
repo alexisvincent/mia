@@ -4,9 +4,9 @@ Since the primary user has ADHD, these patterns optimize for executive function 
 
 ## 1. Friction Reduction
 
-### Use "Executable" label religiously
+### Use "Atomic" label religiously
 
-- Marks tasks requiring zero planning
+- Marks single, indivisible tasks requiring zero planning
 - Reduces decision paralysis
 - Enables quick wins for momentum
 
@@ -60,7 +60,7 @@ Since the primary user has ADHD, these patterns optimize for executive function 
 
 ### Start with quick wins
 
-- First thing in morning: View Executable items in Next
+- First thing in morning: View Atomic items in Next
 - Complete 2-3 quick items for momentum
 - Dopamine hits from completion fuel the day
 

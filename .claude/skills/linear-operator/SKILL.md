@@ -1036,7 +1036,8 @@ See [[references/team-management.md]] for comprehensive team guide.
 Load these on-demand for detailed guidance:
 
 - [[references/issue-workflows.md]] - Advanced issue management patterns
-- [[references/project-management.md]] - Comprehensive project operations
+- [[references/project-management.md]] - Comprehensive project operations (projects, milestones, initiatives, documents, updates, dependencies, labels, templates, priority, notifications, archiving)
+- [[references/triage-and-views.md]] - Triage management, user views, label views, attached views
 - [[references/git-integration.md]] - GitHub/GitLab workflow automation
 - [[references/api-patterns.md]] - MCP tool usage patterns and tips
 - [[references/team-management.md]] - Team creation, configuration, and management

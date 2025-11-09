@@ -30,7 +30,7 @@ A comprehensive guide for implementing David Allen's Getting Things Done methodo
 **Ongoing:**
 1. **Capture** - Collect everything that has your attention into trusted inboxes (Triage state in Linear). Includes physical items, digital inputs, and mental open loops. Goal: Get everything out of your head.
 
-2. **Engage** - Throughout the day: Choose what to do next based on context, time available, energy level, and priority. Work from "Next" list, move items to "In Progress", complete and mark Done.
+2. **Engage** - Throughout the day: Choose what to do next based on context, time available, energy level, and priority. Work from "Next" list, complete and mark Done or move to Waiting For if blocked.
 
 **Daily:**
 3. **Triage** - Process each item in Triage: Is it actionable? What's the next physical action? Takes <2 minutes? Delegate? Then immediately organize it into the right place (Backlog, Waiting For, Someday/Maybe, etc.) with appropriate labels. Goal: Empty Triage to zero.
@@ -53,9 +53,7 @@ This Week (Committed for this week) → Weekly planning
     ↓
 Next (Doing today) → Daily planning
     ↓
-In Progress (Actively working now) → Limit to 1-3 items
-    ↓
-Done / Canceled
+Done / Canceled or Waiting For (if blocked)
 ```
 
 ---

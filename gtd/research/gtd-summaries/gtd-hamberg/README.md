@@ -1,6 +1,6 @@
 # GTD in 15 minutes – A Pragmatic Guide to Getting Things Done
 
-![welcome!](hamberg-gtd-images/slinky.svg)
+![welcome!](slinky.svg)
 
 ## Table of contents
 
@@ -41,7 +41,7 @@ A great part of the "magic" is to convert both tasks and whims into *physical* a
 
 What GTD gives you—when understood and implemented properly—is a foolproof system for keeping track of what you need to do, should do, or should *consider* to do. When your system and your trust in your system is in place, your subconsciousness will stop keeping track of all the things you need to do and stop constantly reminding you. This reduces stress and frees up precious brain time to more productive thinking—maybe it even saves *real* time so that you have more time for ballet lessons, painting classes, and roller-blading.
 
-![lists!](hamberg-gtd-images/lists.svg)
+![lists!](lists.svg)
 
 Awesome! So how does it actually work? It works by using special yoga techniques and daily mental exercises. No, haha! Just kidding. It works by simply maintaining lists, which every kid with paper and a pencil can do. Even computers can maintain lists these days!
 
@@ -75,7 +75,7 @@ When you have determined the next action, you should consider if it takes less t
 
 To summarize, when processing your **in** list(s), you should follow this procedure:
 
-![workflow](hamberg-gtd-images/workflow.svg)
+![workflow](workflow.svg)
 
 *The GTD workflow: open loops are collected in the **in** list, processed, and—if it's an action—it's done immediately, deferred, or delegated. If the item being processed require more than one action it's recorded in the **projects** list as well.*
 
@@ -95,7 +95,7 @@ GTD's definition of a project is very broad. It defines any objective that requi
 
 ## Contexts
 
-![computer!](hamberg-gtd-images/computer.svg)
+![computer!](computer.svg)
 
 Contexts are "tags" you put on the items on your **next actions** lists saying where the action can be done, or what equipment you need to perform it. An action can be "tagged" with a context in several ways; the easiest is probably to simply have different **next actions** lists—one for each context. If you use a newfangled electronic list manager you can often have a "smart" lists for each tag—yielding the same result. (With so-called smartphones it's probably even possible to use its location awareness to only present actions whose context match your current location. If so: that is amazing! We live in the future!)
 
@@ -123,7 +123,7 @@ This is where the **some day/maybe** list comes it. This list simply contains id
 
 ## Calendar
 
-![calendar!](hamberg-gtd-images/calendar.svg)
+![calendar!](calendar.svg)
 
 The **calendar** is for things you *have* to do on a certain date or at a certain time—and *nothing else*! That's right; no putting "install Bonzibudddy" on your calendar for next Wednesday if you just *think* you *want* to have it done then.
 
@@ -175,7 +175,7 @@ It is really important to have "sharp edges" here, too. Only the things you actu
 
 ### Tickler file
 
-![Tickle!](hamberg-gtd-images/tickle.svg)
+![Tickle!](tickle.svg)
 
 This strangely-named concept is simply a collection of 43 (physical) file folders. Why 43? Because that means that you can have one for each of the **31** days of a month plus one for each of the **12** months of the year. If you're reaching for your calculator now—just trust me on the number 43.
 

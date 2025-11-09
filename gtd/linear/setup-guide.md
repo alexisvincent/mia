@@ -10,11 +10,10 @@ Ensure your Linear team has these states:
 2. **Backlog** - Approved actions, not yet scheduled
 3. **This Week** - Committed for this week
 4. **Next** - Doing today
-5. **In Progress** - Actively working on
-6. **Waiting For** - Delegated or blocked
-7. **Someday/Maybe** - Ideas to consider later
-8. **Done** - Completed successfully
-9. **Canceled** - No longer relevant
+5. **Waiting For** - Delegated or blocked
+6. **Someday/Maybe** - Ideas to consider later
+7. **Done** - Completed successfully
+8. **Canceled** - No longer relevant
 
 ## Phase 2: Label Setup (15 minutes)
 
@@ -25,8 +24,8 @@ Create these essential labels:
 **Topic Marker:**
 - `Topic` - Parent issue with sub-issues (GTD "project")
 
-**Executable Marker:**
-- `Executable` - Ready to execute immediately (5-30min, max 2hr, no planning needed)
+**Atomic Marker:**
+- `Atomic` - Single, indivisible action ready to execute immediately (5-30min, max 2hr, no planning needed)
 
 ### Context Labels (Location)
 
@@ -67,12 +66,6 @@ state:Next AND NOT label:Topic
 ```
 Your action list for today (excludes topic issues)
 
-**In Progress (Throughout Day):**
-```
-state:"In Progress"
-```
-What you're actively working on
-
 **This Week's Work (Daily Planning):**
 ```
 state:"This Week" AND NOT label:Topic
@@ -106,11 +99,11 @@ state:"Someday/Maybe"
 
 **Quick Wins:**
 ```
-state:Next AND label:Executable
+state:Next AND label:Atomic
 ```
 or
 ```
-state:"This Week" AND label:Executable
+state:"This Week" AND label:Atomic
 ```
 
 ## Phase 4: Initial Capture (2-4 hours)

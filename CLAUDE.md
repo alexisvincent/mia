@@ -116,11 +116,11 @@ When querying for open/active issues, exclude: Done, Canceled, Duplicate
 
 ## Linear Issue Guidelines for LOPS Team
 
-### The "Executable" Label
+### The "Atomic" Label
 
-Use the **Executable** label to mark tasks that are ready to execute immediately.
+Use the **Atomic** label to mark tasks that are single, indivisible actions ready to execute immediately.
 
-A task qualifies as Executable ONLY if it has ALL of these properties:
+A task qualifies as Atomic ONLY if it has ALL of these properties:
 
 1. **Single, clear action** - No ambiguity about what needs to be done
 2. **Clear "done" state** - You know exactly when it's complete
@@ -134,25 +134,25 @@ A task qualifies as Executable ONLY if it has ALL of these properties:
 
 ### Workflow
 
-- **No Executable label** = Task needs planning / is a goal / not ready to execute
-- **Has Executable label** = Ready to execute immediately
+- **No Atomic label** = Task needs planning / is a goal / not ready to execute
+- **Has Atomic label** = Ready to execute immediately
 
 ### Examples
 
-❌ **NOT Executable**: "Get ADHD medication"
+❌ **NOT Atomic**: "Get ADHD medication"
 - Needs planning: which provider? when? what preparation needed?
 
-✅ **Executable**: "Call Dr. Smith at 555-1234 to schedule ADHD assessment appointment"
+✅ **Atomic**: "Call Dr. Smith at 555-1234 to schedule ADHD assessment appointment"
 - Clear action, clear done state, can do right now
 
 ### When Creating Issues
 
-Before adding the Executable label, ask:
+Before adding the Atomic label, ask:
 - Can this be started immediately without more planning?
 - Is it clear what "done" looks like?
 - Can this be completed in one focused session (ideally < 30 min)?
 
-If any answer is "no", don't add the Executable label - break it down further or plan it first.
+If any answer is "no", don't add the Atomic label - break it down further or plan it first.
 
 ### SLA Configuration
 

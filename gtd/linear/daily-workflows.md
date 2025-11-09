@@ -28,10 +28,9 @@ state:"This Week" AND NOT label:Topic
 - Top item = first thing to work on
 
 **5. Start working (0 min)**
-- Move top item to "In Progress"
-- Do the work
+- Do the work on top item
 - Mark Done when complete
-- Pull next item from "Next" to "In Progress"
+- Pull next item from "Next" list
 
 ### Daily Planning Example
 
@@ -55,10 +54,9 @@ state:"This Week" AND label:@office AND label:@high-energy
 - "Call vendor" → Next (might do this afternoon)
 
 **Step 3: Start working**
-- "Draft Q1 strategy document" → In Progress
-- Work on it
-- Mark Done
-- Pull "Review architecture proposal" → In Progress
+- Work on "Draft Q1 strategy document"
+- Mark Done when complete
+- Pull "Review architecture proposal" to work on next
 
 ## Inbox Processing: Get to Zero (15-30 minutes daily)
 
@@ -117,8 +115,8 @@ Update the issue title to be a concrete action:
 - Move to "Backlog" state
 - Add appropriate context labels (@computer, @high-energy, etc.)
 - Update description with clear success criteria
-- Add "Executable" label if:
-  - Single, clear action
+- Add "Atomic" label if:
+  - Single, indivisible action
   - Clear "done" state
   - No planning required
   - 5-30 min (max 2 hours)
@@ -143,10 +141,9 @@ Your "Next" list should be short (3-5 items) and context-appropriate. When choos
    ```
    state:Next AND NOT label:Topic
    ```
-   - Move top item to "In Progress"
-   - Work on it
-   - Mark Done
-   - Pull next item
+   - Work on top item
+   - Mark Done when complete
+   - Pull next item from the list
 
 2. **If Next is empty or blocked:**
    - Return to "This Week" and pull more items to Next
@@ -154,11 +151,11 @@ Your "Next" list should be short (3-5 items) and context-appropriate. When choos
 
 3. **For quick wins between meetings:**
    ```
-   state:Next AND label:Executable
+   state:Next AND label:Atomic
    ```
    or
    ```
-   state:"This Week" AND label:Executable
+   state:"This Week" AND label:Atomic
    ```
 
 ### Context-Based Filtering Examples
@@ -172,7 +169,7 @@ Your "Next" list should be short (3-5 items) and context-appropriate. When choos
 1. **Capture any new items** from today into Triage
 
 2. **Update work in progress:**
-   - Add comments with progress notes on In Progress items
+   - Add comments with progress notes on items you worked on
    - Move completed items to Done
    - Move items you didn't get to back from "Next" to "This Week" (or leave in Next for tomorrow)
 

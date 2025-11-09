@@ -123,7 +123,7 @@ Filter by contexts available this week:
 **Select 10-15 items:**
 - Move from Backlog → This Week
 - Balance across contexts
-- Include quick wins (Executable items)
+- Include quick wins (Atomic items)
 - Include progress on topic issues (move sub-issues)
 
 **Rule of thumb:** 2-3 items per workday = 10-15 items for the week
