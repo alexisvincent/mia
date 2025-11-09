@@ -68,6 +68,54 @@ LOPS uses **T-shirt sizing** for issue estimates to indicate effort/complexity:
 
 **When to estimate:** Assign estimates during the Triage/Clarify workflow to help with prioritization and cycle planning.
 
+## Workflows
+
+For detailed workflow guides, see the [workflows/](./workflows/) directory.
+
+### 0. Collect (Daily, 5-10 min)
+- Consolidate captures from all channels into Linear Triage queue
+- Bridge between distributed capture and centralized processing
+- Will be automated in the future
+
+See [workflows/triage/collect.md](./workflows/triage/collect.md) for detailed process.
+
+### 1. Capture (Ongoing)
+- Extract thoughts, tasks, and reference items from your brain into the system
+- Multi-channel capture: AI assistant, WhatsApp, voice input, etc.
+- Automated ingestion: Reading messages and suggesting items for capture
+- Goal: Get everything out of your head
+
+See [workflows/capture.md](./workflows/capture.md) for detailed process.
+
+### 2. Triage (Daily, 15-30 min)
+- **Collect:** Consolidate captures from all capture channels into Triage queue
+- **Clarify:** Determine what each item in triage means and what action is needed
+- **Organize:** Put clarified items in the right place with appropriate metadata
+- Output: Clear, actionable items ready for prioritization
+
+See [workflows/triage.md](./workflows/triage.md) for overview, and sub-workflows:
+- [Collect](./workflows/triage/collect.md)
+- [Clarify](./workflows/triage/clarify.md)
+- [Organize](./workflows/triage/organize.md)
+
+### 3. Prioritize (Daily & Weekly)
+- Daily: Select 3-5 most important items for today
+- Daily: Protect time for Top Goal work (most important quarterly priority)
+- Weekly: Choose 10-15 items from Backlog for the coming week
+- Reassess incomplete items from previous periods
+- Goal: Keep focus tight and realistic
+
+See [workflows/prioritize.md](./workflows/prioritize.md) for detailed process.
+
+### 4. Review (Weekly, 30+ min)
+- Maintain project momentum by ensuring each has a next action
+- Clean up stale or unrealistic items from active lists
+- Surface and capture any missed commitments or open loops
+- Prune Someday/Maybe and activate ready items
+- Realign work with quarterly goals and assess system health
+
+See [workflows/review.md](./workflows/review.md) for detailed process.
+
 ## Notes
 
 **Cycles vs This Week:** Currently experimenting with Linear Cycles as an alternative to "This Week" status. For now, continuing to use "This Week" status. If Cycles work well, "This Week" may be dropped and would collapse into Backlog.
