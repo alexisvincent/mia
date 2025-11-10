@@ -40,6 +40,24 @@ Lists in LOPS are implemented as Linear statuses.
 - **objective** - Multi-step work with a defined outcome (parent issue)
 - **action** - Single, executable task
 
+### Energy (ADHD-optimized)
+
+Energy labels help match tasks to your current cognitive capacity.
+
+- **🔥 high-energy** - Deep work, complex problems, strategic thinking
+  - Examples: Writing strategy docs, complex problem-solving, learning new concepts, creative work, difficult conversations, important decisions
+  - Best time: Usually mornings or your personal peak hours
+
+- **⚡ medium-energy** - Standard tasks, meetings, moderate complexity
+  - Examples: Routine meetings, code reviews, email processing, standard execution work, follow-ups
+  - Best time: Mid-morning to early afternoon
+
+- **🌙 low-energy** - Administrative work, simple tasks, routine items
+  - Examples: Filing, data entry, simple messages, light reading, planning, list-making
+  - Best time: Post-lunch dips, late afternoon, or when recovering from high-energy work
+
+**Usage:** Assign energy labels during triage to enable energy-aware prioritization. See [workflows/prioritize.md](./workflows/prioritize.md#energy-aware-decision-making) for details.
+
 ### Context (GTD @contexts)
 - **@computer** - Requires computer access
 - **@phone** - Phone calls, or tasks best completed on your phone
