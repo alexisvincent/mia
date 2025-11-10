@@ -72,12 +72,6 @@ LOPS uses **T-shirt sizing** for issue estimates to indicate effort/complexity:
 
 For detailed workflow guides, see the [workflows/](./workflows/) directory.
 
-### 0. Collect (Daily, 5-10 min)
-- Consolidate captures from all channels into Linear Triage queue
-- Bridge between distributed capture and centralized processing
-- Will be automated in the future
-
-See [workflows/triage/collect.md](./workflows/triage/collect.md) for detailed process.
 
 ### 1. Capture (Ongoing)
 - Extract thoughts, tasks, and reference items from your brain into the system
