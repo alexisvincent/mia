@@ -89,6 +89,7 @@ See [workflows/capture.md](./workflows/capture.md) for detailed process.
 
 See [workflows/triage.md](./workflows/triage.md) for overview, and sub-workflows:
 - [Collect](./workflows/triage/collect.md)
+  - [Chats Collection](./workflows/triage/collect/chats.md) - Collect from WhatsApp, iMessage, LinkedIn
 - [Clarify](./workflows/triage/clarify.md)
 - [Organize](./workflows/triage/organize.md)
 

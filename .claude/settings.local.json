@@ -18,7 +18,9 @@
       "mcp__linear__search_documentation",
       "WebFetch(domain:linear.app)",
       "Bash(python3 init_skill.py:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "mcp__mia-local__get_beeper_chat_cursors",
+      "mcp__mia-local__get_beeper_chat_preferences"
     ],
     "deny": [],
     "ask": []

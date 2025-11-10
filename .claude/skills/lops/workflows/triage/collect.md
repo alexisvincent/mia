@@ -27,12 +27,13 @@ Go through each capture channel (see [Capture Channels](./capture.md#capture-cha
 ### 3. AI Assistant (Claude Code, ChatGPT, Claude)
 **Collect Process:** None—AI uses MCP to add items directly to Triage when you ask it to save something.
 
-### 4. Inbox Streams (WhatsApp, iMessage, Email)
+### 4. Inbox Streams (WhatsApp, iMessage, LinkedIn)
 **Collect Process:**
-- Scan each chat/thread for new messages since last collect
-- AI identifies potential tasks and automatically adds them to Triage queue
-- Uses MCP to create Linear issues
-- Mark messages as processed
+- See detailed workflow: **[collect/chats.md](./collect/chats.md)**
+- Uses Beeper to scan chat messages across channels
+- Cursor-based tracking ensures incremental processing
+- AI identifies actionable items and creates Triage issues via MCP
+- Process one chat at a time with historical context
 
 ### 5. Granola (Meeting Notes)
 **Collect Process:**

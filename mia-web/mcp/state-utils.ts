@@ -6,19 +6,19 @@ import { set, get } from "./kv";
  * Generic metadata wrapper for any data schema
  * Wraps data in { data: T, last_updated: string, notes: string }
  */
-export const WithMetadata = <T extends z.ZodType<any>>(dataSchema: T) =>
+export const WithMetadata = <T extends z.AnyZodObject>(dataSchema: T) =>
   z.object({
     data: dataSchema,
     last_updated: z.string().describe("Last updated timestamp (ISO 8601)"),
   });
 
 // Derive the type from the actual schema so TypeScript can prove they match
-export type MetadataWrapper<T extends z.ZodType<any>> = z.infer<ReturnType<typeof WithMetadata<T>>>;
+export type MetadataWrapper<T extends z.AnyZodObject> = z.infer<ReturnType<typeof WithMetadata<T>>>;
 
 /**
  * Configuration for creating state management tools
  */
-export interface StateToolConfig<T extends z.ZodObject<any>> {
+export interface StateToolConfig<T extends z.AnyZodObject> {
   /** Name prefix for the tools (e.g., "goals" -> "get_goals", "update_goals") */
   name: string;
   /** The zod schema for the core data structure */
@@ -36,7 +36,7 @@ export interface StateToolConfig<T extends z.ZodObject<any>> {
 /**
  * Generic get function - retrieves and validates state with metadata wrapper
  */
-export async function getState<T extends z.ZodObject<any>>(
+export async function getState<T extends z.AnyZodObject>(
   userId: string,
   config: StateToolConfig<T>
 ): Promise<MetadataWrapper<T>> {
@@ -60,7 +60,7 @@ export async function getState<T extends z.ZodObject<any>>(
 /**
  * Generic update function - performs partial merge and updates timestamp
  */
-export async function updateState<T extends z.ZodObject<any>>(
+export async function updateState<T extends z.AnyZodObject>(
   userId: string,
   config: StateToolConfig<T>,
   partialUpdate: Partial<z.infer<T>>
@@ -107,7 +107,7 @@ export async function updateState<T extends z.ZodObject<any>>(
  * })
  * ```
  */
-export function registerStateTools<T extends z.ZodObject<any>>(
+export function registerStateTools<T extends z.AnyZodObject>(
   server: McpServer,
   config: StateToolConfig<T>
 ) {
@@ -131,12 +131,10 @@ export function registerStateTools<T extends z.ZodObject<any>>(
       };
     }
   );
-
-  // UPDATE tool
   server.registerTool(
     `update_${config.name}`,
     {
-      inputSchema: config.dataSchema.partial().shape,
+      inputSchema: config.dataSchema.shape,
       description: config.updateDescription,
     },
     async (userInput, { authInfo }) => {
