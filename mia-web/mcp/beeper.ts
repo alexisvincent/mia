@@ -4,27 +4,22 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { RequestHandlerExtra } from '@modelcontextprotocol/sdk/shared/protocol.js';
 import { ServerNotification, ServerRequest } from '@modelcontextprotocol/sdk/types.js';
 import { z } from "zod"
-import { registerStateTools } from './state-utils';
+import { registerTableTools } from './mcp-table';
+import { redis } from './kv';
 
 const client = new BeeperDesktop({
   accessToken: process.env.BEEPER_ACCESS_TOKEN,
   baseURL: "https://apollo.emperor-banfish.ts.net/"
 });
 
-const alexis_ids = ["asdf"]
-
-const ChatCursors = z.object({
-  cursors: z.array(z.object({
-    chat_id: z.string(),
-    cursor: z.string()
-  }))
+// Schema for a single chat cursor document
+const ChatCursorSchema = z.object({
+  cursor: z.string().describe("ISO 8601 timestamp, eg: '2025-11-07T11:59:11.000Z'")
 })
 
-const ChatPreferences = z.object({
-  preferences: z.array(z.object({
-    chat_id: z.string(),
-    always_ignore: z.boolean(),
-  }))
+// Schema for a single chat preference document
+const ChatPreferenceSchema = z.object({
+  always_ignore: z.boolean().describe("Never process this chat as part of the collect process, always ignore"),
 })
 
 
@@ -58,22 +53,23 @@ const ChatPreferences = z.object({
 // }
 
 export function register_beeper_tools(server: McpServer) {
-  registerStateTools(server, {
+  registerTableTools(server, {
     name: "beeper_chat_cursors",
     storageKey: "beeper_chat_cursors",
-    getDescription: "Get cursors for beeper chats, tracking where we are in the collect process",
-    updateDescription: "Update cursors for beeper chat, tracking where we are in the collect process",
-    defaultData: {cursors: []},
-    dataSchema: ChatCursors,
+    schema: ChatCursorSchema,
+    listDescription: "List all chat cursors for tracking where we are in the collect process",
+    getDescription: "Get a specific chat cursor by chat ID",
+    updateDescription: "Create or update a chat cursor for tracking collection progress",
+    deleteDescription: "Delete a chat cursor by chat ID",
   })
 
-  registerStateTools(server, {
+  registerTableTools(server, {
     name: "beeper_chat_preferences",
     storageKey: "beeper_chat_preferences",
-    getDescription: "Get user preferences for beeper chats",
-    updateDescription: "Update user preferences for beeper chat",
-    defaultData: {preferences: []},
-    dataSchema: ChatPreferences,
+    schema: ChatPreferenceSchema,
+    listDescription: "List all user preferences for beeper chats",
+    getDescription: "Get preferences for a specific chat",
+    updateDescription: "Create or update preferences for a beeper chat",
+    deleteDescription: "Delete preferences for a specific chat",
   })
-
 }

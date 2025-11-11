@@ -20,7 +20,10 @@
       "Bash(python3 init_skill.py:*)",
       "Bash(python3:*)",
       "mcp__mia-local__get_beeper_chat_cursors",
-      "mcp__mia-local__get_beeper_chat_preferences"
+      "mcp__mia-local__get_beeper_chat_preferences",
+      "mcp__mia-local__update_beeper_chat_cursors",
+      "Skill(lops)",
+      "mcp__beeper__get_accounts"
     ],
     "deny": [],
     "ask": []

@@ -15,12 +15,12 @@ This workflow processes chats one-by-one, identifying tasks and items that shoul
 ### 1. Get Current State
 Retrieve chat cursors and preferences to see where we left off:
 ```
-mcp__mia-local__get_beeper_chat_cursors
-mcp__mia-local__get_beeper_chat_preferences
+mcp__mia-local__list_beeper_chat_cursors
+mcp__mia-local__list_beeper_chat_preferences
 ```
 
-**Cursors** returns `{data: {cursors: [{chat_id, cursor}, ...]}, last_updated}` for all previously processed chats.
-**Preferences** returns `{data: {preferences: [{chat_id, always_ignore}, ...]}, last_updated}` for chat filtering preferences.
+**Cursors** returns `{items: [{_id: "chat_id", cursor: "ISO-timestamp"}, ...]}` for all previously processed chats.
+**Preferences** returns `{items: [{_id: "chat_id", always_ignore: boolean}, ...]}` for chat filtering preferences.
 
 ### 2. Find Chats with New Activity
 
@@ -102,18 +102,18 @@ mcp__linear__create_issue
 After processing, update the cursor for this chat:
 ```
 mcp__mia-local__update_beeper_chat_cursors
-- Full replacement with: { cursors: [...all existing cursors..., {chat_id: "chatID", cursor: "latest_cursor"}] }
-- IMPORTANT: This replaces ALL cursors, so you must include existing cursors from step 1
+- id: "chatID" (the chat ID)
+- cursor: "2025-11-07T11:59:11.000Z" (ISO 8601 timestamp of the most recent message processed)
 ```
 
 Optionally update preferences if user wants to ignore this chat in future:
 ```
 mcp__mia-local__update_beeper_chat_preferences
-- Full replacement with: { preferences: [...all existing preferences..., {chat_id: "chatID", always_ignore: true}] }
-- IMPORTANT: This replaces ALL preferences, so you must include existing preferences from step 1
+- id: "chatID" (the chat ID)
+- always_ignore: true (full boolean value required)
 ```
 
-**Note:** Both tools perform full replacement operations, not partial updates. Always get current state first, then include all existing items plus any new/updated ones.
+**Note:** Both tools perform partial updates by ID. You only update the specific chat cursor/preference, not all of them. Always provide the complete document fields (e.g., both `id` and `cursor`, or both `id` and `always_ignore`).
 
 ### 8. Continue or Complete
 Ask user if they want to process another chat or complete the collect session.
@@ -121,10 +121,14 @@ Ask user if they want to process another chat or complete the collect session.
 ## MCP Tools Used
 
 **State Management:**
-- `mcp__mia-local__get_beeper_chat_cursors` - Get current cursor state for all chats
-- `mcp__mia-local__update_beeper_chat_cursors` - Save progress after processing (partial update)
-- `mcp__mia-local__get_beeper_chat_preferences` - Get chat filtering preferences
-- `mcp__mia-local__update_beeper_chat_preferences` - Update preferences (e.g., always_ignore)
+- `mcp__mia-local__list_beeper_chat_cursors` - List all chat cursors
+- `mcp__mia-local__get_beeper_chat_cursors` - Get cursor for a specific chat by ID
+- `mcp__mia-local__update_beeper_chat_cursors` - Update cursor for a specific chat (partial update by ID)
+- `mcp__mia-local__delete_beeper_chat_cursors` - Delete cursor for a specific chat
+- `mcp__mia-local__list_beeper_chat_preferences` - List all chat preferences
+- `mcp__mia-local__get_beeper_chat_preferences` - Get preferences for a specific chat by ID
+- `mcp__mia-local__update_beeper_chat_preferences` - Update preferences for a specific chat (partial update by ID)
+- `mcp__mia-local__delete_beeper_chat_preferences` - Delete preferences for a specific chat
 
 **Beeper/Chat:**
 - `mcp__beeper__get_accounts` - List available accounts with their IDs (WhatsApp, LinkedIn, etc.)
@@ -140,8 +144,8 @@ Ask user if they want to process another chat or complete the collect session.
 
 ```
 1. Get state:
-   - Cursors → {data: {cursors: [{chat_id: "chat-123", cursor: "cursor_xyz"}]}, last_updated: "..."}
-   - Preferences → {data: {preferences: [{chat_id: "chat-456", always_ignore: true}]}, last_updated: "..."}
+   - Cursors → {items: [{_id: "chat-123", cursor: "2025-01-09T12:00:00.000Z"}]}
+   - Preferences → {items: [{_id: "chat-456", always_ignore: true}]}
    - Accounts → Get WhatsApp account ID: "local-whatsapp_ba_..."
 
 2. Search chats:
@@ -161,8 +165,11 @@ Ask user if they want to process another chat or complete the collect session.
 
 6. Create 3 Linear issues in Triage
 
-7. Update cursor → {cursors: [{chat_id: "chat-123", cursor: "cursor_xyz"}, {chat_id: "chat-123", cursor: "new_cursor"}]}
-   (Full replacement - include all existing cursors plus the updated one)
+7. Update cursor:
+   - mcp__mia-local__update_beeper_chat_cursors
+   - id: "chat-123"
+   - cursor: "2025-01-10T15:30:00.000Z"
+   (Partial update - only updates this specific chat's cursor)
 
 8. Ask → Process another chat?
 ```
