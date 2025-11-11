@@ -56,6 +56,15 @@ const load_unprocessed_chats = (server: McpServer) => {
   const MESSAGE_LIMIT = 100; // Total messages to return
   const HISTORICAL_CONTEXT_COUNT = 20; // Older messages to load for context when cursor exists
 
+  const messageSchema = z.object({
+    senderID: z.string(),
+    senderName: z.string().nullable(),
+    attachments: z.string(),
+    reactions: z.string(),
+    text: z.string().nullable(),
+    timestamp: z.string(),
+  })
+
   const outputSchema = z.object({
     chat: z.object({
       id: z.string(),
@@ -66,14 +75,8 @@ const load_unprocessed_chats = (server: McpServer) => {
       account_id: z.string(),
       unread_count: z.number(),
 
-      messages: z.array(z.object({
-        senderID: z.string(),
-        senderName: z.string().nullable(),
-        attachments: z.string(),
-        reactions: z.string(),
-        text: z.string().nullable(),
-        timestamp: z.string(),
-      }))
+      unprocessed_messages: z.array(messageSchema).describe("Messages that haven't been processed yet (newer than cursor, or all if no cursor)"),
+      processed_messages: z.array(messageSchema).describe("Messages that have already been processed (older than or equal to cursor, empty if no cursor)")
     }).nullable(),
   })
 
@@ -99,25 +102,25 @@ const load_unprocessed_chats = (server: McpServer) => {
       const preferences_table_name = getUserTableName(beeper_chat_preferences_table.storageKey, userId);
       const preferences = await table.list(preferences_table_name, beeper_chat_preferences_table.schema)
 
-      const ignored = preferences.filter(preference => preference.always_ignore).map(preference => preference._id)
-
+      const ignored = preferences
+        .filter(preference => preference.always_ignore)
+        .map(preference => preference._id)
 
       const chats_page = await alexis_client.chats.search({ includeMuted: true, limit: 100, lastActivityAfter: lastActivityAfter.toISOString() });
 
       const unprocessed = chats_page.items
-        // not ignored
-        .filter((chat) => !ignored.includes(chat.id))
         .filter((chat) => {
+          // Skip ignored chats
+          if (ignored.includes(chat.id)) return false;
 
-          const cursor = cursors.find(cursor => cursor._id = chat.id)
+          // Must have some activity
+          if (!chat.lastActivity) return false;
 
-          if (cursor) {
-            // last activity more recent then whats been processed
-            return chat.lastActivity && new Date(chat.lastActivity) > new Date(cursor.cursor)
-          } else {
-            // has at least some activity
-            return chat.lastActivity
-          }
+          // Find cursor for this chat
+          const cursor = cursors.find(c => c._id === chat.id);
+
+          // If cursor exists, last activity must be more recent than cursor
+          return !cursor || new Date(chat.lastActivity) > new Date(cursor.cursor);
         })
 
       if (unprocessed.length > 0) {
@@ -148,9 +151,8 @@ const load_unprocessed_chats = (server: McpServer) => {
                 return allMessages.length < MESSAGE_LIMIT;
               }
               // We've loaded historical context, check if we have enough
-              const messagesAfterCursor = allMessages.filter(msg => msg.timestamp > cursorTimestamp).length;
-              const messagesSinceCrossing = allMessages.length - messagesAfterCursor;
-              return messagesSinceCrossing < HISTORICAL_CONTEXT_COUNT && allMessages.length < MESSAGE_LIMIT;
+              const historicalMessageCount = allMessages.filter(msg => msg.timestamp <= cursorTimestamp).length;
+              return historicalMessageCount < HISTORICAL_CONTEXT_COUNT && allMessages.length < MESSAGE_LIMIT;
             }
             return true; // Haven't crossed boundary yet
           } else {
@@ -168,24 +170,40 @@ const load_unprocessed_chats = (server: McpServer) => {
         // Trim to MESSAGE_LIMIT
         const messages = allMessages.slice(0, MESSAGE_LIMIT);
 
+        // Map message to output format
+        const mapMessage = (message: any) => ({
+          senderID: message.senderID,
+          senderName: message.senderName || null,
+          attachments: JSON.stringify(message.attachments || []),
+          reactions: JSON.stringify(message.reactions || []),
+          text: message.text || null,
+          timestamp: message.timestamp,
+        });
+
+        // Split messages into unprocessed and processed based on cursor
+        const unprocessed_messages = cursorTimestamp
+          ? messages.filter(msg => msg.timestamp > cursorTimestamp).map(mapMessage)
+          : messages.map(mapMessage);
+
+        const processed_messages = cursorTimestamp
+          ? messages.filter(msg => msg.timestamp <= cursorTimestamp).map(mapMessage)
+          : [];
+
+        // Get the most recent message timestamp from the messages we're returning
+        const mostRecentTimestamp = messages[0]?.timestamp || chat.lastActivity!;
+
         const res: z.infer<typeof outputSchema> = {
           chat: {
             id: chat.id,
-            last_activity: chat.lastActivity!,
+            last_activity: mostRecentTimestamp,
             type: chat.type,
             participants: JSON.stringify(chat.participants),
             title: chat.title,
             account_id: chat.accountID,
             unread_count: chat.unreadCount,
 
-            messages: messages.map(message => ({
-              senderID: message.senderID,
-              senderName: message.senderName || null,
-              attachments: JSON.stringify(message.attachments || []),
-              reactions: JSON.stringify(message.reactions || []),
-              text: message.text || null,
-              timestamp: message.timestamp,
-            }))
+            unprocessed_messages: unprocessed_messages,
+            processed_messages: processed_messages
           }
         }
 
