@@ -106,25 +106,41 @@ const load_unprocessed_chats = (server: McpServer) => {
         .filter(preference => preference.always_ignore)
         .map(preference => preference._id)
 
-      const chats_page = await alexis_client.chats.search({ includeMuted: true, limit: 100, lastActivityAfter: lastActivityAfter.toISOString() });
+      // Helper to check if a chat is unprocessed
+      const isUnprocessed = (chat: any) => {
+        // Skip ignored chats
+        if (ignored.includes(chat.id)) return false;
 
-      const unprocessed = chats_page.items
-        .filter((chat) => {
-          // Skip ignored chats
-          if (ignored.includes(chat.id)) return false;
+        // Must have some activity
+        if (!chat.lastActivity) return false;
 
-          // Must have some activity
-          if (!chat.lastActivity) return false;
+        // Find cursor for this chat
+        const cursor = cursors.find(c => c._id === chat.id);
 
-          // Find cursor for this chat
-          const cursor = cursors.find(c => c._id === chat.id);
+        // If cursor exists, last activity must be more recent than cursor
+        return !cursor || new Date(chat.lastActivity) > new Date(cursor.cursor);
+      };
 
-          // If cursor exists, last activity must be more recent than cursor
-          return !cursor || new Date(chat.lastActivity) > new Date(cursor.cursor);
-        })
+      // Keep loading chat pages until we find an unprocessed chat
+      let unprocessedChat = null;
+      let chatsPage = await alexis_client.chats.search({
+        includeMuted: true,
+        limit: 100,
+        lastActivityAfter: lastActivityAfter.toISOString()
+      });
 
-      if (unprocessed.length > 0) {
-        const chat = unprocessed[0]
+      while (!unprocessedChat && chatsPage.items.length > 0) {
+        unprocessedChat = chatsPage.items.find(isUnprocessed);
+
+        if (!unprocessedChat && chatsPage.hasNextPage()) {
+          chatsPage = await chatsPage.getNextPage();
+        } else {
+          break;
+        }
+      }
+
+      if (unprocessedChat) {
+        const chat = unprocessedChat
 
         // Find cursor for this chat
         const chatCursor = cursors.find(cursor => cursor._id === chat.id)
