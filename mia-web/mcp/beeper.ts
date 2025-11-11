@@ -4,13 +4,9 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { RequestHandlerExtra } from '@modelcontextprotocol/sdk/shared/protocol.js';
 import { ServerNotification, ServerRequest } from '@modelcontextprotocol/sdk/types.js';
 import { z } from "zod"
-import { registerTableTools } from './mcp-table';
+import { getUserTableName, registerTableTools } from './mcp-table';
 import { redis } from './kv';
-
-const client = new BeeperDesktop({
-  accessToken: process.env.BEEPER_ACCESS_TOKEN,
-  baseURL: "https://apollo.emperor-banfish.ts.net/"
-});
+import * as table from "./table";
 
 // Schema for a single chat cursor document
 const ChatCursorSchema = z.object({
@@ -21,6 +17,39 @@ const ChatCursorSchema = z.object({
 const ChatPreferenceSchema = z.object({
   always_ignore: z.boolean().describe("Never process this chat as part of the collect process, always ignore"),
 })
+
+const beeper_chat_cursors_table = {
+  name: "beeper_chat_cursors",
+  storageKey: "beeper_chat_cursors",
+  schema: ChatCursorSchema,
+  listDescription: "List all chat cursors for tracking where we are in the collect process",
+  getDescription: "Get a specific chat cursor by chat ID",
+  updateDescription: "Create or update a chat cursor for tracking collection progress",
+  deleteDescription: "Delete a chat cursor by chat ID",
+}
+
+const beeper_chat_preferences_table = {
+  name: "beeper_chat_preferences",
+  storageKey: "beeper_chat_preferences",
+  schema: ChatPreferenceSchema,
+  listDescription: "List all user preferences for beeper chats",
+  getDescription: "Get preferences for a specific chat",
+  updateDescription: "Create or update preferences for a beeper chat",
+  deleteDescription: "Delete preferences for a specific chat",
+}
+
+const alexis_client = new BeeperDesktop({
+  accessToken: process.env.BEEPER_ACCESS_TOKEN,
+  baseURL: "https://apollo.emperor-banfish.ts.net/"
+});
+
+const alexis_ids = [
+  //prod
+  "user_3584ih9kG8pppNq1zTPbuowLF5e",
+  //dev
+  "user_357LSgWCR4syLP2DrGtSHBr6u31"
+]
+
 
 
 // function with_client(handler) {
@@ -52,24 +81,130 @@ const ChatPreferenceSchema = z.object({
 //   }
 // }
 
-export function register_beeper_tools(server: McpServer) {
-  registerTableTools(server, {
-    name: "beeper_chat_cursors",
-    storageKey: "beeper_chat_cursors",
-    schema: ChatCursorSchema,
-    listDescription: "List all chat cursors for tracking where we are in the collect process",
-    getDescription: "Get a specific chat cursor by chat ID",
-    updateDescription: "Create or update a chat cursor for tracking collection progress",
-    deleteDescription: "Delete a chat cursor by chat ID",
+const load_unprocessed_chats = (server: McpServer) => {
+
+  const outputSchema = z.object({
+    chat: z.object({
+      id: z.string(),
+      last_activity: z.string(),
+      type: z.string(),
+      participants: z.string(),
+      title: z.string(),
+      account_id: z.string(),
+      unread_count: z.number(),
+
+      messages: z.array(z.object({
+        senderID: z.string(),
+        senderName: z.string().nullable(),
+        attachments: z.string(),
+        reactions: z.string(),
+        text: z.string().nullable(),
+        timestamp: z.string(),
+      }))
+    }).nullable(),
   })
 
-  registerTableTools(server, {
-    name: "beeper_chat_preferences",
-    storageKey: "beeper_chat_preferences",
-    schema: ChatPreferenceSchema,
-    listDescription: "List all user preferences for beeper chats",
-    getDescription: "Get preferences for a specific chat",
-    updateDescription: "Create or update preferences for a beeper chat",
-    deleteDescription: "Delete preferences for a specific chat",
+  server.registerTool("fetch_next_unprocessed_chat", {
+    inputSchema: {},
+    outputSchema: outputSchema.shape,
+    description: ""
+  }, async ({ }, { authInfo }) => {
+
+
+    const userId = authInfo!.extra!.userId! as string;
+
+
+    if (alexis_ids.includes(userId)) {
+
+      const lastActivityAfter = new Date()
+
+      lastActivityAfter.setMonth(lastActivityAfter.getMonth() - 3)
+
+      const cursors_table_name = getUserTableName(beeper_chat_cursors_table.storageKey, userId);
+      const cursors = await table.list(cursors_table_name, beeper_chat_cursors_table.schema)
+
+      const preferences_table_name = getUserTableName(beeper_chat_preferences_table.storageKey, userId);
+      const preferences = await table.list(preferences_table_name, beeper_chat_preferences_table.schema)
+
+      const ignored = preferences.filter(preference => preference.always_ignore).map(preference => preference._id)
+
+
+      const chats_page = await alexis_client.chats.search({ includeMuted: true, limit: 100, lastActivityAfter: lastActivityAfter.toISOString() });
+
+      const unprocessed = chats_page.items
+        // not ignored
+        .filter((chat) => !ignored.includes(chat.id))
+        .filter((chat) => {
+
+          const cursor = cursors.find(cursor => cursor._id = chat.id)
+
+          if (cursor) {
+            // last activity more recent then whats been processed
+            return chat.lastActivity && new Date(chat.lastActivity) > new Date(cursor.cursor)
+          } else {
+            // has at least some activity
+            return chat.lastActivity
+          }
+        })
+
+      if (unprocessed.length > 0) {
+        const chat = unprocessed[0]
+
+        const messages_page = await alexis_client.messages.list(chat.id, {});
+
+        const res: z.infer<typeof outputSchema> = {
+          chat: {
+            id: chat.id,
+            last_activity: chat.lastActivity!,
+            type: chat.type,
+            participants: JSON.stringify(chat.participants),
+            title: chat.title,
+            account_id: chat.accountID,
+            unread_count: chat.unreadCount,
+
+            messages: messages_page.items.map(message => ({
+              senderID: message.senderID,
+              senderName: message.senderName || null,
+              attachments: JSON.stringify(message.attachments || []),
+              reactions: JSON.stringify(message.reactions || []),
+              text: message.text || null,
+              timestamp: message.timestamp,
+            }))
+          }
+        }
+
+        return {
+          structuredContent: res,
+          content: [
+            {
+              type: "text",
+              text: `Found chat`,
+            },
+          ],
+        };
+
+      }
+
+    }
+
+    return {
+      structuredContent: { chat: null },
+      content: [
+        {
+          type: "text",
+          text: `No chat found`,
+        },
+      ],
+    };
   })
+}
+
+
+export function register_beeper_tools(server: McpServer) {
+
+  load_unprocessed_chats(server)
+
+  registerTableTools(server, beeper_chat_cursors_table)
+
+  registerTableTools(server, beeper_chat_preferences_table)
 }

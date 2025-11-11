@@ -23,7 +23,9 @@
       "mcp__mia-local__get_beeper_chat_preferences",
       "mcp__mia-local__update_beeper_chat_cursors",
       "Skill(lops)",
-      "mcp__beeper__get_accounts"
+      "mcp__beeper__get_accounts",
+      "mcp__mia__list_beeper_chat_cursors",
+      "mcp__mia__list_beeper_chat_preferences"
     ],
     "deny": [],
     "ask": []

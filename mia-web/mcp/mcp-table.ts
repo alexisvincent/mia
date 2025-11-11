@@ -23,7 +23,7 @@ export interface TableConfig<T extends z.AnyZodObject> {
 }
 
 // Helper to create user-scoped table name
-function getUserTableName(storageKey: string, userId: string): string {
+export function getUserTableName(storageKey: string, userId: string): string {
   return `${storageKey}:${userId}`;
 }
 
