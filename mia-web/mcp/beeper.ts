@@ -50,38 +50,11 @@ const alexis_ids = [
   "user_357LSgWCR4syLP2DrGtSHBr6u31"
 ]
 
-
-
-// function with_client(handler) {
-//   return async (input, { authInfo }: RequestHandlerExtra<ServerRequest, ServerNotification>) => {
-//     const userId = authInfo!.extra!.userId! as string
-//     if (alexis_ids.includes(userId)) {
-//       return handler(client, input, authInfo)
-//     } else {
-//       return
-//     }
-//   }
-// }
-//
-// function beeper_compat_tool(handler) {
-//   return with_client(() => {
-//     return handler()
-//   })
-// }
-//
-// const latestInputSchema = {}
-//
-// const latest = async ({ }) => {
-//   const page = await client.chats.search({ includeMuted: true, limit: 3, type: 'single', });
-//   const l = page.items[0];
-//
-//   console.log("dddd", l)
-//   return {
-//     content: [{ type: 'text', text: JSON.stringify(l, null, 2) }]
-//   }
-// }
-
 const load_unprocessed_chats = (server: McpServer) => {
+
+  // Configuration constants for message loading
+  const MESSAGE_LIMIT = 100; // Total messages to return
+  const HISTORICAL_CONTEXT_COUNT = 20; // Older messages to load for context when cursor exists
 
   const outputSchema = z.object({
     chat: z.object({
@@ -107,7 +80,7 @@ const load_unprocessed_chats = (server: McpServer) => {
   server.registerTool("fetch_next_unprocessed_chat", {
     inputSchema: {},
     outputSchema: outputSchema.shape,
-    description: ""
+    description: "Fetch the next unprocessed chat with messages. If cursor exists, loads from most recent until cursor + historical context. Returns up to 100 messages total."
   }, async ({ }, { authInfo }) => {
 
 
@@ -150,7 +123,50 @@ const load_unprocessed_chats = (server: McpServer) => {
       if (unprocessed.length > 0) {
         const chat = unprocessed[0]
 
-        const messages_page = await alexis_client.messages.list(chat.id, {});
+        // Find cursor for this chat
+        const chatCursor = cursors.find(cursor => cursor._id === chat.id)
+        const cursorTimestamp = chatCursor?.cursor;
+
+        // Load messages with pagination
+        const allMessages: any[] = [];
+        let currentPage = await alexis_client.messages.list(chat.id, {});
+        allMessages.push(...currentPage.items);
+
+        let crossedCursorBoundary = false;
+
+        // Determine stop condition based on cursor existence
+        const shouldContinue = () => {
+          if (!currentPage.hasNextPage()) return false;
+
+          if (cursorTimestamp) {
+            // Check if we've crossed the cursor boundary
+            const oldestLoadedTimestamp = allMessages[allMessages.length - 1]?.timestamp;
+            if (oldestLoadedTimestamp && oldestLoadedTimestamp <= cursorTimestamp) {
+              if (!crossedCursorBoundary) {
+                crossedCursorBoundary = true;
+                // Continue loading for HISTORICAL_CONTEXT_COUNT more messages
+                return allMessages.length < MESSAGE_LIMIT;
+              }
+              // We've loaded historical context, check if we have enough
+              const messagesAfterCursor = allMessages.filter(msg => msg.timestamp > cursorTimestamp).length;
+              const messagesSinceCrossing = allMessages.length - messagesAfterCursor;
+              return messagesSinceCrossing < HISTORICAL_CONTEXT_COUNT && allMessages.length < MESSAGE_LIMIT;
+            }
+            return true; // Haven't crossed boundary yet
+          } else {
+            // If no cursor, continue until we have MESSAGE_LIMIT messages
+            return allMessages.length < MESSAGE_LIMIT;
+          }
+        };
+
+        // Keep loading pages based on stop condition
+        while (shouldContinue()) {
+          currentPage = await currentPage.getNextPage();
+          allMessages.push(...currentPage.items);
+        }
+
+        // Trim to MESSAGE_LIMIT
+        const messages = allMessages.slice(0, MESSAGE_LIMIT);
 
         const res: z.infer<typeof outputSchema> = {
           chat: {
@@ -162,7 +178,7 @@ const load_unprocessed_chats = (server: McpServer) => {
             account_id: chat.accountID,
             unread_count: chat.unreadCount,
 
-            messages: messages_page.items.map(message => ({
+            messages: messages.map(message => ({
               senderID: message.senderID,
               senderName: message.senderName || null,
               attachments: JSON.stringify(message.attachments || []),
