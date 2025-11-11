@@ -80,10 +80,30 @@ const load_unprocessed_chats = (server: McpServer) => {
     }).nullable(),
   })
 
-  server.registerTool("fetch_next_unprocessed_chat", {
+  server.registerTool("load_next_unprocessed_chat_with_messages", {
     inputSchema: {},
     outputSchema: outputSchema.shape,
-    description: "Fetch the next unprocessed chat with messages. If cursor exists, loads from most recent until cursor + historical context. Returns up to 100 messages total."
+    description: `Load the next unprocessed chat with messages for LOPS collect workflow.
+
+Automatically handles:
+- Searches chats from last 3 months with activity
+- Pages through chats until finding one with unprocessed messages
+- Filters out chats marked as always_ignore in preferences
+- Compares chat lastActivity with stored cursor to identify new messages
+
+Message loading behavior:
+- If NO cursor exists for chat: Loads up to 100 most recent messages (all unprocessed)
+- If cursor exists: Loads from newest until crossing cursor timestamp, then loads 20 additional historical messages for context (up to 100 total)
+
+Returns:
+- Chat metadata (id, title, participants, account_id, unread_count)
+- last_activity: timestamp of most recent message being returned (use this to update cursor)
+- unprocessed_messages: Messages newer than cursor (or all if no cursor)
+- processed_messages: Messages at or older than cursor (empty if no cursor) - provides historical context
+
+Returns null if no unprocessed chats found.
+
+Typical workflow: Call this repeatedly, analyze messages, create Linear issues, update cursor with last_activity timestamp, repeat until null returned.`
   }, async ({ }, { authInfo }) => {
 
 

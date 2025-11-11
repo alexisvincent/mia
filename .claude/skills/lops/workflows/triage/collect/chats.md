@@ -8,86 +8,81 @@
 
 ## Overview
 
-This workflow processes chats one-by-one, identifying tasks and items that should be captured into the LOPS system. It uses cursor-based tracking to process new messages incrementally while including some historical context.
+This workflow processes chats one-by-one, identifying tasks and items that should be captured into the LOPS system. It uses cursor-based tracking to process new messages incrementally while including historical context for previously processed chats.
 
 ## The Process
 
-### 1. Get Current State
-Retrieve chat cursors and preferences to see where we left off:
+### 1. Load Next Unprocessed Chat
+
+Call the automated tool that handles everything:
 ```
-mcp__mia-local__list_beeper_chat_cursors
-mcp__mia-local__list_beeper_chat_preferences
-```
-
-**Cursors** returns `{items: [{_id: "chat_id", cursor: "ISO-timestamp"}, ...]}` for all previously processed chats.
-**Preferences** returns `{items: [{_id: "chat_id", always_ignore: boolean}, ...]}` for chat filtering preferences.
-
-### 2. Find Chats with New Activity
-
-**IMPORTANT:** Before searching, you MUST have a time period from the user.
-- If user says "process my WhatsApp" without a time period, ASK them: "From when should I search? (e.g., last 24 hours, last week, since Jan 1)"
-- Do NOT assume or default to any time period
-- The time period must be explicitly provided by the user
-
-Search for chats with recent activity after the specified time:
-```
-mcp__beeper__search_chats
-- lastActivityAfter: <ISO 8601 datetime from user's time period>
-- accountIDs: [<actual account IDs>] (optional - to filter by specific accounts)
+mcp__mia-local__load_next_unprocessed_chat_with_messages
 ```
 
-**Account Filtering (if needed):**
-1. First call `mcp__beeper__get_accounts` to get actual account IDs
-2. Account IDs look like: `local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw`
-3. Pass the full account ID string to `accountIDs` parameter
-4. Do NOT pass generic names like "whatsapp" - use the actual ID from get_accounts
+**What this tool does automatically:**
+- Searches chats from last 3 months
+- Pages through results to find the next unprocessed chat
+- Checks cursors to identify chats with new messages
+- Filters out chats marked `always_ignore` in preferences
+- Loads up to 100 messages intelligently:
+  - **No cursor**: Loads 100 most recent messages
+  - **Has cursor**: Loads new messages + 20 historical messages for context
+- Splits messages into `unprocessed_messages` and `processed_messages`
 
-Identify chats where `lastActivity > cursor_timestamp` for that chat.
-Filter out chats marked `always_ignore: true` in preferences.
+**Returns:**
+```json
+{
+  "chat": {
+    "id": "chat_id",
+    "title": "Chat Name",
+    "last_activity": "2025-01-10T15:30:00.000Z",  // Most recent message timestamp - use this for cursor
+    "participants": "[...]",
+    "account_id": "...",
+    "type": "group",
+    "unread_count": 5,
+    "unprocessed_messages": [...],  // New messages to process
+    "processed_messages": [...]     // Historical context (empty if no cursor)
+  }
+}
+```
 
-### 3. Process Chats Automatically (One-by-One)
-When user indicates they want to process chats continuously ("once you're done with a chat, move on to next one"), process ALL chats sequentially without asking between each one.
+Returns `null` when no more unprocessed chats are found.
 
-**Processing Modes:**
-- **Manual Mode**: Present list, user selects each chat
-- **Automatic Mode**: Process all chats from the list sequentially
-
-### 4. Create Chat-Specific Todo List
+### 2. Create Chat-Specific Todo List
 Before processing each chat, create a fresh todo list for THAT SPECIFIC CHAT ONLY:
 
 ```
 TodoWrite:
-1. Load 50 messages from [Chat Name] chat (in_progress)
-2. Analyze messages for actionable items (pending)
-3. Check Linear for existing issues (pending)
-4. Update Linear issue if new context found (pending)
-5. Update cursor and complete (pending)
+1. Analyze messages for actionable items (in_progress)
+2. Check Linear for existing issues (pending)
+3. Create/update Linear issues as needed (pending)
+4. Update cursor and complete (pending)
 ```
 
 **Note:** Todo list is per-chat, not for all remaining chats.
 
-### 5. Load 50 Messages (Not 20)
-For the selected chat, retrieve **50 messages total** using pagination:
+### 3. Analyze Messages
+Focus your analysis on `unprocessed_messages` (the new messages since last cursor).
+Use `processed_messages` for context if needed.
 
-```
-mcp__beeper__list_messages (First call)
-- chatID: <selected chat>
-- No cursor parameter (gets most recent 20)
+**Look for:**
 
-mcp__beeper__list_messages (Second call)
-- chatID: <selected chat>
-- cursor: <from first call>
-- direction: "before"
+**Direct Actions:**
+- Requests made to you ("Can you...", "Could you...", "Please...")
+- Commitments you made ("I'll...", "I will...", "Let me...")
+- Follow-ups needed ("Need to...", "Should...", "Have to...")
 
-mcp__beeper__list_messages (Third call - if needed)
-- chatID: <selected chat>
-- cursor: <from second call>
-- direction: "before"
-```
+**Information to Track:**
+- Items marked "interesting, check this out"
+- References that need follow-up
+- Information that should be saved/remembered
 
-**IMPORTANT:** Load 50 messages, not 20. This provides sufficient context.
+**Time-Sensitive:**
+- Deadlines and time-bound commitments
+- Meeting scheduling needs
+- Urgent requests requiring response
 
-### 6. Check Linear First (Before User Presentation)
+### 4. Check Linear First (Before User Presentation)
 Before presenting any actionable items to the user, search Linear for existing issues.
 
 For each potential actionable item:
@@ -111,32 +106,16 @@ For each potential actionable item:
 - Let the user decide whether to add comments or create new issues
 - Only after user explicitly approves should you add comments or create issues
 
-### 7. Analyze Messages and Present to User
-Review the messages and identify anything that should be captured:
-
-**Direct Actions:**
-- Requests made to you ("Can you...", "Could you...", "Please...")
-- Commitments you made ("I'll...", "I will...", "Let me...")
-- Follow-ups needed ("Need to...", "Should...", "Have to...")
-
-**Information to Track:**
-- Items marked "interesting, check this out"
-- References that need follow-up
-- Information that should be saved/remembered
-
-**Time-Sensitive:**
-- Deadlines and time-bound commitments
-- Meeting scheduling needs
-- Urgent requests requiring response
+### 5. Present Analysis to User
 
 **Present Analysis Format:**
 ```
 ## [Chat Name] Chat Analysis
 
-I loaded 50 messages from this chat. Here's what I found:
+I found [X] unprocessed messages and [Y] processed messages for context.
 
 ### Recent Activity:
-[Summary of recent messages with dates and key points]
+[Summary of unprocessed messages with dates and key points]
 
 ### Linear Check:
 [What existing issues were found, if any]
@@ -154,7 +133,7 @@ What would you like to do?
 
 **CRITICAL:** Always present the analysis and ask the user before creating any new issues.
 
-### 8. Create Triage Issues (Only If User Approves)
+### 6. Create Triage Issues (Only If User Approves)
 After user confirms what to create:
 
 ```
@@ -166,114 +145,101 @@ mcp__linear__create_issue
 - labels: [channel tag if applicable]
 ```
 
-### 9. Update Cursor and Preferences
-After processing, update the cursor for this chat:
+### 7. Update Cursor and Preferences
+After processing, update the cursor for this chat using the `last_activity` timestamp from the tool response:
 ```
 mcp__mia-local__update_beeper_chat_cursors
-- id: "chatID" (the chat ID)
-- cursor: "2025-11-07T11:59:11.000Z" (ISO 8601 timestamp of the most recent message processed)
+- id: <chat.id>
+- cursor: <chat.last_activity>  // Use the timestamp from tool response
 ```
+
+**IMPORTANT:** Use the `last_activity` field from the tool response, NOT the chat's original lastActivity. This is the timestamp of the most recent message loaded.
 
 If user says "always ignore this chat":
 ```
 mcp__mia-local__update_beeper_chat_preferences
-- id: "chatID" (the chat ID)
-- always_ignore: true (full boolean value required)
+- id: <chat.id>
+- always_ignore: true
 ```
 
-**Note:** Both tools perform partial updates by ID. You only update the specific chat cursor/preference, not all of them. Always provide the complete document fields (e.g., both `id` and `cursor`, or both `id` and `always_ignore`).
-
-### 10. Continue Automatically or Complete
-- **If in Automatic Mode**: Immediately move to next chat in the list
-- **If in Manual Mode**: Ask user if they want to process another chat or complete the collect session
+### 8. Loop: Load Next Chat
+Call `mcp__mia-local__load_next_unprocessed_chat_with_messages` again to get the next chat.
+Continue until the tool returns `null` (no more unprocessed chats).
 
 ## MCP Tools Used
 
-**State Management:**
-- `mcp__mia-local__list_beeper_chat_cursors` - List all chat cursors
-- `mcp__mia-local__get_beeper_chat_cursors` - Get cursor for a specific chat by ID
-- `mcp__mia-local__update_beeper_chat_cursors` - Update cursor for a specific chat (partial update by ID)
-- `mcp__mia-local__delete_beeper_chat_cursors` - Delete cursor for a specific chat
-- `mcp__mia-local__list_beeper_chat_preferences` - List all chat preferences
-- `mcp__mia-local__get_beeper_chat_preferences` - Get preferences for a specific chat by ID
-- `mcp__mia-local__update_beeper_chat_preferences` - Update preferences for a specific chat (partial update by ID)
-- `mcp__mia-local__delete_beeper_chat_preferences` - Delete preferences for a specific chat
+**Primary Tool:**
+- `mcp__mia-local__load_next_unprocessed_chat_with_messages` - Automated chat loading with intelligent message pagination and cursor-based tracking
 
-**Beeper/Chat:**
-- `mcp__beeper__get_accounts` - List available accounts with their IDs (WhatsApp, LinkedIn, etc.)
-- `mcp__beeper__search_chats` - Find chats with activity after cursor (use accountIDs from get_accounts)
-- `mcp__beeper__list_messages` - Retrieve messages with context window
-- `mcp__beeper__get_chat` - Get chat metadata if needed
+**State Management:**
+- `mcp__mia-local__update_beeper_chat_cursors` - Update cursor after processing chat
+- `mcp__mia-local__update_beeper_chat_preferences` - Mark chats to always ignore
 
 **Linear:**
 - `mcp__linear__list_issues` - Search for existing issues before creating new ones
-- `mcp__linear__create_issue` - Create Triage issues (only after checking Linear)
-- `mcp__linear__create_comment` - Add context to existing issues
-- `mcp__linear__list_issue_labels` - Get available labels for tagging
+- `mcp__linear__create_issue` - Create Triage issues (only after user approval)
+- `mcp__linear__create_comment` - Add context to existing issues (only after user approval)
 
 ## Workflow Example
 
 ```
-1. Get state:
-   - Cursors → {items: [{_id: "chat-123", cursor: "2025-01-09T12:00:00.000Z"}]}
-   - Preferences → {items: [{_id: "chat-456", always_ignore: true}]}
-   - Accounts → Get WhatsApp account ID: "local-whatsapp_ba_..."
+1. Load next unprocessed chat:
+   Call: mcp__mia-local__load_next_unprocessed_chat_with_messages
 
-2. Search chats:
-   - accountIDs: ["local-whatsapp_ba_..."] (WhatsApp only)
-   - lastActivityAfter: "2025-01-10T00:00:00Z"
-   - Results: chat-123 (last activity: 2025-01-10T15:30:00Z)
-             chat-789 (last activity: 2025-01-10T14:20:00Z)
-   - Filter out chat-456 (always_ignore: true)
+   Returns: {
+     chat: {
+       id: "chat-123",
+       title: "Work Team",
+       last_activity: "2025-01-10T15:30:00.000Z",
+       unprocessed_messages: [25 messages],  // New since last cursor
+       processed_messages: [20 messages]     // Historical context
+     }
+   }
 
-3. Process chat-123 (automatic mode):
+2. Analyze ALL unprocessed messages:
+   - Process ALL 25 unprocessed messages thoroughly
+   - Use 20 processed messages for context
+   - Identify ALL actionable items (not just a sample)
+   - For each item, determine if it's a follow-up on an existing topic
+   - Extract ALL relevant search terms for Linear matching
 
-   a. Create todo list for chat-123
+3. Check Linear using ALL identified search terms:
+   - Search for each actionable item using its keywords
+   - Search for potential follow-ups using their terms
+   - Item 1 ("finish the report"): Found LOP-45 → Has new context to add
+   - Item 2 ("book dentist appointment"): No issue → Needs new issue
+   - Item 3 ("meeting notes ready"): Found LOP-28 → Already tracked, skip
 
-   b. Load 50 messages:
-      - First call: 20 messages (most recent)
-      - Second call: 20 messages (older, using cursor)
-      - Third call: 10 messages (older, using cursor)
+4. Present to user:
+   "Found 3 items in Work Team chat (from 25 unprocessed messages):
+   - Item 1: Follow-up on existing LOP-45
+   - Item 2: New item needs tracking
+   - Item 3: Already tracked in LOP-28, skip"
 
-   c. Analyze messages → Find 3 potential actionable items
+5. User approves → Create/update issues
 
-   d. Check Linear for each item:
-      - Item 1: Found existing issue LOP-45 → Has new context to add
-      - Item 2: No existing issue → Needs new issue
-      - Item 3: Found existing issue LOP-28 → Already fully tracked, skip
+6. Update cursor:
+   - id: "chat-123"
+   - cursor: "2025-01-10T15:30:00.000Z" (from chat.last_activity)
 
-   e. Present analysis to user:
-      "Found 2 actionable items:
-      - Item 1: Existing issue LOP-45 found with new context to add
-      - Item 2: New item needs tracking
-      - Item 3: Already tracked in LOP-28, no new context"
-
-   f. User approves adding comment to LOP-45 and creating new issue
-
-   g. Add comment to LOP-45 and create new Linear issue in Triage
-
-   g. Update cursor:
-      - mcp__mia-local__update_beeper_chat_cursors
-      - id: "chat-123"
-      - cursor: "2025-01-10T15:30:00.000Z"
-
-   h. Immediately process chat-789 (automatic mode continues)
-
-4. Complete all chats in list
+7. Loop: Call load_next_unprocessed_chat_with_messages again
+   - Continues until returns null
 ```
 
 ## Best Practices
 
-### Message Loading
-- Always load 50 messages (not 20) for sufficient context
-- Use pagination to load multiple batches
-- This catches items that might have been mentioned earlier but are still relevant
+### Message Analysis
+- **Process ALL unprocessed messages** - Don't just sample, analyze every message
+- Use processed messages for historical context
+- Identify ALL actionable items, not just a few
+- For each item, determine if it's a follow-up on existing work
+- Extract comprehensive search terms for Linear matching
 
 ### Linear Cross-Referencing
+- **Search using ALL identified search terms**
+- Search for both new items and potential follow-ups
 - **ALWAYS check Linear before presenting items to user**
-- Search with relevant keywords from the actionable item
 - Note when existing issues are found and whether new context exists
-- Present findings to user and let them decide on adding comments or creating issues
 - **NEVER add comments or create issues automatically without user approval**
 - Only after user explicitly approves should you add comments or create new issues
 
@@ -281,7 +247,6 @@ mcp__mia-local__update_beeper_chat_preferences
 - Create a fresh todo list for EACH chat being processed
 - Todo list should be chat-specific, not global
 - Mark tasks complete as you go (don't batch)
-- Update list to reflect current chat being processed
 
 ### User Presentation
 - Present clear analysis with sections: Recent Activity, Linear Check, My Analysis
@@ -290,14 +255,13 @@ mcp__mia-local__update_beeper_chat_preferences
 - When user says "always ignore this chat", update preferences
 
 ### Cursor Updates
-- Only update cursor after successful processing and user confirmation
-- Use latest message timestamp as new cursor
+- Always use `chat.last_activity` from tool response (NOT original chat lastActivity)
+- Update cursor after successful processing and user confirmation
 - Update cursor even if no new issues were created (marks chat as processed)
 
-### Automatic Mode
-- When user indicates to continue automatically, process all chats without asking between each
-- Still present analysis and ask for user input on each chat's actionable items
-- Move immediately to next chat after completing current one
+### Looping
+- Continue calling `load_next_unprocessed_chat_with_messages` until it returns null
+- Each call automatically finds the next unprocessed chat
 
 ## Output
 
