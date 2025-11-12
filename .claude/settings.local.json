@@ -26,7 +26,8 @@
       "mcp__beeper__get_accounts",
       "mcp__mia__list_beeper_chat_cursors",
       "mcp__mia__list_beeper_chat_preferences",
-      "mcp__mia__load_next_unprocessed_chat_with_messages"
+      "mcp__mia__load_next_unprocessed_chat_with_messages",
+      "mcp__mia__update_beeper_chat_cursors"
     ],
     "deny": [],
     "ask": []

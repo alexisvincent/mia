@@ -1,0 +1,37 @@
+{
+  "session_id": "triage-20251111-224346",
+  "chat": {
+    "id": "!RBN213jd7644xLu37NaSwq0tO5s:ba_9jZcvPl73rIpeUYoInC8nfTQwLw.local-whatsapp.localhost",
+    "last_activity": "2025-11-11T22:43:46.000Z",
+    "type": "single",
+    "participants": "{\"items\":[{\"id\":\"@lexvin:beeper.com\",\"fullName\":\"Alexis Vincent\",\"imgURL\":\"file:///Users/alexisvincent/Library/Application%20Support/BeeperTexts/media/localhostlocal-whatsapp/_gkBAAAAaDWUEKcJMTAzNjA1MTg2CQEAAABoNZQQpw\",\"isVerified\":false,\"cannotMessage\":true,\"isSelf\":true,\"isAdmin\":false,\"isNetworkBot\":false,\"isPending\":false,\"hasExited\":false,\"phoneNumber\":\"+447575494823\"},{\"id\":\"@VpT-zt6AFDIkPYF0raGBCIJVPmwhXEOE-JWB29dOVeZ_KP6M5KW76-0:local-whatsapp.localhost\",\"fullName\":\"Viktoria Izdebska\",\"imgURL\":\"file:///Users/alexisvincent/Library/Application%20Support/BeeperTexts/media/localhostlocal-whatsapp/_gkBAAAD-KZ-ftgKMTQ0NjQ4NzIwMAkBAAAAaDWUEKc\",\"isVerified\":false,\"cannotMessage\":true,\"isSelf\":false,\"isAdmin\":false,\"isNetworkBot\":false,\"isPending\":false,\"hasExited\":false,\"phoneNumber\":\"+4366480080600\"}],\"hasMore\":false,\"total\":2}",
+    "title": "Alexis Vincent",
+    "account_id": "local-whatsapp_ba_9jZcvPl73rIpeUYoInC8nfTQwLw",
+    "unread_count": 0
+  },
+  "analysis": {
+    "unprocessed_count": 10,
+    "processed_count": 30,
+    "key_points": [
+      "Shopping list already exists in LOP-94 but needs potatoes added",
+      "Viktoria sent competitor outreach message draft - interesting business development context",
+      "Viktoria requested phone + paper for focused work (interesting productivity pattern)",
+      "Food ordering coordination (burger, potatoes)",
+      "Three null messages (likely voice messages or media without text)",
+      "Google Maps location shared for restaurant",
+      "Image of menu sent"
+    ],
+    "actionable_items": [
+      {
+        "description": "Add potatoes to shopping list (already captured in LOP-94)",
+        "existing_issue": "LOP-94",
+        "has_new_context": true,
+        "action": "update_comment"
+      }
+    ]
+  },
+  "linear_searches": {
+    "shopping_issue": "LOP-94"
+  },
+  "timestamp": "2025-11-11T22:50:00.000Z"
+}
