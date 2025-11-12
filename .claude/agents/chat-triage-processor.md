@@ -118,6 +118,88 @@ For each potential actionable item identified:
 
 Use the AskUserQuestion tool to present your findings to the user.
 
+## CRITICAL Presentation Structure
+
+Your presentation MUST follow this exact order:
+
+### 1. Chat Summary (Top)
+Show key chat metadata on a single line:
+- **Participant name** or **Group name** (BOLD)
+- Unprocessed message count
+- Last activity timestamp
+- Chat type (DM/Group)
+
+Format: `**Name** (Type) • X unprocessed msgs • Last: timestamp`
+
+### 2. Existing Linear Issues (If Any Found)
+Show any existing Linear issues that are relevant to this chat's context.
+List these BEFORE showing the messages, so the user has context about what's already tracked.
+
+**Format (2 lines per issue, no blank lines between issues):**
+- Line 1: `● [ISSUE-ID] [STATE BADGE] [PRIORITY BADGE]`
+- Line 2: `  └─ Issue title`
+
+**Badges on same line:** State badge (e.g., `[Triage]`, `[In Progress]`), then priority badge if applicable
+
+### 3. Message Preview
+Show the actual chat messages to give user context.
+
+**Rules for message display:**
+- **If ≤10 unprocessed messages**: Show ALL unprocessed messages in full
+- **If >10 unprocessed messages**: Apply compacting strategies (see below)
+- **Always show historical context** when available (from `processed_messages`)
+- **Clearly separate** historical context from new unprocessed messages
+
+**Compacting strategies for >10 messages:**
+1. **First**: Summarize/compact historical context messages
+2. **If still too long**: Combine consecutive messages from same sender
+3. **If still too long**: Apply minor shortening while keeping chat-like format
+4. **Goal**: Keep it looking like a real chat, especially for new messages
+
+**Format guidelines (COMPACT, no blank lines between messages):**
+- **Single line per message**: `Name (time): message text`
+- **Your messages**: Name in GREEN
+- **Their messages**: Name in GRAY/WHITE
+- **Date headers**: Only show date when transitioning to a new day (on its own line)
+- **Separation marker**: `--- New Messages ---` (on its own line) between historical and unprocessed
+- **Time format**: Just time (HH:MM), not full timestamp
+- **Message text**: Continues on same line in white after colon
+
+**Example format:**
+```
+Nov 10
+Alice (14:30): Message text here
+Bob (14:45): Another message
+You (15:00): Your message
+Nov 11
+Carol (09:00): New day message
+--- New Messages ---
+Alice (10:30): Unprocessed message
+```
+
+### 4. Recommendations
+Present your suggested actions for each item found.
+
+**Format (similar to Existing Linear Issues, but with action badges):**
+
+Each recommendation should be:
+- Line 1: `● [ISSUE-ID or NEW] [ACTION BADGES] [PRIORITY BADGE] [LABELS]`
+- Line 2: `  └─ Issue title`
+- Line 3-4: `  Brief summary of what will be added/changed (max 2 lines)`
+
+**Action badges (can have multiple):**
+- `[CREATE NEW]` - Creating a new issue
+- `[ADD COMMENT]` - Adding a comment to existing issue
+- `[UPDATE DESCRIPTION]` - Updating the issue description
+
+**Notes:**
+- All badges/labels appear on Line 1 (issue ID line)
+- Multiple action badges are fine (e.g., both ADD COMMENT and UPDATE DESCRIPTION)
+- Summary should be brief - what new context/info will be added
+- No blank lines between recommendations
+
+**Section title**: Use "Recommendations" as the header
+
 ## CRITICAL Style Guide for AskUserQuestion
 
 ### Core Formatting Rules
@@ -133,9 +215,11 @@ Use the AskUserQuestion tool to present your findings to the user.
 1. **Use left-side-only boxes** (NO right walls - they misalign)
 2. **Consistent color scheme:**
    - Cyan (`\u001b[36m`) for Chat Summary sections
-   - Green (`\u001b[32m`) for Analysis/Status sections
-   - Yellow (`\u001b[33m`) for Linear Issues sections
-   - Gray (`\u001b[90m`) for Recommendations/secondary info
+   - Blue (`\u001b[34m`) for Message Preview sections
+   - Yellow (`\u001b[33m`) for Existing Linear Issues sections
+   - Magenta (`\u001b[35m`) for Recommendations sections
+   - Green (`\u001b[32m`) for success/existing items
+   - Gray (`\u001b[90m`) for secondary info
 3. **Badge system for counts/status** using background colors
 4. **Green text for Linear issue IDs** for easy scanning
 5. **Priority indicators** with proper contrast
@@ -169,38 +253,73 @@ function getPriorityBadge(priority) {
   }
 }
 
-// Main template
+// Helper function for state badges
+function getStateBadge(state) {
+  return `\u001b[100m\u001b[97m ${state} \u001b[0m`;
+}
+
+// Helper function for action type badges
+function getActionBadge(actionTypes) {
+  const badges = [];
+  if (actionTypes.includes('create')) badges.push('\u001b[42m\u001b[30m CREATE NEW \u001b[0m');
+  if (actionTypes.includes('add_comment')) badges.push('\u001b[45m\u001b[97m ADD COMMENT \u001b[0m');
+  if (actionTypes.includes('update_description')) badges.push('\u001b[44m\u001b[97m UPDATE DESCRIPTION \u001b[0m');
+  return badges.join(' ');
+}
+
+// Helper function to format messages with date breaks
+function formatMessages(messages, isYou) {
+  let lastDate = null;
+  return messages.map(msg => {
+    const msgDate = msg.date; // e.g., "Nov 10"
+    let lines = [];
+    if (msgDate !== lastDate) {
+      lines.push(`\u001b[0m\u001b[34m│\u001b[0m \u001b[90m${msgDate}\u001b[0m`);
+      lastDate = msgDate;
+    }
+    const nameColor = msg.isYou ? '\u001b[32m' : '\u001b[90m';
+    lines.push(`\u001b[0m\u001b[34m│\u001b[0m ${nameColor}${msg.sender}\u001b[0m \u001b[90m(${msg.time}):\u001b[0m ${msg.text}`);
+    return lines.join('\n');
+  }).join('\n');
+}
+
+// Main template structure following the required order
 AskUserQuestion({
   questions: [{
     header: "Triage",
     multiSelect: false,
     question: `\u001b[0m\u001b[36m┌─ Chat Summary ──────────────────────\u001b[0m
-\u001b[0m\u001b[36m│\u001b[0m ${chat.title} \u001b[90m•\u001b[0m ${unprocessed.length} msgs \u001b[90m•\u001b[0m ${days}d
+\u001b[0m\u001b[36m│\u001b[0m \u001b[1m${chat.title}\u001b[0m ${chat.type === 'group' ? '(Group)' : '(DM)'} \u001b[90m•\u001b[0m ${unprocessed.length} unprocessed msgs \u001b[90m•\u001b[0m Last: ${lastActivityTime}
 \u001b[0m\u001b[36m└──────────────────────────────────────\u001b[0m
 \u001b[0m
-\u001b[0m\u001b[32m┌─ Analysis ───────────────────────────\u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m Actionable: \u001b[42m\u001b[30m ${actionableCount} items \u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m Tracked:    \u001b[42m\u001b[30m ${trackedCount} of ${actionableCount} \u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m New needed: \u001b[${newCount > 0 ? '43m\u001b[30m' : '100m\u001b[97m'} ${newCount} \u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m
-\u001b[0m\u001b[32m└──────────────────────────────────────\u001b[0m
-\u001b[0m
-\u001b[0m\u001b[33m┌─ Linear Issues ──────────────────────\u001b[0m
+${existingIssues.length > 0 ? `\u001b[0m\u001b[33m┌─ Existing Linear Issues ─────────────\u001b[0m
 \u001b[0m\u001b[33m│\u001b[0m
-${items.map(item => `\u001b[0m\u001b[33m│\u001b[0m ${item.exists ? '\u001b[32m●\u001b[0m' : '\u001b[33m○\u001b[0m'} \u001b[1m\u001b[32m${item.issueId || 'NEW'}\u001b[0m ${item.priority ? getPriorityBadge(item.priority) : ''}
-\u001b[0m\u001b[33m│\u001b[0m   └─ ${item.title}
-\u001b[0m\u001b[33m│\u001b[0m   \u001b[37m${item.status || 'To create'}\u001b[0m`).join('\n\u001b[0m\u001b[33m│\u001b[0m\n')}
+${existingIssues.map(issue => `\u001b[0m\u001b[33m│\u001b[0m \u001b[32m●\u001b[0m \u001b[1m\u001b[32m${issue.id}\u001b[0m ${getStateBadge(issue.state)} ${issue.priority ? getPriorityBadge(issue.priority) : ''}
+\u001b[0m\u001b[33m│\u001b[0m   └─ ${issue.title}`).join('\n')}
 \u001b[0m\u001b[33m│\u001b[0m
 \u001b[0m\u001b[33m└──────────────────────────────────────\u001b[0m
 \u001b[0m
-\u001b[0m\u001b[1mRecommendation:\u001b[0m ${recommendation}
+` : ''}\u001b[0m\u001b[34m┌─ Message Preview ────────────────────\u001b[0m
+\u001b[0m\u001b[34m│\u001b[0m
+${formatMessages(historicalMessages)}
+${historicalMessages.length > 0 ? `\u001b[0m\u001b[34m│\u001b[0m \u001b[1m--- New Messages ---\u001b[0m
+` : ''}${formatMessages(unprocessedMessages)}
+\u001b[0m\u001b[34m│\u001b[0m
+\u001b[0m\u001b[34m└──────────────────────────────────────\u001b[0m
+\u001b[0m
+\u001b[0m\u001b[35m┌─ Recommendations ────────────────────\u001b[0m
+\u001b[0m\u001b[35m│\u001b[0m
+${recommendations.map(rec => `\u001b[0m\u001b[35m│\u001b[0m \u001b[32m●\u001b[0m ${rec.existingIssue ? `\u001b[1m\u001b[32m${rec.issueId}\u001b[0m` : '\u001b[1m\u001b[32mNEW\u001b[0m'} ${getActionBadge(rec.actionTypes)} ${rec.priority ? getPriorityBadge(rec.priority) : ''} ${rec.labels ? rec.labels.map(l => `\u001b[100m\u001b[97m ${l} \u001b[0m`).join(' ') : ''}
+\u001b[0m\u001b[35m│\u001b[0m   └─ ${rec.title}
+\u001b[0m\u001b[35m│\u001b[0m   ${rec.summary}`).join('\n')}
+\u001b[0m\u001b[35m│\u001b[0m
+\u001b[0m\u001b[35m└──────────────────────────────────────\u001b[0m
 \u001b[0m
 \u001b[0mWhat should I do?`,
     options: [
-      { label: "Update cursor", description: "Mark as processed" },
-      { label: "Add context", description: "Comment on issues" },
-      { label: "Skip", description: "Process later" }
+      { label: "Approve all", description: "Execute all recommendations" },
+      { label: "Skip for now", description: "Don't process yet" },
+      { label: "Mark processed", description: "Update cursor, no actions" }
     ]
   }]
 })
@@ -208,41 +327,60 @@ ${items.map(item => `\u001b[0m\u001b[33m│\u001b[0m ${item.exists ? '\u001b[32m
 
 ### Example Implementation
 
-When presenting a chat with mixed results:
+When presenting a chat with mixed results (few messages, full display):
 
 ```javascript
 question: `\u001b[0m\u001b[36m┌─ Chat Summary ──────────────────────\u001b[0m
-\u001b[0m\u001b[36m│\u001b[0m Work Team \u001b[90m•\u001b[0m 25 msgs \u001b[90m•\u001b[0m 10d
+\u001b[0m\u001b[36m│\u001b[0m \u001b[1mWork Team\u001b[0m (Group) \u001b[90m•\u001b[0m 5 unprocessed msgs \u001b[90m•\u001b[0m Last: Jan 10 15:30
 \u001b[0m\u001b[36m└──────────────────────────────────────\u001b[0m
 \u001b[0m
-\u001b[0m\u001b[32m┌─ Analysis ───────────────────────────\u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m Actionable: \u001b[42m\u001b[30m 3 items \u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m Tracked:    \u001b[43m\u001b[30m 2 of 3 \u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m New needed: \u001b[43m\u001b[30m 1 \u001b[0m
-\u001b[0m\u001b[32m│\u001b[0m
-\u001b[0m\u001b[32m└──────────────────────────────────────\u001b[0m
-\u001b[0m
-\u001b[0m\u001b[33m┌─ Linear Issues ──────────────────────\u001b[0m
+\u001b[0m\u001b[33m┌─ Existing Linear Issues ─────────────\u001b[0m
 \u001b[0m\u001b[33m│\u001b[0m
-\u001b[0m\u001b[33m│\u001b[0m \u001b[32m●\u001b[0m \u001b[1m\u001b[32mLOP-45\u001b[0m
-\u001b[0m\u001b[33m│\u001b[0m   └─ Finish the report
-\u001b[0m\u001b[33m│\u001b[0m   \u001b[37mNeeds update with new context\u001b[0m
-\u001b[0m\u001b[33m│\u001b[0m
-\u001b[0m\u001b[33m│\u001b[0m \u001b[33m○\u001b[0m \u001b[1m\u001b[32mNEW\u001b[0m \u001b[41m\u001b[97m HIGH \u001b[0m
-\u001b[0m\u001b[33m│\u001b[0m   └─ Book dentist appointment
-\u001b[0m\u001b[33m│\u001b[0m   \u001b[37mTo create\u001b[0m
-\u001b[0m\u001b[33m│\u001b[0m
-\u001b[0m\u001b[33m│\u001b[0m \u001b[32m●\u001b[0m \u001b[1m\u001b[32mLOP-28\u001b[0m
-\u001b[0m\u001b[33m│\u001b[0m   └─ Meeting notes ready
-\u001b[0m\u001b[33m│\u001b[0m   \u001b[37mAlready tracked, no action needed\u001b[0m
+\u001b[0m\u001b[33m│\u001b[0m \u001b[32m●\u001b[0m \u001b[1m\u001b[32mLOP-45\u001b[0m \u001b[100m\u001b[97m In Progress \u001b[0m \u001b[41m\u001b[97m HIGH \u001b[0m
+\u001b[0m\u001b[33m│\u001b[0m   └─ Finish the quarterly report
+\u001b[0m\u001b[33m│\u001b[0m \u001b[32m●\u001b[0m \u001b[1m\u001b[32mLOP-28\u001b[0m \u001b[100m\u001b[97m Triage \u001b[0m
+\u001b[0m\u001b[33m│\u001b[0m   └─ Review meeting notes
 \u001b[0m\u001b[33m│\u001b[0m
 \u001b[0m\u001b[33m└──────────────────────────────────────\u001b[0m
 \u001b[0m
-\u001b[0m\u001b[1mRecommendation:\u001b[0m Create 1 issue, add comment to LOP-45
+\u001b[0m\u001b[34m┌─ Message Preview ────────────────────\u001b[0m
+\u001b[0m\u001b[34m│\u001b[0m
+\u001b[0m\u001b[34m│\u001b[0m \u001b[90mJan 8\u001b[0m
+\u001b[0m\u001b[34m│\u001b[0m \u001b[90mAlice\u001b[0m \u001b[90m(10:00):\u001b[0m We need to finish the report by Friday
+\u001b[0m\u001b[34m│\u001b[0m \u001b[90mBob\u001b[0m \u001b[90m(10:05):\u001b[0m I'll start the data analysis section
+\u001b[0m\u001b[34m│\u001b[0m \u001b[1m--- New Messages ---\u001b[0m
+\u001b[0m\u001b[34m│\u001b[0m \u001b[90mJan 10\u001b[0m
+\u001b[0m\u001b[34m│\u001b[0m \u001b[90mAlice\u001b[0m \u001b[90m(14:30):\u001b[0m Just got the feedback from Finance - they need an extra section on Q4 projections
+\u001b[0m\u001b[34m│\u001b[0m \u001b[90mBob\u001b[0m \u001b[90m(14:45):\u001b[0m Can handle that. Should be done by EOD tomorrow
+\u001b[0m\u001b[34m│\u001b[0m \u001b[32mYou\u001b[0m \u001b[90m(15:00):\u001b[0m Also need to book a dentist appointment this week
+\u001b[0m\u001b[34m│\u001b[0m \u001b[90mCarol\u001b[0m \u001b[90m(15:15):\u001b[0m Meeting notes from yesterday are in Notion
+\u001b[0m\u001b[34m│\u001b[0m \u001b[90mCarol\u001b[0m \u001b[90m(15:16):\u001b[0m Link: notion.so/meeting-notes-123
+\u001b[0m\u001b[34m│\u001b[0m
+\u001b[0m\u001b[34m└──────────────────────────────────────\u001b[0m
+\u001b[0m
+\u001b[0m\u001b[35m┌─ Recommendations ────────────────────\u001b[0m
+\u001b[0m\u001b[35m│\u001b[0m
+\u001b[0m\u001b[35m│\u001b[0m \u001b[32m●\u001b[0m \u001b[1m\u001b[32mLOP-45\u001b[0m \u001b[45m\u001b[97m ADD COMMENT \u001b[0m \u001b[41m\u001b[97m HIGH \u001b[0m
+\u001b[0m\u001b[35m│\u001b[0m   └─ Add Q4 projections requirement
+\u001b[0m\u001b[35m│\u001b[0m   Finance feedback: Need extra section on Q4 projections. Bob can handle, target EOD Jan 11.
+\u001b[0m\u001b[35m│\u001b[0m \u001b[32m●\u001b[0m \u001b[1m\u001b[32mNEW\u001b[0m \u001b[42m\u001b[30m CREATE NEW \u001b[0m \u001b[41m\u001b[97m HIGH \u001b[0m \u001b[100m\u001b[97m Atomic \u001b[0m
+\u001b[0m\u001b[35m│\u001b[0m   └─ Book dentist appointment this week
+\u001b[0m\u001b[35m│\u001b[0m   Need to schedule dentist appointment sometime this week.
+\u001b[0m\u001b[35m│\u001b[0m
+\u001b[0m\u001b[35m└──────────────────────────────────────\u001b[0m
 \u001b[0m
 \u001b[0mWhat should I do?`
 ```
+
+**Notes on this example:**
+- **Chat summary**: Single line with bold name, type, counts, and timestamp
+- **Existing issues**: 2 lines each, no blank lines between, state badge on same line as issue ID
+- **Messages**: Compact format, one line per message, date headers only on day changes
+- **Your messages**: "You" in green, others in gray
+- **New messages separator**: `--- New Messages ---` on its own line
+- **Recommendations**: Similar format to existing issues, action badges + priority + labels all on first line
+- **Summary**: 2-line descriptions of what will be added/changed
+- Meeting notes (Carol) don't get a recommendation since LOP-28 already tracks it
 
 ### Key Visual Patterns
 
