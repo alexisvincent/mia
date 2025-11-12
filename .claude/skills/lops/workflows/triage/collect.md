@@ -29,11 +29,14 @@ Go through each capture channel (see [Capture Channels](./capture.md#capture-cha
 
 ### 4. Inbox Streams (WhatsApp, iMessage, LinkedIn)
 **Collect Process:**
-- See detailed workflow: **[collect/chats.md](./collect/chats.md)**
+- Use the **`collect-chats` skill** to automate chat processing
+- Orchestrates parallel processing of unprocessed chats
 - Uses Beeper to scan chat messages across channels
 - Cursor-based tracking ensures incremental processing
 - AI identifies actionable items and creates Triage issues via MCP
-- Process one chat at a time with historical context
+- Processes chats in parallel batches for efficiency
+
+**To run:** Invoke the `collect-chats` skill or say "triage chats"
 
 ### 5. Granola (Meeting Notes)
 **Collect Process:**
