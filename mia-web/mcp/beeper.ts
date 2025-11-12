@@ -65,7 +65,17 @@ const load_unprocessed_chats = (server: McpServer) => {
     timestamp: z.string(),
   })
 
-  const outputSchema = z.object({
+  const chatMetadataSchema = z.object({
+    id: z.string(),
+    last_activity: z.string(),
+    type: z.string(),
+    participants: z.string(),
+    title: z.string(),
+    account_id: z.string(),
+    unread_count: z.number(),
+  })
+
+  const chatWithMessagesSchema = z.object({
     chat: z.object({
       id: z.string(),
       last_activity: z.string(),
@@ -80,10 +90,276 @@ const load_unprocessed_chats = (server: McpServer) => {
     }).nullable(),
   })
 
+  // Helper function to load messages for a chat
+  const loadMessagesForChat = async (chat: any, cursorTimestamp: string | undefined) => {
+    // Load messages with pagination
+    const allMessages: any[] = [];
+    let currentPage = await alexis_client.messages.list(chat.id, {});
+    allMessages.push(...currentPage.items);
+
+    let crossedCursorBoundary = false;
+
+    // Determine stop condition based on cursor existence
+    const shouldContinue = () => {
+      if (!currentPage.hasNextPage()) return false;
+
+      if (cursorTimestamp) {
+        // Check if we've crossed the cursor boundary
+        const oldestLoadedTimestamp = allMessages[allMessages.length - 1]?.timestamp;
+        if (oldestLoadedTimestamp && oldestLoadedTimestamp <= cursorTimestamp) {
+          if (!crossedCursorBoundary) {
+            crossedCursorBoundary = true;
+            // Continue loading for HISTORICAL_CONTEXT_COUNT more messages
+            return allMessages.length < MESSAGE_LIMIT;
+          }
+          // We've loaded historical context, check if we have enough
+          const historicalMessageCount = allMessages.filter(msg => msg.timestamp <= cursorTimestamp).length;
+          return historicalMessageCount < HISTORICAL_CONTEXT_COUNT && allMessages.length < MESSAGE_LIMIT;
+        }
+        return true; // Haven't crossed boundary yet
+      } else {
+        // If no cursor, continue until we have MESSAGE_LIMIT messages
+        return allMessages.length < MESSAGE_LIMIT;
+      }
+    };
+
+    // Keep loading pages based on stop condition
+    while (shouldContinue()) {
+      currentPage = await currentPage.getNextPage();
+      allMessages.push(...currentPage.items);
+    }
+
+    // Trim to MESSAGE_LIMIT
+    const messages = allMessages.slice(0, MESSAGE_LIMIT);
+
+    // Map message to output format
+    const mapMessage = (message: any) => ({
+      senderID: message.senderID,
+      senderName: message.senderName || null,
+      attachments: JSON.stringify(message.attachments || []),
+      reactions: JSON.stringify(message.reactions || []),
+      text: message.text || null,
+      timestamp: message.timestamp,
+    });
+
+    // Split messages into unprocessed and processed based on cursor
+    const unprocessed_messages = cursorTimestamp
+      ? messages.filter(msg => msg.timestamp > cursorTimestamp).map(mapMessage)
+      : messages.map(mapMessage);
+
+    const processed_messages = cursorTimestamp
+      ? messages.filter(msg => msg.timestamp <= cursorTimestamp).map(mapMessage)
+      : [];
+
+    // Get the most recent message timestamp from the messages we're returning
+    const mostRecentTimestamp = messages[0]?.timestamp || chat.lastActivity!;
+
+    return {
+      unprocessed_messages,
+      processed_messages,
+      mostRecentTimestamp
+    };
+  };
+
+  // Tool 1: List unprocessed chats (returns batch of chat metadata)
+  server.registerTool("list_unprocessed_chats", {
+    inputSchema: z.object({
+      limit: z.number().optional().describe("Maximum number of unprocessed chats to return (default: 10)")
+    }).shape,
+    outputSchema: z.object({
+      chats: z.array(chatMetadataSchema)
+    }).shape,
+    description: `List unprocessed chats for LOPS collect workflow.
+
+Automatically handles:
+- Searches chats from last 3 months with activity
+- Filters out chats marked as always_ignore in preferences
+- Compares chat lastActivity with stored cursor to identify new messages
+- Returns up to 'limit' chats (default: 10)
+
+Returns:
+- Array of chat metadata (id, title, participants, account_id, unread_count, last_activity, type)
+
+Use this to get a batch of unprocessed chats, then call load_chat_messages for each one you want to process.`
+  }, async ({ limit = 10 }, { authInfo }) => {
+    const userId = authInfo!.extra!.userId! as string;
+
+    if (alexis_ids.includes(userId)) {
+      const lastActivityAfter = new Date()
+      lastActivityAfter.setMonth(lastActivityAfter.getMonth() - 3)
+
+      const cursors_table_name = getUserTableName(beeper_chat_cursors_table.storageKey, userId);
+      const cursors = await table.list(cursors_table_name, beeper_chat_cursors_table.schema)
+
+      const preferences_table_name = getUserTableName(beeper_chat_preferences_table.storageKey, userId);
+      const preferences = await table.list(preferences_table_name, beeper_chat_preferences_table.schema)
+
+      const ignored = preferences
+        .filter(preference => preference.always_ignore)
+        .map(preference => preference._id)
+
+      // Helper to check if a chat is unprocessed
+      const isUnprocessed = (chat: any) => {
+        // Skip ignored chats
+        if (ignored.includes(chat.id)) return false;
+
+        // Must have some activity
+        if (!chat.lastActivity) return false;
+
+        // Find cursor for this chat
+        const cursor = cursors.find(c => c._id === chat.id);
+
+        // If cursor exists, last activity must be more recent than cursor
+        return !cursor || new Date(chat.lastActivity) > new Date(cursor.cursor);
+      };
+
+      // Collect unprocessed chats up to limit
+      const unprocessedChats: any[] = [];
+      let chatsPage = await alexis_client.chats.search({
+        includeMuted: true,
+        limit: 100,
+        lastActivityAfter: lastActivityAfter.toISOString()
+      });
+
+      while (unprocessedChats.length < limit && chatsPage.items.length > 0) {
+        const newUnprocessed = chatsPage.items.filter(isUnprocessed);
+        unprocessedChats.push(...newUnprocessed.slice(0, limit - unprocessedChats.length));
+
+        if (unprocessedChats.length < limit && chatsPage.hasNextPage()) {
+          chatsPage = await chatsPage.getNextPage();
+        } else {
+          break;
+        }
+      }
+
+      const result = {
+        chats: unprocessedChats.map(chat => ({
+          id: chat.id,
+          last_activity: chat.lastActivity,
+          type: chat.type,
+          participants: JSON.stringify(chat.participants),
+          title: chat.title,
+          account_id: chat.accountID,
+          unread_count: chat.unreadCount,
+        }))
+      };
+
+      return {
+        structuredContent: result,
+        content: [
+          {
+            type: "text",
+            text: `Found ${result.chats.length} unprocessed chat(s)`,
+          },
+        ],
+      };
+    }
+
+    return {
+      structuredContent: { chats: [] },
+      content: [
+        {
+          type: "text",
+          text: `No unprocessed chats found`,
+        },
+      ],
+    };
+  })
+
+  // Tool 2: Load messages for a specific chat
+  server.registerTool("load_chat_messages", {
+    inputSchema: z.object({
+      chat_id: z.string().describe("The chat ID to load messages for")
+    }).shape,
+    outputSchema: chatWithMessagesSchema.shape,
+    description: `Load messages for a specific chat.
+
+Message loading behavior:
+- If NO cursor exists for chat: Loads up to 100 most recent messages (all unprocessed)
+- If cursor exists: Loads from newest until crossing cursor timestamp, then loads 20 additional historical messages for context (up to 100 total)
+
+Returns:
+- Chat metadata (id, title, participants, account_id, unread_count)
+- last_activity: timestamp of most recent message being returned (use this to update cursor)
+- unprocessed_messages: Messages newer than cursor (or all if no cursor)
+- processed_messages: Messages at or older than cursor (empty if no cursor) - provides historical context
+
+Returns null if chat not found.
+
+Typical workflow: Call list_unprocessed_chats first, then call this for each chat you want to process.`
+  }, async ({ chat_id }, { authInfo }) => {
+    const userId = authInfo!.extra!.userId! as string;
+
+    if (alexis_ids.includes(userId)) {
+      const cursors_table_name = getUserTableName(beeper_chat_cursors_table.storageKey, userId);
+      const cursors = await table.list(cursors_table_name, beeper_chat_cursors_table.schema)
+
+      // Get the chat details
+      const chat = await alexis_client.chats.retrieve(chat_id);
+
+      if (!chat) {
+        return {
+          structuredContent: { chat: null },
+          content: [
+            {
+              type: "text",
+              text: `Chat not found: ${chat_id}`,
+            },
+          ],
+        };
+      }
+
+      // Find cursor for this chat
+      const chatCursor = cursors.find(cursor => cursor._id === chat.id)
+      const cursorTimestamp = chatCursor?.cursor;
+
+      const { unprocessed_messages, processed_messages, mostRecentTimestamp } =
+        await loadMessagesForChat(chat, cursorTimestamp);
+
+      const res: z.infer<typeof chatWithMessagesSchema> = {
+        chat: {
+          id: chat.id,
+          last_activity: mostRecentTimestamp,
+          type: chat.type,
+          participants: JSON.stringify(chat.participants),
+          title: chat.title,
+          account_id: chat.accountID,
+          unread_count: chat.unreadCount,
+
+          unprocessed_messages: unprocessed_messages,
+          processed_messages: processed_messages
+        }
+      }
+
+      return {
+        structuredContent: res,
+        content: [
+          {
+            type: "text",
+            text: `Loaded messages for chat: ${chat.title}`,
+          },
+        ],
+      };
+    }
+
+    return {
+      structuredContent: { chat: null },
+      content: [
+        {
+          type: "text",
+          text: `Unauthorized`,
+        },
+      ],
+    };
+  })
+
+  // Keep original tool for backwards compatibility
   server.registerTool("load_next_unprocessed_chat_with_messages", {
     inputSchema: {},
-    outputSchema: outputSchema.shape,
-    description: `Load the next unprocessed chat with messages for LOPS collect workflow.
+    outputSchema: chatWithMessagesSchema.shape,
+    description: `[DEPRECATED: Use list_unprocessed_chats + load_chat_messages instead]
+
+Load the next unprocessed chat with messages for LOPS collect workflow.
 
 Automatically handles:
 - Searches chats from last 3 months with activity
@@ -166,69 +442,10 @@ Typical workflow: Call this repeatedly, analyze messages, create Linear issues, 
         const chatCursor = cursors.find(cursor => cursor._id === chat.id)
         const cursorTimestamp = chatCursor?.cursor;
 
-        // Load messages with pagination
-        const allMessages: any[] = [];
-        let currentPage = await alexis_client.messages.list(chat.id, {});
-        allMessages.push(...currentPage.items);
+        const { unprocessed_messages, processed_messages, mostRecentTimestamp } =
+          await loadMessagesForChat(chat, cursorTimestamp);
 
-        let crossedCursorBoundary = false;
-
-        // Determine stop condition based on cursor existence
-        const shouldContinue = () => {
-          if (!currentPage.hasNextPage()) return false;
-
-          if (cursorTimestamp) {
-            // Check if we've crossed the cursor boundary
-            const oldestLoadedTimestamp = allMessages[allMessages.length - 1]?.timestamp;
-            if (oldestLoadedTimestamp && oldestLoadedTimestamp <= cursorTimestamp) {
-              if (!crossedCursorBoundary) {
-                crossedCursorBoundary = true;
-                // Continue loading for HISTORICAL_CONTEXT_COUNT more messages
-                return allMessages.length < MESSAGE_LIMIT;
-              }
-              // We've loaded historical context, check if we have enough
-              const historicalMessageCount = allMessages.filter(msg => msg.timestamp <= cursorTimestamp).length;
-              return historicalMessageCount < HISTORICAL_CONTEXT_COUNT && allMessages.length < MESSAGE_LIMIT;
-            }
-            return true; // Haven't crossed boundary yet
-          } else {
-            // If no cursor, continue until we have MESSAGE_LIMIT messages
-            return allMessages.length < MESSAGE_LIMIT;
-          }
-        };
-
-        // Keep loading pages based on stop condition
-        while (shouldContinue()) {
-          currentPage = await currentPage.getNextPage();
-          allMessages.push(...currentPage.items);
-        }
-
-        // Trim to MESSAGE_LIMIT
-        const messages = allMessages.slice(0, MESSAGE_LIMIT);
-
-        // Map message to output format
-        const mapMessage = (message: any) => ({
-          senderID: message.senderID,
-          senderName: message.senderName || null,
-          attachments: JSON.stringify(message.attachments || []),
-          reactions: JSON.stringify(message.reactions || []),
-          text: message.text || null,
-          timestamp: message.timestamp,
-        });
-
-        // Split messages into unprocessed and processed based on cursor
-        const unprocessed_messages = cursorTimestamp
-          ? messages.filter(msg => msg.timestamp > cursorTimestamp).map(mapMessage)
-          : messages.map(mapMessage);
-
-        const processed_messages = cursorTimestamp
-          ? messages.filter(msg => msg.timestamp <= cursorTimestamp).map(mapMessage)
-          : [];
-
-        // Get the most recent message timestamp from the messages we're returning
-        const mostRecentTimestamp = messages[0]?.timestamp || chat.lastActivity!;
-
-        const res: z.infer<typeof outputSchema> = {
+        const res: z.infer<typeof chatWithMessagesSchema> = {
           chat: {
             id: chat.id,
             last_activity: mostRecentTimestamp,
