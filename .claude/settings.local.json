@@ -32,7 +32,9 @@
       "mcp__mia__load_chat_messages",
       "mcp__linear__update_issue",
       "mcp__mia__update_beeper_chat_preferences",
-      "Skill(collect-chats)"
+      "Skill(collect-chats)",
+      "mcp__next-devtools__nextjs_runtime",
+      "mcp__mia-local__format_ansi"
     ],
     "deny": [],
     "ask": []

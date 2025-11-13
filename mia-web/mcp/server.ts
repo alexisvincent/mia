@@ -10,6 +10,8 @@ import { register_beeper_tools } from "./beeper"
 
 import { registerXTools } from "./x"
 import { registerTaskPlanningTools } from './task_planning'
+import { registerLLMTools } from './llm'
+import { registerANSIFormatterTools } from './ansi-formatter'
 
 
 export function setupServer(server: McpServer) {
@@ -18,6 +20,8 @@ export function setupServer(server: McpServer) {
 
   registerXTools(server)
   registerTaskPlanningTools(server)
+  registerLLMTools(server)
+  registerANSIFormatterTools(server)
 
   server.registerTool(
     'get-clerk-user-data',
