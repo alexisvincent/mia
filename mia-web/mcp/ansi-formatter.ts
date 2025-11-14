@@ -68,9 +68,9 @@ export function registerANSIFormatterTools(server: McpServer) {
         ? `Additional Context:\n${context}\n\n---\n\nXML to format:\n\`\`\`xml\n${xml}\n\`\`\``
         : `XML to format:\n\`\`\`xml\n${xml}\n\`\`\``
 
-      // Call Claude 4.5 Sonnet via Vercel AI SDK Gateway
+      // Call Gemini 2.5 Flash via Vercel AI SDK Gateway
       const result = await generateText({
-        model: 'anthropic/claude-sonnet-4-5-20250929',
+        model: 'google/gemini-2.5-flash',
         prompt,
         system: systemPrompt,
         maxTokens: 4096,

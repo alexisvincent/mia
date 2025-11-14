@@ -113,12 +113,19 @@ When messages span multiple dates, add date headers:
 \u001b[0m\u001b[34m│\u001b[0m \u001b[90m09:00\u001b[0m \u001b[32mYou\u001b[0m   New message
 ```
 
-**Format**: `{Date} ---` in gray
+**Format**: `{Date} ---` in gray (EXACTLY three dashes, no more)
+
+**CRITICAL**: Date header must be EXACTLY `{Date} ---` - do NOT extend the dashes to fill the line. The three dashes are a short visual separator, not a full line.
+
+**Examples**:
+- ✅ Correct: `Jan 10 ---`
+- ❌ Wrong: `Jan 10 ---─────────────────────────`
 
 **Rules**:
 - Only show date header when date changes
 - First message group should have a date header
 - Date headers appear on their own line
+- Use EXACTLY three dashes (`---`), not more
 
 ## Historical vs New Message Separator
 

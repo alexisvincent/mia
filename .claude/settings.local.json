@@ -34,7 +34,8 @@
       "mcp__mia__update_beeper_chat_preferences",
       "Skill(collect-chats)",
       "mcp__next-devtools__nextjs_runtime",
-      "mcp__mia-local__format_ansi"
+      "mcp__mia-local__format_ansi",
+      "mcp__mia-local__llm"
     ],
     "deny": [],
     "ask": []

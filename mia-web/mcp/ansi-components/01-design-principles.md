@@ -17,9 +17,19 @@ Example:
 \u001b[0m\u001b[34m└──────────────────────────────────────────────────────────────────\u001b[0m
 ```
 
-## Left-Side-Only Boxes
+## CRITICAL: Left-Side-Only Structure (NO Right Walls!)
 
-**NO right walls on boxes.** They misalign and look broken.
+**This is a MANDATORY design rule that applies to ALL box-like structures:**
+- Boxes
+- Tables
+- Dashboards
+- Any component using `┌├└` borders
+
+**WHY**: Right walls misalign, look broken, and create visual noise.
+
+### The Rule
+
+**NEVER close structures on the right side.** Use borders and separators on the left only.
 
 ✅ **Correct** (left-side only):
 ```
@@ -29,12 +39,53 @@ Example:
 └──────────────────────────────────────────────────────────────────
 ```
 
-❌ **Wrong** (enclosed box):
+✅ **Correct Table** (left-side only):
+```
+┌──────────┬──────────┬──────────
+│ Column 1 │ Column 2 │ Column 3
+├──────────┼──────────┼──────────
+│ Data     │ Data     │ Data
+└──────────┴──────────┴──────────
+```
+
+✅ **Correct Dashboard** (left-side only):
+```
+┌─────────────┬────────────┬────────────
+│ CELL 1      │ CELL 2     │ CELL 3
+│ Content     │ Content    │ Content
+└─────────────┴────────────┴────────────
+```
+
+❌ **WRONG** (enclosed box with right wall):
 ```
 ┌─ Title ────────┐
 │ Content        │
 └────────────────┘
 ```
+
+❌ **WRONG Table** (has closing `│` on right):
+```
+┌──────────┬──────────┬──────────┐
+│ Column 1 │ Column 2 │ Column 3 │
+├──────────┼──────────┼──────────┤
+│ Data     │ Data     │ Data     │
+└──────────┴──────────┴──────────┘
+```
+
+❌ **WRONG Dashboard** (has closing `│` on right):
+```
+┌─────────────┬────────────┬────────────┐
+│ CELL 1      │ CELL 2     │ CELL 3     │
+└─────────────┴────────────┴────────────┘
+```
+
+### How to Remember
+
+Look at the end of each line:
+- ✅ Ends with content or separator: CORRECT
+- ❌ Ends with `│`, `┐`, `┤`, or `┘`: WRONG
+
+**This rule applies EVERYWHERE** - no exceptions.
 
 ## Consistent Color Scheme
 
