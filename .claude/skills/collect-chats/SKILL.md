@@ -17,11 +17,11 @@ Invoke this skill when:
 
 You orchestrate the high-level collect workflow:
 1. Load batches of unprocessed chats
-2. Spawn parallel chat-triage-processor agents for each chat
+2. Spawn parallel chat-collector agents for each chat
 3. Wait for batch completion
 4. Repeat until no more unprocessed chats
 
-You do NOT process individual chats yourself - that's the job of the chat-triage-processor subagents you spawn.
+You do NOT process individual chats yourself - that's the job of the chat-collector subagents you spawn.
 
 ## Your Workflow
 
@@ -59,7 +59,7 @@ mcp__mia__list_unprocessed_chats
 
 #### Step 2: Spawn Parallel Chat Processors
 
-For each chat in the batch, spawn a chat-triage-processor agent using the Task tool.
+For each chat in the batch, spawn a chat-collector agent using the Task tool.
 
 **CRITICAL:** Use a SINGLE message with MULTIPLE Task tool calls to spawn all agents in parallel.
 
@@ -68,19 +68,19 @@ Example for 3 chats:
 Send ONE message with THREE Task tool calls:
 
 Task 1:
-- subagent_type: "chat-triage-processor"
+- subagent_type: "chat-collector"
 - description: "Process Work Team chat"
 - prompt: "Process chat ID: chat-123"
 - model: "sonnet"
 
 Task 2:
-- subagent_type: "chat-triage-processor"
+- subagent_type: "chat-collector"
 - description: "Process Family Group chat"
 - prompt: "Process chat ID: chat-456"
 - model: "sonnet"
 
 Task 3:
-- subagent_type: "chat-triage-processor"
+- subagent_type: "chat-collector"
 - description: "Process Friends chat"
 - prompt: "Process chat ID: chat-789"
 - model: "sonnet"
@@ -142,7 +142,7 @@ You have successfully completed when:
 ## MCP Tools You Will Use
 
 - `mcp__mia__list_unprocessed_chats` - Get batches of unprocessed chats
-- Task tool with `subagent_type: "chat-triage-processor"` - Spawn parallel processors
+- Task tool with `subagent_type: "chat-collector"` - Spawn parallel processors
 
 ## Example Full Workflow
 
@@ -190,7 +190,7 @@ You have successfully completed when:
 ## Important Notes
 
 - **Always spawn agents in parallel** - use SINGLE message with multiple Task calls
-- **Don't process chats yourself** - delegate to chat-triage-processor agents
+- **Don't process chats yourself** - delegate to chat-collector agents
 - **Keep looping** until no more chats
 - **Be patient** - each batch may take time as users review findings
 - **Track progress** - inform user of overall progress through batches
@@ -201,7 +201,7 @@ Your role is pure orchestration - you coordinate the workflow but delegate all a
 
 This skill is part of the LOPS (Life Operating System) GTD-based workflow:
 - **Collect phase:** This skill helps capture actionable items from chat messages
-- **Triage phase:** Each chat-triage-processor agent performs triage and creates Linear issues
+- **Triage phase:** Each chat-collector agent performs triage and creates Linear issues
 - **Output:** Issues created in "Triage" state in the LOPS Linear team
 
 For more context on the LOPS system, see the `lops` skill.

@@ -70,14 +70,31 @@ export function registerANSIFormatterTools(server: McpServer) {
 
       // Call Gemini 2.5 Flash via Vercel AI SDK Gateway
       const result = await generateText({
-        model: 'google/gemini-2.5-flash',
+        // model: 'google/gemini-2.5-flash-lite',
+        model: 'anthropic/claude-4.5-sonnet',
         prompt,
         system: systemPrompt,
-        maxTokens: 4096,
       })
 
+      // Convert escaped ANSI codes to actual escape sequences
+      // The LLM outputs \u001b as the literal string, we need to convert it to the actual ESC byte
+      let formatted = result.text
+
+      // Replace literal \u001b with actual escape character (byte 27)
+      formatted = formatted.replace(/\\u001b/g, '\u001b')
+
+      // Also handle case where LLM used \x1b notation
+      formatted = formatted.replace(/\\x1b/g, '\u001b')
+
+      // Handle case where escape character was stripped, leaving just [
+      // This is a fallback - look for patterns like [0m, [32m, etc. at start of line or after other codes
+      if (!formatted.includes('\u001b') && formatted.includes('[')) {
+        // Replace [XXm patterns with \u001b[XXm
+        formatted = formatted.replace(/\[(\d+(?:;\d+)*m)/g, '\u001b[$1')
+      }
+
       const response = {
-        formatted: result.text,
+        formatted: formatted,
       }
 
       return {
@@ -85,7 +102,7 @@ export function registerANSIFormatterTools(server: McpServer) {
         content: [
           {
             type: 'text',
-            text: result.text,
+            text: formatted,
           },
         ],
       }

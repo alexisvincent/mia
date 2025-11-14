@@ -35,7 +35,10 @@
       "Skill(collect-chats)",
       "mcp__next-devtools__nextjs_runtime",
       "mcp__mia-local__format_ansi",
-      "mcp__mia-local__llm"
+      "mcp__mia-local__llm",
+      "mcp__mia-local__list_unprocessed_chats",
+      "Skill(ansi-formatter-usage)",
+      "mcp__mia-local__load_chat_messages"
     ],
     "deny": [],
     "ask": []
