@@ -38,7 +38,8 @@
       "mcp__mia-local__llm",
       "mcp__mia-local__list_unprocessed_chats",
       "Skill(ansi-formatter-usage)",
-      "mcp__mia-local__load_chat_messages"
+      "mcp__mia-local__load_chat_messages",
+      "mcp__mia-local__update_beeper_chat_preferences"
     ],
     "deny": [],
     "ask": []

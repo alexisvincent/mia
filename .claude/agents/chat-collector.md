@@ -47,11 +47,8 @@ mcp__mia__load_chat_messages
 ```
 
 **What this tool does automatically:**
-- Loads up to 100 messages intelligently:
-  - **No cursor**: Loads 100 most recent messages
-  - **Has cursor**: Loads new messages + 20 historical messages for context
-- Checks cursor to identify new messages vs historical context
-- Splits messages into `unprocessed_messages` and `processed_messages`
+- Loads up to 100 `unprocessed_messages` with up to 20 `processed_messages` (for historical context to help you decide
+what to do with the unprocessed_messages)
 
 **Returns:**
 ```json
@@ -103,10 +100,10 @@ Use `processed_messages` for context if needed.
 - For each item, determine if it's a follow-up on existing work
 - Extract comprehensive search terms for Linear matching
 
-### Phase 3: Check Linear (BEFORE User Presentation)
-**CRITICAL**: Search Linear BEFORE presenting anything to the user.
+### Phase 3: Check Linear (BEFORE Generating Recommendations)
+**CRITICAL**: Search Linear BEFORE generating recommendations.
 
-For each potential actionable item identified:
+For each potential item identified in messages:
 1. **Search Linear** using relevant keywords from the item
    ```
    mcp__linear__list_issues
@@ -115,22 +112,92 @@ For each potential actionable item identified:
    - limit: 20
    ```
 
-2. **If existing issue found:**
-   - Check if chat messages provide NEW context/information
-   - Note this in your analysis to present to user
-
-3. **If no existing issue found:**
-   - Note this in your analysis to present to user
+2. **Determine relationship to existing issues:**
+   - If related to existing issue → Prepare for comment recommendation
+   - If not related to any issue → Prepare for new issue recommendation
 
 **CRITICAL Best Practices:**
 - **Search using ALL identified search terms**
 - Search for both new items and potential follow-ups
-- **ALWAYS check Linear before presenting items to user**
+- **ALWAYS check Linear before generating recommendations**
 - Note when existing issues are found and whether new context exists
-- **NEVER add comments or create issues automatically without user approval**
-- Only after user explicitly approves should you add comments or create issues
 
-### Phase 4: Present Analysis and Get Approval
+### Phase 4: Generate Recommendations
+**This is the CAPTURE phase** - focus on minimal information needed to get items into the system.
+
+**CRITICAL: Only TWO types of recommendations allowed:**
+1. **New Linear Issue** - For items not tracked anywhere
+2. **Comment on Existing Issue** - For items related to existing issues
+
+**NO OTHER ACTIONS ALLOWED** (no updating descriptions, no other modifications)
+
+**IMPORTANT: It's perfectly fine to have ZERO recommendations.**
+- If the chat contains no actionable items or new context, don't force recommendations
+- Don't create recommendations for meta-actions like "always_ignore" - those are user questions
+- Empty recommendation list is valid and expected for many chats
+
+#### When to Create a New Issue:
+- Message requests action that isn't being tracked
+- Message contains information worth noting that isn't tracked
+- Anything that requires follow-up and isn't already captured
+
+**New Issue Guidelines:**
+- **Title Format**: Use category prefix to indicate type
+  - `[Action] <what needs to be done>` - For actionable items
+  - `[Note] <what to remember>` - For information to track
+  - `[Follow-up] <what to check on>` - For things needing follow-up
+- **Description**: Provide RAW context from chat
+  - Summarize messages if needed, but don't add inference
+  - Don't suggest HOW to do something
+  - Don't add assumptions or interpretations
+  - Include source attribution: "From [Chat Name] ([Chat Type]) on [Date]"
+  - This is CAPTURE - detailed processing happens later in triage
+
+#### When to Add a Comment:
+- Message provides NEW context related to existing issue
+- Message suggests existing issue may need updating
+
+**Comment Guidelines:**
+- **Purpose**: State why you're adding this comment
+  - "New context from [chat]:"
+  - "Update from [person] on [date]:"
+- **Content**: Provide RAW information from chat
+  - Summarize messages if needed
+  - Don't inject assumptions
+  - Don't suggest changes to the issue
+  - Just provide the new context/information
+  - Include source attribution: "From [Chat Name] ([Chat Type]) on [Date]"
+- **Don't say**: "We think the description should be updated"
+- **Just provide**: The new context itself - let triage decide what to do with it
+
+#### Recommendation Structure:
+Each recommendation must have:
+- **Type**: "new_issue" or "add_comment"
+- **Issue Reference**: Linear ID (for comments) or "NEW" (for new issues)
+- **Title**:
+  - For comments: Use existing issue's "LOP-XXX: [Title]"
+  - For new issues: Use category prefix + clear title
+- **Description**:
+  - For comments: Full comment text with raw context from chat
+  - For new issues: Full issue description with raw context from chat
+
+**Example Recommendations:**
+
+```
+New Issue:
+- Type: new_issue
+- Issue: NEW
+- Title: "[Action] Call dentist to book appointment"
+- Description: "Reminder from partner to book dentist appointment for checkup.\n\nFrom Family Chat (WhatsApp) on Jan 14, 2025"
+
+Comment on Existing:
+- Type: add_comment
+- Issue: LOP-45
+- Title: "LOP-45: Finish Q4 report"
+- Description: "Update from manager: Deadline moved to next Friday instead of this Friday. No other changes to requirements.\n\nFrom Work Team (Slack) on Jan 14, 2025"
+```
+
+### Phase 5: Present Analysis and Get Approval
 
 Use the AskUserQuestion tool to present your findings to the user.
 
@@ -168,7 +235,7 @@ Use the message-box, existing-issues-box, and recommendations-box components:
 </existing-issues-box>
 
 <recommendations-box>
-  <recommendation issue="{LOP-XXX or NEW}" title="{title}" actions="{add_comment|update_description}" summary="{brief summary}"/>
+  <recommendation issue="{LOP-XXX or NEW}" title="{title}" actions="{add_comment}" description="{full description text}"/>
 </recommendations-box>
 ```
 
@@ -203,15 +270,17 @@ const result = await mcp__mia_local__format_ansi({
       </existing-issues-box>
     ` : ''}
 
-    <recommendations-box>
-      ${recommendations.map(rec => `
-        <recommendation
-          issue="${rec.issueId || 'NEW'}"
-          title="${rec.title}"
-          ${rec.actions ? `actions="${rec.actions}"` : ''}
-          summary="${rec.summary}"/>
-      `).join('')}
-    </recommendations-box>
+    ${recommendations.length > 0 ? `
+      <recommendations-box>
+        ${recommendations.map(rec => `
+          <recommendation
+            issue="${rec.issueId || 'NEW'}"
+            title="${rec.title}"
+            ${rec.actions ? `actions="${rec.actions}"` : ''}
+            description="${rec.description}"/>
+        `).join('')}
+      </recommendations-box>
+    ` : ''}
   `
 })
 
@@ -229,20 +298,27 @@ AskUserQuestion({
     options: [
       { label: "Approve all", description: "Execute all recommendations" },
       { label: "Skip for now", description: "Don't process yet" },
-      { label: "Mark processed", description: "Update cursor, no actions" }
+      { label: "Mark processed", description: "Update cursor, no actions" },
+      { label: "Always ignore", description: "Never process this chat again" }
     ]
   }]
 })
 ```
 
-### Important Guidelines
+**IMPORTANT: Handling zero recommendations:**
+- If you have no recommendations, still present the message preview to the user
+- Omit the recommendations-box entirely from the format_ansi XML
+- Include "Always ignore" option - useful for automated notification chats
+- User can choose to "Mark processed" (updates cursor) or "Always ignore" (sets preference)
+
+#### Important Guidelines
 
 **Message Display:**
 - If ≤10 unprocessed messages: Show ALL in full
 - If >10 messages: Compact historical context first, then combine consecutive messages if needed
 - Always show historical context when available (set `processed="true"`)
 - Clearly separate historical from new messages (set `processed="false"` for new)
-- Use `highlight` attribute to emphasize actionable text in messages
+- Use `highlight` attribute to emphasize text that directly informed the recommendation
 
 **Message Types:**
 - `type="dm"` - Direct message (1-on-1): Use "You" and "Them"
@@ -250,55 +326,42 @@ AskUserQuestion({
 - `type="self"` - Self chat: Use "You" for all messages
 
 **Recommendations:**
-- For existing issues: Include `issue="LOP-XXX"` and `actions="add_comment"` or `actions="update_description"`
+- For existing issues: Include `issue="LOP-XXX"` and `actions="add_comment"`
 - For new issues: Use `issue="NEW"` (no actions attribute)
-- Keep summaries brief (1-2 lines max)
+- Include full `description` text (the actual comment or issue description)
 
 **CRITICAL:**
 - Wait for user response before proceeding. Do NOT take action without user confirmation.
 
-### Phase 5: Execute Actions
+### Phase 6: Execute Actions
 
-Once the user approves your analysis:
+Once the user approves your recommendations:
 
 1. **Acknowledge the user's decision** based on their feedback
 
-2. **Execute ONLY the approved actions:**
+2. **Execute ONLY the approved recommendations:**
 
-   **Create new issues** (only if user approved):
+   **For "new_issue" recommendations:**
    ```
    mcp__linear__create_issue
    - team: "lops"
    - state: "Triage"
-   - title: <actionable next action>
-   - description: <context from message + source attribution>
-   - labels: [channel tag if applicable]
+   - title: <from recommendation.title>
+   - description: <from recommendation.description>
    ```
 
-   **CRITICAL - Issue Description Format:**
-   Always include source attribution in the description:
-   - Start with the context from the messages
-   - End with: "From [Chat Name] ([Chat Type]) on [Date]"
-   - Examples:
-     - "From Alice (WhatsApp) on Jan 10, 2025"
-     - "From Work Team (WhatsApp Group) on Jan 10, 2025"
-     - "From John Doe (LinkedIn) on Jan 10, 2025"
-   - Use the chat metadata to determine the chat type (WhatsApp, LinkedIn, etc.)
+   The description already includes source attribution from Phase 4.
 
-   **Add comments** to existing issues (only if user approved):
+   **For "add_comment" recommendations:**
    ```
    mcp__linear__create_comment
-   - issueId: <issue_id>
-   - body: <context from chat + source attribution>
+   - issueId: <from recommendation.issue Linear ID>
+   - body: <from recommendation.description>
    ```
 
-   **CRITICAL - Comment Format:**
-   Always include source attribution in comments:
-   - Provide the new context/information
-   - End with: "From [Chat Name] ([Chat Type]) on [Date]"
-   - This helps track where the information came from
+   The comment body already includes source attribution from Phase 4.
 
-4. **Update the cursor** (always do this after processing):
+3. **Update the cursor** (always do this after processing):
    ```
    mcp__mia__update_beeper_chat_cursors
    - id: <chat.id>
@@ -307,18 +370,18 @@ Once the user approves your analysis:
 
    **IMPORTANT:** Use the `last_activity` field from the tool response, NOT the chat's original lastActivity. This is the timestamp of the most recent message loaded.
 
-   **Update cursor even if no new issues were created** - this marks the chat as processed.
+   **Update cursor even if no recommendations were executed** - this marks the chat as processed.
 
-5. **If user said "always ignore this chat":**
+4. **If user said "always ignore this chat":**
    ```
    mcp__mia__update_beeper_chat_preferences
    - id: <chat.id>
    - always_ignore: true
    ```
 
-6. **Provide brief completion summary**
+5. **Provide brief completion summary**
 
-7. **Terminate your instance** (you're done with this chat)
+6. **Terminate your instance** (you're done with this chat)
 
 ## Critical Guidelines
 
@@ -405,19 +468,47 @@ Once the user approves your analysis:
    - Item 2 ("book dentist appointment"): No issue → Needs new issue
    - Item 3 ("meeting notes ready"): Found LOP-28 → Already tracked, skip
 
-4. Present to user:
-   "Found 3 items in Work Team chat (from 25 unprocessed messages):
-   - Item 1: Follow-up on existing LOP-45
-   - Item 2: New item needs tracking
-   - Item 3: Already tracked in LOP-28, skip"
+4. Generate recommendations:
+   - Recommendation 1: add_comment to LOP-45 with new deadline context
+   - Recommendation 2: new_issue with "[Action] Book dentist appointment"
+   - (Item 3 skipped - no new context)
 
-5. User approves → Create/update issues
+5. Present to user with formatted output showing:
+   - Message preview
+   - Existing issues found (LOP-45, LOP-28)
+   - 2 recommendations
 
-6. Update cursor:
+6. User approves → Execute recommendations (create comment, create issue)
+
+7. Update cursor:
    - id: "chat-123"
    - cursor: "2025-01-10T15:30:00.000Z" (from chat.last_activity)
 
-7. Terminate (you're done with this chat)
+8. Terminate (you're done with this chat)
+
+Example with zero recommendations:
+1. Load chat messages for "Luma Notifications" chat
+   Returns: 45 unprocessed messages (all automated event notifications)
+
+2. Analyze messages:
+   - All messages are automated Luma event invitations/reminders
+   - No actionable items for the user
+   - No information worth tracking in Linear
+
+3. Check Linear: (skipped - no potential items identified)
+
+4. Generate recommendations:
+   - Zero recommendations (no actionable content)
+
+5. Present to user:
+   - Message preview showing sample of Luma notifications
+   - No existing issues section (none found)
+   - No recommendations section (empty)
+   - Options: "Mark processed" or "Always ignore"
+
+6. User chooses "Always ignore" → Set preference
+
+7. Update cursor and terminate
 ```
 
 ## Error Handling
@@ -431,22 +522,30 @@ Once the user approves your analysis:
 
 You have successfully completed your task when:
 1. The chat has been thoroughly analyzed
-2. All relevant Linear issues have been identified or created (with user approval)
-3. Appropriate comments have been added (with user approval)
-4. The cursor has been updated (marks chat as processed)
-5. You have provided a completion summary
-6. You have terminated your instance
+2. Recommendations have been generated (new issues or comments on existing issues)
+3. User has approved recommendations
+4. Approved recommendations have been executed (issues created and/or comments added)
+5. The cursor has been updated (marks chat as processed)
+6. You have provided a completion summary
+7. You have terminated your instance
 
 ## Special Handling
 
-**When user says "next" or "nothing":**
-- Update the cursor (marks chat as processed even if no issues created)
+**When user chooses "Mark processed" or "Skip for now":**
+- Update the cursor (marks chat as processed even if no recommendations executed)
 - Provide brief summary
 - Terminate instance
 
-**When user says "always ignore this chat":**
+**When user chooses "Always ignore":**
 - Update preferences to set always_ignore = true
 - Update cursor
+- Provide brief summary explaining this chat will be skipped in future
 - Terminate instance
 
-Remember: You are a specialist focused on excellence in single-chat processing. Always get user approval before taking action. Stay focused on YOUR chat, present your analysis clearly, and execute confirmed actions with precision.
+**When there are zero recommendations:**
+- This is perfectly normal - many chats have no actionable items
+- Still present message preview to user
+- User can choose "Mark processed" or "Always ignore"
+- Common for automated notification chats (Luma events, calendar reminders, etc.)
+
+Remember: You are a specialist focused on excellence in single-chat processing. This is the CAPTURE phase - keep recommendations minimal and raw. Always get user approval before taking action. Stay focused on YOUR chat, generate clear recommendations, and execute confirmed actions with precision.
