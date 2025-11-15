@@ -14,7 +14,6 @@ export function registerLLMTools(server: McpServer) {
       inputSchema: z.object({
         prompt: z.string().describe('The prompt to send to the LLM'),
         system: z.string().optional().describe('Optional system prompt to set context'),
-        maxTokens: z.number().optional().default(4096).describe('Maximum tokens in the response (default: 4096)'),
       }).shape,
       outputSchema: z.object({
         response: z.string(),
@@ -25,7 +24,7 @@ export function registerLLMTools(server: McpServer) {
         }),
       }).shape,
     },
-    async ({ prompt, system, maxTokens = 4096 }, { authInfo }) => {
+    async ({ prompt, system }, { authInfo }) => {
       const userId = authInfo?.extra?.userId as string | undefined
 
       if (!userId) {
@@ -37,15 +36,18 @@ export function registerLLMTools(server: McpServer) {
         model: 'anthropic/claude-sonnet-4-5-20250929',
         prompt,
         system,
-        maxTokens,
       })
+
+      const inputTokens = result.usage.inputTokens ?? 0
+      const outputTokens = result.usage.outputTokens ?? 0
+      const totalTokens = inputTokens + outputTokens
 
       const response = {
         response: result.text,
         usage: {
-          promptTokens: result.usage?.promptTokens ?? 0,
-          completionTokens: result.usage?.completionTokens ?? 0,
-          totalTokens: result.usage?.totalTokens ?? 0,
+          promptTokens: inputTokens,
+          completionTokens: outputTokens,
+          totalTokens: totalTokens,
         },
       }
 
@@ -54,7 +56,7 @@ export function registerLLMTools(server: McpServer) {
         content: [
           {
             type: 'text',
-            text: `**LLM Response:**\n\n${result.text}\n\n---\n**Usage:** ${result.usage.promptTokens} prompt + ${result.usage.completionTokens} completion = ${result.usage.totalTokens} total tokens`,
+            text: `**LLM Response:**\n\n${result.text}\n\n---\n**Usage:** ${inputTokens} prompt + ${outputTokens} completion = ${totalTokens} total tokens`,
           },
         ],
       }
