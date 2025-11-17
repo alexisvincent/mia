@@ -1,5 +1,4 @@
 import { verifyClerkToken } from '@clerk/mcp-tools/next'
-import { clerkClient } from '@/lib/clerk'
 import { createMcpHandler, withMcpAuth } from '@vercel/mcp-adapter'
 import { auth } from '@clerk/nextjs/server'
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'

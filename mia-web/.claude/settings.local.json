@@ -18,7 +18,8 @@
       "mcp__mia-local__get_task_planning_context",
       "mcp__linear__list_issues",
       "mcp__mia-local__update_task_planning_context",
-      "mcp__linear__get_issue"
+      "mcp__linear__get_issue",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []

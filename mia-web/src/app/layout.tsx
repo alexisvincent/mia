@@ -7,8 +7,10 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
+  useSignIn,
 } from "@clerk/nextjs";
 import "./globals.css";
+import { redirect } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +27,10 @@ export const metadata: Metadata = {
   description: "AI personal assistant agent",
 };
 
+function RedirectToDashboard() {
+  return null
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,13 +43,6 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <header>
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
           </header>
           {children}
         </body>
