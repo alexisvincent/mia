@@ -1,6 +1,6 @@
 import { LinearClient } from "@linear/sdk"
 
-import { nango } from "@/src/nango"
+import { nango } from "@/nango"
 
 
 export async function getTempClient(user_id: string) {

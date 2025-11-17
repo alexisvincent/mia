@@ -1,4 +1,4 @@
-import { composio } from "@/src/composio"
+import { composio } from "@/composio"
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { generateText, Experimental_Agent as Agent, stepCountIs, tool } from 'ai';
 import { ToolkitsListParamsSchema } from "@composio/core"
